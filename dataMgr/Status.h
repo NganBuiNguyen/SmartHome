@@ -26,3 +26,4 @@ private:
     std::string employeeID;
     std::string roomID;
 }
+#endif

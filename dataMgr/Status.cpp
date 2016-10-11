@@ -22,10 +22,11 @@ std::boolean Status::getStatusName()
 void Status::setSatusName(std::boolean statusName)
 {
  this->statusName = statusName;
-}                                                                      std::string Status::getEmployeeID()
+}
+std::string Status::getEmployeeID()
 {
  return this->employeeID;
-}                                                                      void Status::setEmployeeID(std::string employeeID)
+}                                                                               void Status::setEmployeeID(std::string employeeID)
 {
  this->employeeID = employeeID;
 }
