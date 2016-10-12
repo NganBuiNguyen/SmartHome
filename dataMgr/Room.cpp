@@ -16,12 +16,12 @@ void Room::setRoomID(std::string roomID)
     this->roomID = roomID;
 }
 
-std::string Room::getnameRoom()
+std::string Room::getNameRoom()
 {
     return nameRoom;
 }
 
-void Room::setnameRoom(std::string nameRoom)
+void Room::setNameRoom(std::string nameRoom)
 {
     this->nameRoom = nameRoom;
 } 
