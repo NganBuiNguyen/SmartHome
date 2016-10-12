@@ -15,11 +15,11 @@ void Status::setStatusID(std::string statusID)
 {
  this->statusID = statusID;
 }                        
-std::boolean Status::getStatusName()
+bool Status::getStatusName()
 {
  return this->statusName;
 }                                                              
-void Status::setSatusName(std::boolean statusName)
+void Status::setSatusName(bool statusName)
 {
  this->statusName = statusName;
 }                                                                      std::string Status::getEmployeeID()

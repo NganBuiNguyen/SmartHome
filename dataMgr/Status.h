@@ -6,15 +6,18 @@
 #ifndef __Status_H__
 #define __Status_H__
 
-#include<iostream>
+#include <iostream>
+#include <string>
+#include <string.h>
+
 
 class Status
 {
 public:
     std::string getStatusID();
-    void setStatusID(std::string statusID)
-    std::boolean getStatusName();
-    void setSatusName(std::boolean statusName);
+    void setStatusID(std::string statusID);
+    bool getStatusName();
+    void setSatusName(bool statusName);
     std::string getEmployeeID();
     void setEmployeeID(std::string employeeID);
     std::string getRoomID();
@@ -22,7 +25,8 @@ public:
 
 private:
     std::string statusID;
-    std::boolean statusName;
+    bool statusName;
     std::string employeeID;
     std::string roomID;
-}
+};
+#endif
