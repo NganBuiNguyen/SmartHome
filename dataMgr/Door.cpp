@@ -1,5 +1,5 @@
 /*!
- * @file Room.cpp
+ * @file Door.cpp
  * @brief Implementation of Door class
  * @author Ngan Bui
  */
@@ -8,9 +8,9 @@
 #include "Door.h"
 
 
-std::string Door::getDoorID();
+std::string Door::getDoorID()
 {
-    return doorID;
+    return this->doorID;
 }
 
 void Door::setDoorID(std::string doorID)
@@ -21,7 +21,7 @@ void Door::setDoorID(std::string doorID)
 
 std::string Door::getNameDoor()
 {
-    return nameDoor;
+    return this->nameDoor;
 }
 
 

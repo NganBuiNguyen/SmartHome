@@ -4,20 +4,23 @@
 #include <iostream>
 #include <string>
 #include <string.h>
-
+#include <time.h>
 
 class Main_Door 
 {
 public:
+    Main_Door ();
+    Main_Door (std::string doorID,time_t timeIn,time_t timeOut);
+
     std::string getDoorID();
     void setDoorID(std::string doorID);
-    std::Date getTimeIn();
-    void setTimeIn(std::Date timeIn);
-    std::Date getTimeOut();
-    void setTimeOut(std::Date timeOut); 
+    time_t getTimeIn();
+    void setTimeIn(time_t timeIn);
+    time_t getTimeOut();
+    void setTimeOut(time_t timeOut); 
 private:
     std::string doorID;
-    std::Date timeIn;
-    std::Date timeOut;
-}
+    time_t timeIn;
+    time_t timeOut;
+};
 #endif

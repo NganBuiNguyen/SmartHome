@@ -17,5 +17,5 @@ public:
 private:
     int cardID;
     std::string doorID;
-}
+};
 #endif
