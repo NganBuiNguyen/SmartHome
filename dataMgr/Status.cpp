@@ -15,6 +15,7 @@ void Status::setStatusID(std::string statusID)
 {
  this->statusID = statusID;
 }                        
+<<<<<<< HEAD
 std::boolean Status::getStatusName()
 {
  return this->statusName;
@@ -27,6 +28,19 @@ std::string Status::getEmployeeID()
 {
  return this->employeeID;
 }                                                                               void Status::setEmployeeID(std::string employeeID)
+=======
+bool Status::getStatusName()
+{
+ return this->statusName;
+}                                                              
+void Status::setSatusName(bool statusName)
+{
+ this->statusName = statusName;
+}                                                                      std::string Status::getEmployeeID()
+{
+ return this->employeeID;
+}                                                                      void Status::setEmployeeID(std::string employeeID)
+>>>>>>> 5df60496ad809eef20b23bd6a2a623d66b3d56f9
 {
  this->employeeID = employeeID;
 }
