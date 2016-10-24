@@ -1,5 +1,5 @@
 /*!        
- * @file Room.h                                                        
+ * @file Door.h                                                        
  * @brief this is decleration of Door class                            
  * @author Ngan Bui                                                    
  */
@@ -22,4 +22,5 @@ public:
 private:
     std::string doorID;
     std::string nameDoor;
-}
+};
+#endif

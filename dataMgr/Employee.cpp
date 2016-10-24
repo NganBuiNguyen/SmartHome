@@ -27,7 +27,7 @@ void Employee::setEmployeeName(std::string EmployeeName)
    this->employeeName = EmployeeName;
 }
 
-std::string Employee:: getRoomID()
+std::string Employee::getRoomID()
 {
    return this->roomID;
 }
