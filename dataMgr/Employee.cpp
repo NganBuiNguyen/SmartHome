@@ -5,6 +5,7 @@
  */
 
 #include "Employee.h"
+#include <string>
 
 std::string Employee::getEmployeeID()
 {
@@ -13,7 +14,7 @@ std::string Employee::getEmployeeID()
 
 void Employee::setEmployeeID(std::string employeeID)
 {
-    this->employee = employeeID;
+    this->employeeID = employeeID;
 }
 
 std::string Employee::getEmployeeName()
@@ -28,10 +29,10 @@ void Employee::setEmployeeName(std::string EmployeeName)
 
 std::string Employee:: getRoomID()
 {
-   return this->RoomID;
+   return this->roomID;
 }
 
 void Employee::setRoomID(std::string RoomID)
 {
-   this->RoomID = RoomID;
+   this->roomID = RoomID;
 }

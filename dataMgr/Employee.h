@@ -7,7 +7,8 @@
 #ifndef __Employee_H__
 #define __Employee_H__
 
-#include<iostream>
+#include <iostream>
+#include <string>
 class Employee
 {
 public:
