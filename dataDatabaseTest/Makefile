@@ -1,7 +1,7 @@
 CC = g++
 E = echo
 
-SRC = Employee.cpp DbEmployee.cpp TestDbEmployee.cpp
+SRC = Employee.cpp DbEmployee.cpp TestDbEmployee.cpp Card.cpp DbCard.cpp TestDbCard.cpp
 
 OBJFILES := $(patsubst %.cpp, %.o, $(SRC))
 
@@ -11,12 +11,12 @@ INCS = -I $(SH_ROOT)/dataDatabaseTest\
 	   -I $(SH_ROOT)/dataMgr
 
 LIBRARY_INC = 	 -I /development/googletest-1.7.0/include\
-		 -I ~/Development/mysql-connector-c++/include\
+		 -I /development/mysql-connector-c++-1.1.7/include\
 		 -I /development/boost_1_62_0/include\
 		 -I /development/poco-1.7.5-all/include
 
 LIBRARY_DIRS = 	-L /development/googletest-1.7.0/lib\
-		-L ~/Development/mysql-connector-c++/lib\
+		-L /development/mysql-connector-c++-1.1.7/lib\
 		-L /development/boost_1_62_0/lib\
 		-L /development/poco-1.7.5-all/lib\
 		-L /data/SmartHome/dataMgr 
