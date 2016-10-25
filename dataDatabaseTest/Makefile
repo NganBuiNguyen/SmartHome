@@ -26,7 +26,7 @@ LDFLAGS = -lgtest -lgtest_main -lpthread -lmysqlcppconn -lPocoData
 COMMONFLAGS = -g -std=c++11 
 
 ut: $(TARGET)
-		./gtest
+	./gtest
 
 $(TARGET): $(OBJFILES)
 	$(CC) $^ -o gtest $(LDFLAGS) $(LIBRARY_DIRS) 
