@@ -1,7 +1,7 @@
 CC = g++
 E = echo
 
-SRC =  Person.cpp
+SRC =  Person.cpp Status.cpp
 
 OBJFILES := $(patsubst %.cpp, $(SH_ROOT)/obj/%.o, $(SRC))
 
