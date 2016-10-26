@@ -10,6 +10,9 @@
 #include <string>
 #include <string.h>
 
+#include "Door.h"
+#include "Card.h"
+
 
 class Status
 {
@@ -18,15 +21,25 @@ public:
     void setStatusID(std::string statusID);
     bool getStatusName();
     void setSatusName(bool statusName);
-    std::string getEmployeeID();
-    void setEmployeeID(std::string employeeID);
-    std::string getRoomID();
-    void setRoomID(std::string roomID);
+
+    Door getDoorID();
+    void setDoorID(Door doorID);
+    Card getCardID();
+    void setCardID(Card cardID);
+
+    time_t getTimeIn();
+    void setTimeIn(time_t timeIn);
+    time_t getTimeOut();
+    void setTimeOut(time_t timeOut); 
+
+
 
 private:
     std::string statusID;
     bool statusName;
-    std::string employeeID;
-    std::string roomID;
+    Door doorID;
+    Card cardID;
+    time_t timeIn;
+    time_t timeOut;
 };
 #endif

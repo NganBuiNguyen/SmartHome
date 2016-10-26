@@ -1,13 +1,13 @@
 #include "Card.h"
 
 
-int Card::getCardID()
+std::string Card::getCardID()
 {
     return cardID; 
 }
 
 
-void Card::setCardID(int cardID)
+void Card::setCardID(std::string cardID)
 {
     this->cardID = cardID;
 }
