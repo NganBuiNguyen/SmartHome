@@ -1,7 +1,7 @@
 CC = g++
 E = echo
 
-SRC = DbEmployee.cpp TestDbEmployee.cpp Card.cpp DbCard.cpp TestDbCard.cpp Employee.cpp
+SRC = DbRoom.cpp TestDbRoom.cpp Room.cpp DbDoor.cpp TestDbDoor.cpp Door.cpp
 
 OBJFILES := $(patsubst %.cpp, %.o, $(SRC))
 
