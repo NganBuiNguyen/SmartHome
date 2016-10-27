@@ -35,7 +35,7 @@
 class DbPerson
 {
 public:
-     DbPerson();
+    DbPerson();
     static std::string database;
     static DbPerson* instance;
     sql::Connection* getConn(std::string userName,std::string password,std::string url);

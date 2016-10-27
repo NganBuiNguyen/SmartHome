@@ -40,6 +40,9 @@ public:
     sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
     void insert_node_to_db(sql::Connection* conn,Door door);
+    void select_to_db(sql::Connection* conn);
+    void update_to_db(sql::Connection* conn,Door door);
+    void delete_to_db(sql::Connection* conn,Door door);
     static DbDoor* getInstance();
    
 

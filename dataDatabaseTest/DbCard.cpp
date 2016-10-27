@@ -61,6 +61,55 @@
         (this->prep_stmt)->setString(2, card.getKindCard());
 
         dbCard->closeConn();
-    
+    }
+
+    void DbCard::select_to_db(sql::Connection* conn)
+    {
+        DbCard* dbCard = DbCard::getInstance();
+
+        stmt = conn->createStatement();
+
+        dbCard->getConn(this->user,this->password,this->url);
+
+        this->res = stmt->executeQuery("SELECT * FROM Card");
+
+         while (res->next())
+        {
+            std::cout << res->getString("cardID") << std::endl;
+        }
+        int updateCount = prep_stmt->executeUpdate();
+        conn->commit();
+        
+        dbCard->closeConn();
+    }
+    void DbCard::update_to_db(sql::Connection* conn, Card card)
+    {
+        
+        DbCard* dbCard = DbCard::getInstance();
+
+        dbCard->getConn(this->user,this->password,this->url);
+
+        this->prep_stmt = conn->prepareStatement("UPDATE Card SET kindCard = ? WHERE cardID = ?");
+
+        (this->prep_stmt)->setString(1, card.getKindCard());
+        (this->prep_stmt)->setString(2, card.getCardID());
+        
+        int updateCount = prep_stmt->executeUpdate();
+        conn->commit();
+        dbCard->closeConn();
+    }
+    void DbCard::delete_to_db(sql::Connection* conn,Card card)
+    {
+        DbCard* dbCard = DbCard::getInstance();
+
+        dbCard->getConn(this->user,this->password,this->url);
+        this->prep_stmt = conn->prepareStatement("DELETE FROM Card WHERE cardID = ?");
+
+        (this->prep_stmt)->setString(1, card.getCardID());
+
+        int updateCount = prep_stmt->executeUpdate();
+        conn->commit();
+
+        dbCard->closeConn();
     }
     

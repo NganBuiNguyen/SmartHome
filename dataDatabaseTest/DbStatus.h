@@ -1,5 +1,5 @@
-#ifndef __DB_CARD_H__
-#define __DB_CARD_H__
+#ifndef __DB_STATUS_H__
+#define __DB_STATUS_H__
 
 
 #include <iostream>
@@ -20,34 +20,34 @@
 #include <cppconn/warning.h>
 
 
-#include "Card.h"
+#include "Status.h"
 
 
 
 #define DBHOST "tcp://127.0.0.1:3306"
 #define USER "root"
-#define PASSWORD "ngan123"
+#define PASSWORD "nganbui123"
 #define DATABASE "SmartHome"
 
 #define NUMOFFSET 100
 #define COLNAME 200
 
-class DbCard
+class DbStatus
 {
 public:
     static std::string database;
-    static DbCard* instance;
-    static DbCard* getInstance();
+    static DbStatus* instance;
     sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
-    void insert_to_db(sql::Connection* conn,Card card);
+    void insert_to_db(sql::Connection* conn,Status status);
     void select_to_db(sql::Connection* conn);
-    void update_to_db(sql::Connection* conn,Card card);
-    void delete_to_db(sql::Connection* conn,Card card);
+    void update_to_db(sql::Connection* conn,Status status);
+    void delete_to_db(sql::Connection* conn,Status status);
+    static DbStatus* getInstance();
    
 
 private:
-    DbCard();
+    DbStatus();
 
     sql::PreparedStatement* prep_stmt;
     sql::Connection* conn;
@@ -63,3 +63,7 @@ private:
 };
 
 #endif
+
+
+
+

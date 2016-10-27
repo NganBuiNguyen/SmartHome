@@ -56,4 +56,55 @@
         
          dbRoom->closeConn();
     }
+
+
+    void DbRoom::select_to_db(sql::Connection* conn)
+    {
+        DbRoom* dbRoom = DbRoom::getInstance();
+
+        stmt = conn->createStatement();
+
+        dbRoom->getConn(this->user,this->password,this->url);
+
+        this->res = stmt->executeQuery("SELECT * FROM Room");
+
+         while (res->next())
+        {
+            std::cout << res->getString("roomID") << std::endl;
+        }
+        int updateCount = prep_stmt->executeUpdate();
+        conn->commit();
+        
+        dbRoom->closeConn();
+    }
+    void DbRoom::update_to_db(sql::Connection* conn, Room room)
+    {
+        
+        DbRoom* dbRoom = DbRoom::getInstance();
+
+        dbRoom->getConn(this->user,this->password,this->url);
+
+        this->prep_stmt = conn->prepareStatement("UPDATE Room SET roomName = ? WHERE roomID = ?");
+
+        (this->prep_stmt)->setString(1, room.getNameRoom());
+        (this->prep_stmt)->setString(2, room.getRoomID());
+        
+        int updateCount = prep_stmt->executeUpdate();
+        conn->commit();
+        dbRoom->closeConn();
+    }
+    void DbRoom::delete_to_db(sql::Connection* conn,Room room)
+    {
+        DbRoom* dbRoom = DbRoom::getInstance();
+
+        dbRoom->getConn(this->user,this->password,this->url);
+        this->prep_stmt = conn->prepareStatement("DELETE FROM Room WHERE roomID = ?");
+
+        (this->prep_stmt)->setString(1, room.getRoomID());
+
+        int updateCount = prep_stmt->executeUpdate();
+        conn->commit();
+
+        dbRoom->closeConn();
+    }
    
