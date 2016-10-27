@@ -20,6 +20,8 @@ public:
     void setRoomID(std::string roomID);
     std::string getNameRoom();
     void setNameRoom(std::string nameRoom);
+    int getCountRoom();
+    void setCountRoom(int countRoom);
     Person getIDPerson();
 	void setIDPerson(Person IDPerson);
 	Door getIDDoor();
@@ -27,6 +29,7 @@ public:
 private:
     std::string roomID;
     std::string nameRoom;
+    int countRoom;
     Person IDPerson;
     Door IDDoor;
 };
