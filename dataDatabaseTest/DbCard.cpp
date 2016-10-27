@@ -57,7 +57,7 @@
 
         dbCard->getConn(this->user, this->password, this->url);
         this->prep_stmt = conn->prepareStatement("INSERT INTO Card(cardID,kindCard) values(?,?)");
-        (this->prep_stmt)->setInt(1, card.getCardID());
+        (this->prep_stmt)->setString(1, card.getCardID());
         (this->prep_stmt)->setString(2, card.getKindCard());
 
         dbCard->closeConn();
