@@ -56,11 +56,9 @@
         DbCard* dbCard = DbCard::getInstance();
 
         dbCard->getConn(this->user, this->password, this->url);
-        this->prep_stmt = conn->prepareStatement("INSERT INTO Card(cardID,kindCard,employeeID,roomID) values(?,?)");
+        this->prep_stmt = conn->prepareStatement("INSERT INTO Card(cardID,kindCard) values(?,?)");
         (this->prep_stmt)->setInt(1, card.getCardID());
         (this->prep_stmt)->setString(2, card.getKindCard());
-        (this->prep_stmt)->setString(3, card.getEmployeeID());
-        (this->prep_stmt)->setString(4, card.getRoomID());
 
         dbCard->closeConn();
     

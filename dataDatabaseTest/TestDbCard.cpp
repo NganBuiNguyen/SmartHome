@@ -20,8 +20,8 @@ protected:
 TEST_F(TestDbCard, TestGetSetCard)
 {
     Card card;
-    std::string employeeID("GCS2734");
-    card.setEmployeeID(employeeID);
+    std::string kindCard("GCS2734");
+    card.setKindCard(kindCard);
 
-    EXPECT_STREQ(card.getEmployeeID().c_str(), employeeID.c_str());
+    EXPECT_STREQ(card.getKindCard().c_str(), kindCard.c_str());
 }

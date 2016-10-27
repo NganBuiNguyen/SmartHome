@@ -37,11 +37,12 @@ void Person::setCardID(Card cardID)
 {
    this->cardID = cardID;
 }
- int Person::getAge()
- {
+int Person::getAge()
+{
  	return this->age;
- }
- void Person::setAge(int age)
- {
+}
+ 
+void Person::setAge(int age)
+{
  	this->age = age;
- }
+}
