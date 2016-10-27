@@ -10,13 +10,14 @@
 class Card 
 {
 public:
-    int getCardID();
-    void setCardID(int cardID);
+    std::string getCardID();
+    void setCardID(std::string cardID);
     std::string getKindCard();
     void setKindCard(std::string kindCard);
-    
 private:
-    int cardID;
+    std::string cardID;
     std::string kindCard;
+
+
 };
 #endif
