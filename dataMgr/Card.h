@@ -18,6 +18,5 @@ private:
     std::string cardID;
     std::string kindCard;
 
-
 };
 #endif

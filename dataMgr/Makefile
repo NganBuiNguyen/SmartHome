@@ -1,11 +1,8 @@
 CC = g++
 E = echo
 
-<<<<<<< HEAD
 SRC =  Person.cpp Status.cpp Card.cpp Room.cpp Door.cpp
-=======
-SRC =  Person.cpp Status.cpp
->>>>>>> 86e6bb73480f4e189c968f34b2f1f716486e68f0
+
 
 OBJFILES := $(patsubst %.cpp, $(SH_ROOT)/obj/%.o, $(SRC))
 

@@ -6,8 +6,18 @@
 
 #include "Person.h"
 
+Person::Person()
+{
 
+}
 
+Person::Person(std::string personID,std::string personName,int age)
+{
+	this->personID = personID;
+	this->personName = personName;
+	//this->cardID = cardID;
+	this->age = age;
+}
 std::string Person::getPersonID()
 {
    return this->personID;

@@ -12,6 +12,8 @@
 class Person
 {
 public:
+    Person();
+    Person(std::string personID,std::string personName,int age);
     std::string getPersonID();
     void setPersonID(std::string personID);
     std::string getPersonName();
