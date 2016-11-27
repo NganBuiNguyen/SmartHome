@@ -1,0 +1,6 @@
+.PHONY: all clean debug
+all: run
+run: DbEmployee.cpp DbEmployee.h
+	g++ -c DbEmployee.cpp -I /data/SmartHome/dataDatabaseTest -I /data/SmartHome/dataMgr -I /development/poco-1.7.5-all/include -I /development/mysql-connector-c++/include -I /development/boost_1_62_0/include -L /development/poco-1.7.5-all/lib -L /development/mysql-connector-c++/lib -L /development/boost_1_62_0/lib -lmysqlcppconn -lPocoData -o run
+clean:
+	rm -rf *o run

@@ -1,13 +1,22 @@
 #include "Card.h"
 
+Card::Card(std::string CardID)
+{
+        this->cardID=CardID;
+}
+Card::Card(std::string CardID,std::string kindCard)
+{
+	this->cardID=CardID;
+	this->kindCard=kindCard;
+}
 
-int Card::getCardID()
+std::string Card::getCardID()
 {
     return cardID; 
 }
 
 
-void Card::setCardID(int cardID)
+void Card::setCardID(std::string cardID)
 {
     this->cardID = cardID;
 }
@@ -23,22 +32,3 @@ void Card::setKindCard(std::string kindCard)
     this->kindCard = kindCard;
 }
 
-std::string Card::getEmployeeID()
-{
-    return employeeID;
-}
-
-void Card::setEmployeeID(std::string employeeID)
-{
-    this->employeeID = employeeID;
-}
-
-std::string Card::getRoomID()
-{
-    return roomID;
-}
-
-void Card::setRoomID(std::string roomID)
-{
-   this->roomID = roomID;
-}

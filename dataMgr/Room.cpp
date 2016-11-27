@@ -25,3 +25,29 @@ void Room::setNameRoom(std::string nameRoom)
 {
     this->nameRoom = nameRoom;
 } 
+
+int Room::getCountRoom()
+{
+	return countRoom;
+}
+void Room::setCountRoom(int countRoom)
+{
+	this->countRoom = countRoom;
+}
+
+Person Room::getIDPerson()
+{
+	return this->IDPerson;
+}
+void Room::setIDPerson(Person IDPerson)
+{
+   this->IDPerson=IDPerson;
+}
+Door Room::getIDDoor()
+{
+	return this->IDDoor;
+}
+void Room::setIDDoor(Door IDDoor)
+{
+	this->IDDoor=IDDoor;
+}

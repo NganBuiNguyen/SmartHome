@@ -36,6 +36,7 @@ bool Status::getStatusName()
 void Status::setSatusName(bool statusName)
 {
  this->statusName = statusName;
+<<<<<<< HEAD
 }                                                                      std::string Status::getEmployeeID()
 {
  return this->employeeID;
@@ -43,12 +44,41 @@ void Status::setSatusName(bool statusName)
 >>>>>>> 5df60496ad809eef20b23bd6a2a623d66b3d56f9
 {
  this->employeeID = employeeID;
+=======
+>>>>>>> a056a8048d2a9d921065e10494bb092040d5e5d7
 }
-std::string Status::getRoomID()
-{
- return this->roomID;
-}                   
-void Status::setRoomID(std::string roomID)
-{
- this->roomID = roomID;
-}  
+
+
+ Door Status::getDoorID()
+ {
+ 	return this->doorID;
+ }
+ void Status::setDoorID(Door doorID)
+ {
+ 	this->doorID = doorID;
+ }
+ Card Status::getCardID()
+ {
+ 	return this->cardID;
+ }
+ void Status::setCardID(Card cardID)
+ {
+ 	this->cardID = cardID;
+ }
+
+ time_t Status::getTimeIn()
+ {
+ 	return this->timeIn;
+ }
+ void Status::setTimeIn(time_t timeIn)
+ {
+ 	this->timeIn = timeIn;
+ }
+ time_t Status::getTimeOut()
+ {
+ 	return this->timeOut;
+ }
+ void Status::setTimeOut(time_t timeOut)
+ {
+ 	this->timeOut = timeOut;
+ } 
