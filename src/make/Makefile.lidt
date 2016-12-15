@@ -1,0 +1,60 @@
+#------------------------------------------------------------------------------
+# Makefile - make/Makefile.lidt
+#
+# Copyright Tien Nguyen Anh
+#
+# Modification history
+# -------------------
+#     Created: 2016-Dec-3
+#------------------------------------------------------------------------------
+
+.PHONY: all
+all:
+
+#------------------------------------------------------------------------------
+DEFAULT_LIDT_COMPONENTS =
+
+ifeq ($(origin LIDT_COMPONENTS), undefined)
+	LIDT_COMPONENTS=$(DEFAULT_LIDT_COMPONENTS)
+endif
+
+#------------------------------------------------------------------------------
+MV := mv -f
+RM := rm -f
+LN := ln -f
+CP := cp -f
+
+CAT := cat
+CUT := cut
+AWK := awk
+SED := sed
+ECHO := echo
+TOUCH := touch
+CHMOD := chmod
+PYTHON := python
+MAKE := make
+
+#------------------------------------------------------------------------------
+ifndef  LIDT_ROOT
+    $(ECHO) "ERROR: LIDT_ROOT environment variable is not set."
+endif
+
+#------------------------------------------------------------------------------
+APP_SRC = $(LIDT_ROOT)/src/app
+
+APP_OBJ = $(LIDT_ROOT)/obj/app
+LIB_DIR = $(APP_OBJ)/libs
+
+#------------------------------------------------------------------------------
+PWD := $(strip $(shell pwd))
+
+
+#------------------------------------------------------------------------------
+ifdef RUN_TIME
+	POSTCONDITIONS = $(addprefix $(RUN_TIME)/, $(COPY_TO_RUNTIME))
+else
+	RUN_TIME = .
+
+endif
+
+

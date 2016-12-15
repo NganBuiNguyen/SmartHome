@@ -1,0 +1,148 @@
+#-------------------------------------------------------------------------------
+# Makefile - make/Makefile.rules
+#
+# Copyright (c) Tien Anh Nguyen
+#
+# Modified history
+# --------------------
+#    Created: 2016-Dec-04 
+#    Modified: 2016-Dec-07
+#-------------------------------------------------------------------------------
+
+ifndef  make_rules
+make_rules = once_only
+
+include $(LIDT_MAKEDIR)/Makefile.lidt
+
+#-------------------------------------------------------------------------------
+# Directory of objects
+
+ifndef  OBJ_DIR
+    OBJ_DIR = .
+endif
+
+ifndef  TARGET_DIR
+    TARGET_DIR = $(OBJ_DIR)
+endif
+
+#-------------------------------------------------------------------------------
+
+ifdef ARCHIVE_ALT
+    ADD_ARCHIVES := $(addsuffix _$(ARCHIVE_ALT), $(ARCHIVES))
+    ARCHIVES += $(ADD_ARCHIVES)
+endif
+
+CLEAN   := $(CLEAN) $(OBJS)
+
+OBJS    := $(addprefix  $(OBJ_DIR)/, $(OBJS))
+SUBOBJS := $(addprefix  $(OBJ_DIR)/, $(SUBOBJS))
+EXTOBJS := $(strip $(EXTOBJS))
+CMNOBJS := $(strip $(CMNOBJS))
+
+TARGET  := $(addprefix  $(TARGET_DIR)/, $(TARGET))
+PROGRAM := $(addprefix $(RUN_TIME)/, $(PROGRAM))
+ARCHIVES := $(addprefix  $(LIB_DIR)/, $(patsubst %, lib%.a, $(ARCHIVES)))
+
+SUBDIRS := $(addprefix  $(PWD)/, $(SUBDIRS))
+
+
+CLEAN   := $(CLEAN) $(OBJS)
+
+#-------------------------------------------------------------------------------
+ifndef  TARGET
+    ifeq ($(words $(PROGRAM)), 1)
+        TARGET := $(PROGRAM)
+    endif
+endif
+
+#-------------------------------------------------------------------------------
+# Default action: build the list of targets in the correct order
+
+.PHONY: all
+
+all:    $(OBJS) $(SUBOBJS)
+
+all:    $(LOCAL_TARGET) $(TARGET) $(PROGRAM) $(ARCHIVES)
+
+#-------------------------------------------------------------------------------
+# Compiler flags
+INCS   := src $(INCS)
+
+
+ifdef USE_CPP_LANG
+    LIBS += -lstdc++
+endif
+
+CC 		= gcc
+CPP 	= g++
+AR 		= ar
+
+#----------------------------------------------------------------------------
+# Unittest
+
+ifeq ($(APP),unittest)
+
+report_xml: $(TEST_BIN)
+	$(ECHO) 'Run test'
+	./$^ $(LIBS) --gtest_output=xml
+
+report_cover: report_xml
+	$(ECHO) 'Generating HTML output'
+	$(LCOV) -q -c -b $(LCOV_BASEDIR) -d $(OBJ_DIR) -o r.info.all
+	$(LCOV) -q -e r.info.all "*$(TCS_ROOT)/$(TEST_OBJECT)*" -b $(LCOV_BASEDIR) -o r.info.all
+	$(LCOV) -q -r r.info.all "*/test/*" -b $(LCOV_BASEDIR) -o r.info
+	$(GENHTML) -q -o $(REPORT_COVER_DIR) --t VARBASE_TEST_RESULT r.info 
+	$(LCOV) -q -z -b $(LCOV_BASEDIR) -d $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o:     ../%.c
+	$(ECHO) " Compiling " $< "For UT"
+	$(RM) $@;
+	$(CC) -o $@ -c $(COMMON_FLAGS) $(INC_FLAGS) $(INCLUDE_LIBS) $< 
+
+$(OBJ_DIR)/%.o:     ../%.cpp
+	$(ECHO) " Compiling " $<  "For UT"
+	$(RM) $@;
+	$(CPP) -o $@ -c $(COMMON_FLAGS) $(INC_FLAGS) $(INCLUDE_LIBS) $< 
+
+gtest.bin: $(TEST_OBJS) $(OBJS)
+	$(ECHO) " Linking " $@
+	$(RM) $@
+	$(CPP) $^ $(LIBS) -L$(LIB_DIR) $(patsubst lib%.a, -l%, $(filter %.a, $^)) -o $@
+
+CLEAN += $(OBJS)
+
+endif
+
+#------------------------------------------------------------------------------
+# Compile rules - the rules all look like this:
+
+$(OBJ_DIR)/%.o:     %.c
+	$(ECHO) "Compiling to Object" $<
+	$(RM) $@
+	$(CC) -c $< -o $@ $(LIBS) $(INC_FLAGS) $(INCLUDE_LIBS) $(COMMON_FLAGS)
+
+$(OBJ_DIR)/%.o:	%.cpp
+	$(ECHO) "Compiling to Object" $<
+	$(RM) $@
+	$(CPP) -c $< -o $@ $(LIBS) $(INC_FLAGS) $(INCLUDE_LIBS) $(COMMON_FLAGS)
+
+$(LIB_DIR)/lib%_$(ARCHIVE_ALT).a: $(OBJS)
+	$(ECHO) "Creating archive" $@
+	$(AR) -cr $@ $^ $(LIBS)
+
+$(LIB_DIR)/lib%.a:    $(OBJS) 
+	$(ECHO) "Creating archive" $@
+	$(AR) -cr $@ $^
+
+$(OBJ_DIR)/lib%.so:     %.o
+	$(CC) -shared -o $@ $<
+
+#-------------------------------------------------------------------------------
+# clean and clobber etc.
+
+# CLEAN    += core
+# CLEAN_DIRS += $(SUBDIRS)
+
+include $(LIDT_MAKEDIR)/Makefile.clean
+
+endif   # once_only

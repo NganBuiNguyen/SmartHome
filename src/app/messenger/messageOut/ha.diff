@@ -1,0 +1,1000 @@
+ 1008  sudo wget https://ftp.mozilla.org/pub/mozilla.org/webtools/bugzilla-5.0.tar.gz
+ 1009  sudo tar -xvf bugzilla-5.0.tar.gz 
+ 1010  sudo mv bugzilla /usr/local/
+ 1011  ls
+ 1012  sudo mv bugzilla-5.0 /usr/local/
+ 1013  sudo ln -s /usr/local/bugzilla-4.0.2 /var/www/bugzilla
+ 1014  cd /var/www/
+ 1015  ls
+ 1016  cd ../
+ 1017  cd www
+ 1018  ls
+ 1019  cd html/
+ 1020  ls
+ 1021  cd bugzilla/
+ 1022  ls
+ 1023  ./checksetup.pl 
+ 1024  sudo perl install-module.pl -all
+ 1025  sudo /etc/init.d/apache2 restart
+ 1026  sudo ./checksetup.pl 
+ 1027  sudo gedit localconfig 
+ 1028  sudo /etc/init.d/apache2 restart
+ 1029  cd ../
+ 1030  cd
+ 1031  cd /var/www/
+ 1032  ls
+ 1033  cd ../
+ 1034  sudo chown -R www-data:www-data /var/www/bugzilla
+ 1035  cd /var/www/html/bugzilla/
+ 1036  ./checksetup.pl 
+ 1037  sudo ./checksetup.pl 
+ 1038  sudo ./checksetup.pl 
+ 1039  cd /usr/bin/perl
+ 1040  cd /usr/bin/
+ 1041  ls
+ 1042  cd /var/www/html/bugzilla/
+ 1043  sudo gedit localconfig 
+ 1044  sudo ./checksetup.pl 
+ 1045  sudo /etc/init.d/apache2 restart
+ 1046  cd /usr/bin/perl
+ 1047  ls
+ 1048  cd 
+ 1049  sudo perl install-module.pl -all
+ 1050  cd /var/
+ 1051  ls
+ 1052  cd www/
+ 1053  ls
+ 1054  cd html/
+ 1055  ls
+ 1056  cd bugzilla/
+ 1057  sudo perl install-module.pl -all
+ 1058  sudo ./checksetup.pl 
+ 1059  sudo /etc/init.d/apache2 restart
+ 1060  cd ../
+ 1061  cd 
+ 1062  ls
+ 1063  apache2
+ 1064  apache2 -v
+ 1065  http://localhost
+ 1066  sudo gedit /etc/apache2/apache2.conf
+ 1067  mysql -u root -p
+ 1068  shutdown now
+ 1069  shut down now
+ 1070  cd project/android-studio/
+ 1071  l
+ 1072  cd bin/
+ 1073  ls
+ 1074  ./studio.sh 
+ 1075  cd project/android-studio/
+ 1076  cd bin/./studio.sh
+ 1077  cd bin./studio.sh
+ 1078  cd bin/
+ 1079  ./studio.sh 
+ 1080  cd project/android-studio/
+ 1081  cd bin/
+ 1082  ./studio.sh 
+ 1083  cd project/android-studio/bin/
+ 1084  ./studio.sh 
+ 1085  cd project/android-studio/bin/
+ 1086  ./studio.sh 
+ 1087  cd
+ 1088  cd project/
+ 1089  ls
+ 1090  cd Bugzilla/
+ 1091  ls
+ 1092  cd ../
+ 1093  ls
+ 1094  cd ../
+ 1095  cd study/
+ 1096  ls
+ 1097  cd ../
+ 1098  cd /usr/
+ 1099  ls
+ 1100  cd /lib
+ 1101  ld
+ 1102  cd /var/
+ 1103  ls
+ 1104  cd www/
+ 1105  ls
+ 1106  cd html/
+ 1107  ls
+ 1108  cd b
+ 1109  cd bugzilla/
+ 1110  ls
+ 1111  ./checksetup.pl 
+ 1112  cd /data/
+ 1113  ls
+ 1114  cd SmartHome/
+ 1115  ls
+ 1116  cd messenger/
+ 1117  ls
+ 1118  make
+ 1119  ls
+ 1120  ./MsgIn 
+ 1121  rm -rf main.o MsgIn.o
+ 1122  ls
+ 1123  cd /var/
+ 1124  ls
+ 1125  cd www/
+ 1126  ls
+ 1127  cd html/
+ 1128  ls
+ 1129  cd bugzilla/
+ 1130  ./checksetup.pl 
+ 1131  sudo ./checksetup.pl 
+ 1132  sudo apt-get install build-esstential
+ 1133  sudo apt-get install build-essential
+ 1134  which perl\
+ 1135  sudo apt-get install libappconfig-perl libdate-calc-perl libtemplate-perl libmime-perl libdatetime-timezone-perl libdatetime-perl libemail-sender-perl libemail-mime-perl libemail-mime-modifier-perl libdbi-perl libdbd-mysql-perl libcgi-pm-perl libmath-random-isaac-perl libmath-random-isaac-xs-perl apache2-mpm-prefork libapache2-mod-perl2 libapache2-mod-perl2-dev libchart-perl libxml-perl libxml-twig-perl perlmagick libgd-graph-perl libtemplate-plugin-gd-perl libsoap-lite-perl libhtml-scrubber-perl libjson-rpc-perl libdaemon-generic-perl libtheschwartz-perl libtest-taint-perl libauthen-radius-perl libfile-slurp-perl libencode-detect-perl libmodule-build-perl libnet-ldap-perl libauthen-sasl-perl libtemplate-perl-doc libfile-mimeinfo-perl libhtml-formattext-withlinks-perl libgd-dev lynx-cur python-sphinx
+ 1136  sudo apt-get install apache2-mpm-prefork
+ 1137  sudo apt-get install apache2.2-common
+ 1138  sudo apt-get install libappconfig-perl libdate-calc-perl libtemplate-perl libmime-perl libdatetime-timezone-perl libdatetime-perl libemail-sender-perl libemail-mime-perl libemail-mime-modifier-perl libdbi-perl libdbd-mysql-perl libcgi-pm-perl libmath-random-isaac-perl libmath-random-isaac-xs-perl libapache2-mod-perl2 libapache2-mod-perl2-dev libchart-perl libxml-perl libxml-twig-perl perlmagick libgd-graph-perl libtemplate-plugin-gd-perl libsoap-lite-perl libhtml-scrubber-perl libjson-rpc-perl libdaemon-generic-perl libtheschwartz-perl libtest-taint-perl libauthen-radius-perl libfile-slurp-perl libencode-detect-perl libmodule-build-perl libnet-ldap-perl libauthen-sasl-perl libtemplate-perl-doc libfile-mimeinfo-perl libhtml-formattext-withlinks-perl libgd-dev lynx-cur python-sphinx
+ 1139  ./checksetup.pl 
+ 1140  sudo ./checksetup.pl 
+ 1141  ./localconfig
+ 1142  sudo ./localconfig
+ 1143  ls
+ 1144  cd../
+ 1145  ls
+ 1146  cd ../
+ 1147  cd bugzilla/
+ 1148  ls
+ 1149  ./checksetup.pl 
+ 1150  vi localconfig 
+ 1151  cd /var/
+ 1152  ls
+ 1153  cd www/
+ 1154  ls
+ 1155  cd html/
+ 1156  ls
+ 1157  cd bugzilla/
+ 1158  ls
+ 1159  vi localconfig 
+ 1160  mysql -u root -p
+ 1161  cd /var/
+ 1162  ls
+ 1163  cd www/
+ 1164  ls
+ 1165  cd html/
+ 1166  ls
+ 1167  cd bugzilla/
+ 1168  ls
+ 1169  ./checksetup.pl 
+ 1170  ls
+ 1171  cd Bugzilla/
+ 1172  cd Install/
+ 1173  ls
+ 1174  vi Localconfig.pm 
+ 1175  cd ../
+ 1176  vi localconfig 
+ 1177  cd /var/www/html/
+ 1178  l
+ 1179  ls
+ 1180  cd bugzilla/
+ 1181  sudo su -
+ 1182  cd /var/
+ 1183  ls
+ 1184  cd www/
+ 1185  ls
+ 1186  cd html/
+ 1187  ls
+ 1188  cd bugzilla/
+ 1189  cd Bugzilla/
+ 1190  ls
+ 1191  cd Install/
+ 1192  cd ../
+ 1193  cd ./.
+ 1194  cd ../
+ 1195  ./checksetup.pl 
+ 1196  nano localconfig
+ 1197  ./checksetup.pl 
+ 1198  cd Bugzilla/
+ 1199  ./check
+ 1200  chmod -R 777 /var/www/bugzilla/ 
+ 1201  sudo chmod -R 777 /var/www/bugzilla/ 
+ 1202  cd 
+ 1203  sudo chmod -R 777 /var/www/bugzilla/ 
+ 1204  sudo chown -R www-data:www-data /var/www/html/bugzilla
+ 1205  cd /var/www/html/
+ 1206  cd bugzilla/
+ 1207  ls
+ 1208  cd Bugzilla/
+ 1209  ls
+ 1210  cd ../
+ 1211  ./checksetup.pl 
+ 1212  cd Bugzilla/Install/
+ 1213  ls
+ 1214  vi Localconfig.pm 
+ 1215  sudo cp -p /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
+ 1216  sudo su-
+ 1217  sudo su -
+ 1218  cd../
+ 1219  cd ../
+ 1220  cd
+ 1221  sudo cp -p /etc/mysql/my.cnf /etc/mysql/my.cnf.orig
+ 1222  sudo vi /etc/mysql/my.cnf
+ 1223  sudo vi /etc/apache2/sites-available/bugzilla.conf
+ 1224  sudo su -
+ 1225  sudo a2ensite bugzilla
+ 1226  sudo a2dissite 000-default
+ 1227  sudo service apache2 restart
+ 1228  systemctl status apache2.service
+ 1229  sudo touch /etc/apache2/envvars
+ 1230  sudo nano /etc/apache2/envvars
+ 1231  sudo su-
+ 1232  sudo su -
+ 1233  sudo vi /etc/apache2/sites-available/bugzilla.conf
+ 1234  sudo su -
+ 1235  cd /var/www/
+ 1236  ls
+ 1237  cd html/
+ 1238  ls
+ 1239  cd bugzilla/
+ 1240  ls
+ 1241  cd Bugzilla/
+ 1242  ls
+ 1243  cd ls
+ 1244  ls
+ 1245  cd Install/
+ 1246  ls
+ 1247  vi Localconfig.pm 
+ 1248  cd ../
+ 1249  ./checksetup.pl 
+ 1250  cd Bugzilla/Install/
+ 1251  ls
+ 1252  ./L
+ 1253  vi Localconfig.pm 
+ 1254  sudo su -
+ 1255  mysql -u root -p
+ 1256  sudo service apache2 restart
+ 1257  sudo touch /etc/apache2/envvars
+ 1258  sudo nano /etc/apache2/envvars
+ 1259  sudo service apache2 start
+ 1260  sudo apt-get remove apache2*
+ 1261  sudo apt-get install apache2
+ 1262  sudo service apache2 restart
+ 1263  sudo apt-get install apache2
+ 1264  sudo service apache2 restart
+ 1265  sudo service apache2 start
+ 1266  sudo apt-get -o DPkg::Options::="--force-confmiss" --reinstall install apache2
+ 1267  sudo apt-get purge apache2
+ 1268  sudo apt-get install apache2
+ 1269  sudo service apache2 start
+ 1270  sudo service apache2 restart
+ 1271  sudo a2enmod cgi 
+ 1272  sudo service apache2 restart
+ 1273  apache2ctl -M | grep cgi
+ 1274  echo "ServerName localhost" | sudo tee /etc/apache2/conf.d/fqdn
+ 1275  13.04 and older
+ 1276  This is just a friendly warning and not really a problem (as in that something does not work).
+ 1277  If you insert a
+ 1278  ServerName localhost   
+ 1279  in either httpd.conf or apache2.conf in /etc/apache2 and restart apache the notice will disappear.
+ 1280  If you have a name inside /etc/hostname you can also use that name instead of localhost.
+ 1281  And it uses 127.0.1.1 if it is inside your /etc/hosts:
+ 1282  127.0.0.1 localhost
+ 1283  127.0.1.1 myhostname
+ 1284  Preferred method
+ 1285  Troubleshooting Apache
+ 1286  If you get this error:
+ 1287  apache2: Could not determine the server's fully qualified domain name, 
+ 1288  using 127.0.0.1 for ServerName
+ 1289  then use a text editor such as "sudo nano" at the command line or "gksudo gedit" on the desktop to create a new file,
+ 1290  sudo nano /etc/apache2/conf.d/fqdn
+ 1291  ServerName localhost
+ 1292  :wq!
+ 1293  w!
+ 1294  exit
+ 1295   echo "ServerName localhost" | sudo tee /etc/apache2/conf.d/fqdn
+ 1296  sudo service apache2 reload
+ 1297  sudo su -
+ 1298  sudo nano /etc/apache2/conf.d/fqdn
+ 1299  cd /data/SmartHome/
+ 1300  ls
+ 1301  cd dataDatabaseTest/
+ 1302  ls
+ 1303  vi TestDbCard.cpp 
+ 1304  vi TestDbDoor.cpp 
+ 1305  cd /data/SmartHome/
+ 1306  ls
+ 1307  cd dataDatabaseTest/
+ 1308  ls
+ 1309  vi TestDbDoor.cpp 
+ 1310  cd /var/
+ 1311  ls
+ 1312  cd www/
+ 1313  ls
+ 1314  cd html/
+ 1315  ls 
+ 1316  cd bugzilla/
+ 1317  ls
+ 1318  cd bugzilla/
+ 1319  sudo su -
+ 1320  sudo vi /etc/apache2/sites-available/bugzilla.conf
+ 1321  cd bugzilla/
+ 1322  sudo su -
+ 1323  cd /etc/mysql
+ 1324  ls
+ 1325  vi my.cnf
+ 1326  vi mysql.conf.d/
+ 1327  cd ../
+ 1328  nano /etc/mysql/my.cnf
+ 1329  cd ../
+ 1330  cd 
+ 1331  cd /var/www/html/
+ 1332  ls
+ 1333  cd bugzilla/
+ 1334  ls
+ 1335  sudo su -s
+ 1336  sudo su -
+ 1337  ongha17
+ 1338  sudo su -
+ 1339  cd /usr/
+ 1340  ls
+ 1341  cd ../
+ 1342  ls
+ 1343  cd
+ 1344  ls
+ 1345  cd Downloads/
+ 1346  ls
+ 1347  cd Desktop/
+ 1348  rm -r eclipse-installer/
+ 1349  ls
+ 1350  cd Downloads/
+ 1351  ls
+ 1352  rm -r eclipse-inst-linux64.tar.gz 
+ 1353  ls
+ 1354  sudo apt-get update 
+ 1355  sudo apt-get install tomcat8
+ 1356  service tomcat start
+ 1357  echo $JAVA_HOME
+ 1358  echo $PATH
+ 1359  ls
+ 1360  cd Desktop/
+ 1361  ls
+ 1362  cd eclipse-installer/
+ 1363  ls
+ 1364  ./configuration/
+ 1365  ./eclipse-inst 
+ 1366  cd ../
+ 1367  cd
+ 1368  sudo apt-get autoremove eclipse*
+ 1369  sudo apt-get purge  eclipse
+ 1370  sudo apt-get autoremove eclipse*
+ 1371  sudo apt-get purge  eclipse
+ 1372  rm -r ~/eclipse/
+ 1373  rm -r ~/eclipses/
+ 1374  cd /var/
+ 1375  ls
+ 1376  cd www/
+ 1377  ls
+ 1378  cd html/
+ 1379  ls
+ 1380  cd bugzilla/
+ 1381  sudo su -
+ 1382  cd /usr/bin
+ 1383  ls
+ 1384  cd perl
+ 1385  cd
+ 1386  sudo apt-get install build-essential 
+ 1387  sudo apt-get update 
+ 1388  sudo apt-get install build-essential 
+ 1389  sudo apt-get install libyaml-perl
+ 1390  sudo apt-get install libmysql++-dev
+ 1391  sudo su -s
+ 1392  sudo su -
+ 1393  gedit /etc/apache2/sites-available/bugzilla.conf`
+ 1394  gedit /etc/apache2/sites-available/bugzilla.conf
+ 1395  sudo su -
+ 1396  mkdir /usr/include/apache2
+ 1397  sudo mkdir /usr/include/apache2
+ 1398  cpan Apache2::SizeLimit install
+ 1399  sudo su -
+ 1400  cd /var/bin
+ 1401  cd /var/
+ 1402  ls
+ 1403  cd /usr/bin/
+ 1404  ls
+ 1405  cd
+ 1406  clear
+ 1407  sudo nano /etc/apache2/apache2.conf
+ 1408  lwp-download http://www.apache.org/dist/httpd/apache_1.3.20.tar.gz
+ 1409  cd /home/
+ 1410  ls
+ 1411  cd apache2/
+ 1412  ls
+ 1413  cd src
+ 1414  cd ../
+ 1415  cd
+ 1416  cd /usr/local
+ 1417  ls
+ 1418  cd bugzilla
+ 1419  ls
+ 1420  cd ../
+ 1421  ls
+ 1422  cd bin/
+ 1423  ls
+ 1424  cd../
+ 1425  cd
+ 1426  cd ~
+ 1427  cd Downloads/
+ 1428  ls
+ 1429  cd mod_perl-2.0.10/
+ 1430  ls
+ 1431  perl Makefile.PL MP_APXS=/usr/local/apache2/bin/apxs
+ 1432  rpm -ivh gdbm-devel-1.8.0-26.2.1.i386.rpm
+ 1433  sudo apt install rpm
+ 1434  rpm -ivh gdbm-devel-1.8.0-26.2.1.i386.rpm
+ 1435  cd /usr/lib
+ 1436  ls
+ 1437  cd /usr/local/apache2/bin/apxs -q LIBEXECDIR
+ 1438  cd /usr/
+ 1439  lls
+ 1440  ls
+ 1441  cd local
+ 1442  ls
+ 1443  cd bin/
+ 1444  ls
+ 1445  cd /var/
+ 1446  ls
+ 1447  cd www/
+ 1448  ls
+ 1449  cd html/
+ 1450  ls
+ 1451  cd bugzilla/
+ 1452  ls
+ 1453  sudo su -
+ 1454  sudo apt-get  install lib32stdc++6 lib32z1 lib32z1-dev 
+ 1455  sudo apt-get  install lib32ncursess lib32z1
+ 1456  ls
+ 1457  cd Downloads/
+ 1458  ls
+ 1459  cd ..
+ 1460  cd /opt/
+ 1461  ls
+ 1462  cd /etc/
+ 1463  ls
+ 1464  cd tomcat8/
+ 1465  ls
+ 1466  vi tomcat-users.xml 
+ 1467  vi context.xml 
+ 1468  sudo su -
+ 1469  cd /var/lib/colord/
+ 1470  cd ../
+ 1471  ls
+ 1472  cd tomcat8/
+ 1473  ls
+ 1474  cd webapps/
+ 1475  ls
+ 1476  cd ../
+ 1477  cd lib/
+ 1478  ls
+ 1479  cd /etc/tomcat8/
+ 1480  ls
+ 1481  cd ../
+ 1482  java --version
+ 1483  cd 
+ 1484  java --version
+ 1485  javac --version
+ 1486  cd /etc/
+ 1487  ls
+ 1488  cd tomcat8/
+ 1489  ls
+ 1490  history 
+ 1491  ls
+ 1492  cd ../
+ 1493  cd 
+ 1494  cd /var/lib/
+ 1495  ls
+ 1496  cd tomcat8/
+ 1497  ls
+ 1498  sudo find / -name tomcat8
+ 1499  cd /usr/share/tomcat7
+ 1500  cd /usr/share/tomcat8
+ 1501  sudo ln -s /var/lib/tomcat8/conf conf
+ 1502  sudo ln -s /etc/tomcat7/policy.d/03catalina.policy conf/catalina.policy
+ 1503  sudo ln -s /etc/tomcat8/policy.d/03catalina.policy conf/catalina.policy
+ 1504  sudo ln -s /etc/tomcat8/policy.d/03catalina.policy conf
+ 1505  sudo ln -s /var/log/tomcat7 log
+ 1506  sudo chmod -R 777 /usr/share/tomcat8/conf
+ 1507  sudo ln -s /var/lib/tomcat7/common common
+ 1508  sudo ln -s /var/lib/tomcat8/common common
+ 1509  cd /etc/
+ 1510  ls
+ 1511  ls -la
+ 1512  sudo dpkg -r ~/.eclipse
+ 1513  rm -rf  ~/.eclipse
+ 1514  ls
+ 1515  su - root
+ 1516  sudo su -
+ 1517  cd
+ 1518  mv eclipse/ /opt/
+ 1519  sudo mv eclipse/ /opt/
+ 1520  sudo su 
+ 1521  gedit .local/share/applications/eclipse.desktop
+ 1522  cd /opt/
+ 1523  ls
+ 1524  cd
+ 1525  ls
+ 1526  cd eclipse/
+ 1527  ls
+ 1528  cd jee-neon/
+ 1529  ls
+ 1530  cd eclipse/
+ 1531  ls
+ 1532  cd ../
+ 1533  cd
+ 1534  haphan
+ 1535  cd eclipse/jee-neon/eclipse/
+ 1536  ls
+ 1537  cd .local/share/applications/eclipse.desktop
+ 1538  cd .local/
+ 1539  cd share/
+ 1540  ls
+ 1541  cd applications/
+ 1542  l
+ 1543  ls
+ 1544  vi eclipse.desktop 
+ 1545  cd ../
+ 1546  cd
+ 1547  gksu gedit
+ 1548  cd .local/share/applications/eclipse.desktop
+ 1549  cd .local/share/applications/
+ 1550  vi eclipse.desktop 
+ 1551  cd
+ 1552  sudo apt install gksu
+ 1553  gksu gedit
+ 1554  cd /usr/
+ 1555  ls
+ 1556  cd share/
+ 1557  ls
+ 1558  cd application
+ 1559  cd applications
+ 1560  ls
+ 1561  vi eclipse.desktop 
+ 1562  eclipse -version
+ 1563  sudo apt install eclipse-platform
+ 1564  cd /usr/
+ 1565  ls
+ 1566  cd share/
+ 1567  ls
+ 1568  cd application
+ 1569  cd applications
+ 1570  ls
+ 1571  vi eclipse.desktop 
+ 1572  cd /var/
+ 1573  ls
+ 1574  cd www/
+ 1575  ls
+ 1576  cd html/
+ 1577  ls
+ 1578  cd bugzilla/
+ 1579  sudo su -
+ 1580  sudo su
+ 1581  ip addr show
+ 1582  cd /data/
+ 1583  ls
+ 1584  cd SmartHome/
+ 1585  ls
+ 1586  cd dataDatabaseTest/
+ 1587  ls
+ 1588  make
+ 1589  cd ../
+ 1590  ls
+ 1591  cd dataDatabaseTest/
+ 1592  ls
+ 1593  cd ../
+ 1594  mv dataDatabaseTest/ dataDatabaseTest/
+ 1595  cd dataDatabaseTest/
+ 1596  ls
+ 1597  vi TestDbCard.cpp 
+ 1598  vi TestDbDoor.cpp 
+ 1599  make
+ 1600  cd ../
+ 1601  cd dataDatabaseTest/
+ 1602  ls
+ 1603  ifconfig
+ 1604  cd /opt/eclipse/
+ 1605  ls
+ 1606  cd jee-neon/
+ 1607  ls
+ 1608  cd eclipse/
+ 1609  ls
+ 1610  cd
+ 1611  sudo apt-get install isc-dhcp-server
+ 1612  sudo vi /etc/default/isc-dhcp-server
+ 1613  sudo vi /etc/dhcp/dhcpd.conf
+ 1614  ifconfif
+ 1615  ifconfig
+ 1616  sudo vi /etc/dhcp/dhcpd.conf
+ 1617  ifconfig
+ 1618  sudo vi /etc/dhcp/dhcpd.conf
+ 1619  mysql -u root -p
+ 1620  cd /data/SmartHome/
+ 1621  ls
+ 1622  cd dataMgr/
+ 1623  ls
+ 1624  vi Card.cpp
+ 1625  vi Card.h
+ 1626  cd /da
+ 1627  cd /data/
+ 1628  ls
+ 1629  cd SmartHome/
+ 1630  ls
+ 1631  cd dataMgr/
+ 1632  ls
+ 1633  vi Card.h
+ 1634  cd /data/SmartHome/
+ 1635  cd /data/
+ 1636  cd SmartHome/
+ 1637  cd dataDatabaseTest/
+ 1638  ls
+ 1639  vi main.cpp
+ 1640  make
+ 1641  ls
+ 1642  make
+ 1643  export SH_ROOT=/data/SmartHome/
+ 1644  make
+ 1645  export SH_ROOT=/data/SmartHome/dataMgr/
+ 1646  make
+ 1647  export SH_ROOT=/data/SmartHome/dataMgr/
+ 1648  make
+ 1649  export SH_ROOT=/data/SmartHome/dataMgr/
+ 1650  make
+ 1651  ls
+ 1652  make cleanall 
+ 1653  ls
+ 1654  make 
+ 1655  cd ../
+ 1656  ls
+ 1657  cd dataMgr/
+ 1658  ls
+ 1659  git pull
+ 1660  git pull origin WP01
+ 1661  cd ../
+ 1662  cd dataDatabaseTest/
+ 1663  git add DbCard.h 
+ 1664  git add DbDoor.h
+ 1665  git commit -m"Ha Phan"
+ 1666  git pull origin WP01
+ 1667  cd ../
+ 1668  cd dataMgr/
+ 1669  ls
+ 1670  cd ../
+ 1671  cd dataDatabaseTest/
+ 1672  ls
+ 1673  rm -rf Employee.o DbDoor.o 
+ 1674  ls
+ 1675  make
+ 1676  export SH_ROOT=/data/SmartHome
+ 1677  ,ake
+ 1678  make
+ 1679  cd /data/SmartHome/dataDatabaseTest/
+ 1680  ls
+ 1681  vi DbCard.cpp 
+ 1682  cd project/android-studio/
+ 1683  cd b
+ 1684  cd bin/
+ 1685  ls
+ 1686  shutdown now
+ 1687  cd project/android-studio/
+ 1688  ls
+ 1689  cd bin/
+ 1690  ls
+ 1691  ./studio.sh 
+ 1692  cd /data/SmartHome/dataDatabaseTest/
+ 1693  ls
+ 1694  make
+ 1695  export SH_ROOT=/data/SmartHome/
+ 1696  make
+ 1697  cd /data/SmartHome/dataDatabaseTest/
+ 1698  make
+ 1699  export SH_ROOT=/data/SmartHome/
+ 1700  make
+ 1701  cd ../
+ 1702  cd dataMgr/
+ 1703  ls
+ 1704  git pull origin WP01
+ 1705  git status
+ 1706  git add Card.cpp
+ 1707  ls
+ 1708  git add Card.h
+ 1709  ls
+ 1710  git status
+ 1711  cd ../
+ 1712  cd dataDatabaseTest/
+ 1713  git commit -m "Ha Phan"
+ 1714  git add DbCard.h 
+ 1715  git commit -m "Ha Phan"
+ 1716  git pull origin WP01
+ 1717  ls
+ 1718  cd ../
+ 1719  cd dataMgr/
+ 1720  ls
+ 1721  git pull origin WP01
+ 1722  ls
+ 1723  cd ../
+ 1724  git pull origin WP01
+ 1725  ls
+ 1726  cd dataDatabaseTest/
+ 1727  ls
+ 1728  cd ../
+ 1729  cd dataMgr/
+ 1730  ls
+ 1731  git pull origin WP01
+ 1732  ls
+ 1733  cd project/android-studio/bin/
+ 1734  ./studio.sh 
+ 1735  cd /data/SmartHome/
+ 1736  ls
+ 1737  cd dataDatabaseTest/
+ 1738  ls
+ 1739  make
+ 1740  export SH_ROOT=/data/SmartHome/
+ 1741  make
+ 1742  git pull origin WP01
+ 1743  ls
+ 1744  cd ../
+ 1745  cd dataMgr/
+ 1746  ls
+ 1747  git pull origin WP01
+ 1748  ls
+ 1749  git status 
+ 1750  git add Card.h 
+ 1751  git commit -m "Ha Phan"
+ 1752  git rm Card.h.swp
+ 1753  rm Card.h.swp
+ 1754  rm .Card.h.swp
+ 1755  git commit -m "Ha Phan"
+ 1756  git add Card.h 
+ 1757  git commit -m "Ha Phan"
+ 1758  git status
+ 1759  git --
+ 1760  git status
+ 1761  cd ../
+ 1762  ls
+ 1763  git branch 
+ 1764  git checkout WP01
+ 1765  git add dataDatabaseTest/DbCard.cpp dataDatabaseTest/DbCard.h dataDatabaseTest/TestDbCard.cpp dataDatabaseTest/Makefile dataDatabaseTest/TestDbDoor.cpp 
+ 1766  git commit -m "Ha Phan"
+ 1767  git checkout WP01
+ 1768  git pull 
+ 1769  cd dataMgr/
+ 1770  ls
+ 1771  cd ../
+ 1772  cd dataDatabaseTest/
+ 1773  ls
+ 1774  make
+ 1775  vi Makefile 
+ 1776  mysql -u root -p
+ 1777  cd /data/SmartHome/
+ 1778  cd dataDatabaseTest/
+ 1779  ls
+ 1780  echo $LD_LIBRARY_PATH
+ 1781  export LD_LIBRARY_PATH=/development/mysql-connector-c++/lib/
+ 1782  g++ -g main.o DbCard.o Card.o -o run -L /development/poco-1.7.5-all/lib/ -lPocoFoundation -lPocoFoundationd -lPocoData -lPocoDatad -lpthread -L /development/mysql-connector-c++/lib -lmysqlcppconn
+ 1783  ./r
+ 1784  ./run 
+ 1785  make
+ 1786  rm Card.o 
+ 1787  make
+ 1788  export SH_ROOT=/data/SmartHome/
+ 1789  make
+ 1790  ls
+ 1791  ./run 
+ 1792  make
+ 1793  ./run 
+ 1794  ls
+ 1795  rm Card.o DbCard.o main.o
+ 1796  ls
+ 1797  rm run 
+ 1798  ls
+ 1799  rm gtest 
+ 1800  ls
+ 1801  make
+ 1802  ls
+ 1803  echo $LD_LIBRARY_PATH
+ 1804  g++ -g main.o DbCard.o Card.o -o run -L /development/poco-1.7.5-all/lib/ -lPocoFoundation -lPocoFoundationd -lPocoData -lPocoDatad -lpthread -L /development/mysql-connector-c++/lib -lmysqlcppconn
+ 1805  ./run 
+ 1806  gdb ./run 
+ 1807  cd /data/SmartHome/
+ 1808  ls
+ 1809  cd dataDatabaseTest/
+ 1810  ls
+ 1811  vi Makefile 
+ 1812  make
+ 1813  export SH_ROOT=/data/SmartHome/
+ 1814  make
+ 1815  vi Makefile 
+ 1816  make
+ 1817  rm Card.o DbCard.o main.o
+ 1818  ls
+ 1819  rm run 
+ 1820  make
+ 1821  export SH_ROOT=/data/SmartHome/
+ 1822  make
+ 1823  ls
+ 1824  ./run 
+ 1825  ulimit -c unlimited
+ 1826  ./run 
+ 1827  rm Card.o main.o DbCard.o
+ 1828  ls
+ 1829  rm run 
+ 1830  ls
+ 1831  make
+ 1832  g++ -g main.o DbCard.o Card.o -o run -L /development/poco-1.7.5-all/lib/ -lPocoFoundation -lPocoFoundationd -lPocoData -lPocoDatad -lpthread -L /development/mysql-connector-c++/lib -lmysqlcppconn
+ 1833  ./run 
+ 1834  cd project/android-studio/
+ 1835  ls
+ 1836  cd bin/
+ 1837  ./studio.sh 
+ 1838  cd project/android-studio/
+ 1839  cd bin/
+ 1840  ./studio.sh 
+ 1841  mysql -u root -p
+ 1842  cd /var/www/html/
+ 1843  ls
+ 1844  sudo su -
+ 1845  cd project/android-studio/bin/
+ 1846  ./studio.sh 
+ 1847  cd /usr/
+ 1848  ls
+ 1849  cd ../
+ 1850  ls
+ 1851  cd /var/
+ 1852  ls
+ 1853  cd www/
+ 1854  ls
+ 1855  cd html/
+ 1856  ls
+ 1857  cd bugzilla/
+ 1858  sudo su -
+ 1859  cd project/android-studio/b
+ 1860  cd project/android-studio/bin/
+ 1861  ./studio.sh 
+ 1862  cd project/
+ 1863  ls 
+ 1864  cd ../
+ 1865  cd study/
+ 1866  ls
+ 1867  cd Umlet/
+ 1868  ls
+ 1869  ./umlet.sh 
+ 1870  cd project/android-studio/bin/
+ 1871  ./studio.sh 
+ 1872  shutdown now
+ 1873  cd project/android-studio/
+ 1874  cd bin/
+ 1875  ./studio.sh 
+ 1876  cd project/android-studio/bin/
+ 1877  ./studio.sh 
+ 1878  cd Downloads/
+ 1879  ls
+ 1880  mv arduino-1.6.21 /opt/
+ 1881  mv arduino-1.6.21/ /opt/
+ 1882  sudo mv arduino-1.6.21/ /opt
+ 1883  sudo mv arduino-1.6.21 /opt
+ 1884  sudo mv arduino-1.6.12 /opt
+ 1885  cd /opt/
+ 1886  ls
+ 1887  cd arduino-1.6.12/
+ 1888  ls
+ 1889  ./arduino
+ 1890  cd Downloads/
+ 1891  cd tai\ lieu\ hibernet
+ 1892  ls
+ 1893  mv card.txt /opt/arduino-1.6.12/
+ 1894  cd  /opt/arduino-1.6.12/
+ 1895  ls
+ 1896  vi card.txt 
+ 1897  cd /opt/
+ 1898  cd arduino-1.6.12/
+ 1899  ./install.sh 
+ 1900  ifconfig 
+ 1901  cd /etc/default/
+ 1902  ls
+ 1903  vi isc-dhcp-server 
+ 1904  vi dhcp.conf
+ 1905  sudo vi /etc/dhcp/dhcpd.conf 
+ 1906  vi isc-dhcp-server 
+ 1907  sudo vi isc-dhcp-server 
+ 1908  sudo vi /etc/dhcp/dhcpd.conf 
+ 1909  sudo systemctl status isc-dhcp-server
+ 1910  sudo vi isc-dhcp-server 
+ 1911  sudo vi /etc/dhcp/dhcpd.conf 
+ 1912  sudo systemctl status isc-dhcp-server
+ 1913  cd /data/SmartHome/
+ 1914  ls
+ 1915  cd dataDatabaseTest/
+ 1916  ls
+ 1917  ./run 
+ 1918  ulmit -c unlimited
+ 1919  ulimit -c unlimited
+ 1920  ./run 
+ 1921  ls
+ 1922  gdb ./run core
+ 1923  ip addr show
+ 1924  make
+ 1925  vi Makefile 
+ 1926  cd ../
+ 1927  cd
+ 1928  cd /etc/
+ 1929  ls
+ 1930  cd dhcp/
+ 1931  ls
+ 1932  cp dhcpd.conf ~/s
+ 1933  cd ../
+ 1934  cd default/
+ 1935  ls
+ 1936  cp isc-dhcp-server ~/study/
+ 1937  ls
+ 1938  sudo vi /etc/dhcp/dhcpd.conf
+ 1939  sudo systemctl status isc-dhcp-server
+ 1940  vi isc-dhcp-server 
+ 1941  ifconfig
+ 1942  vi /etc/dhcp/dhcpd.conf 
+ 1943  vi /etc/default/isc-dhcp-server 
+ 1944  vi /etc/dhcp/dhcpd.conf 
+ 1945  vi /etc/default/isc-dhcp-server 
+ 1946  sudo vi /etc/default/isc-dhcp-server 
+ 1947  sudo vi /etc/dhcp/dhcpd.conf 
+ 1948  sudo vi /etc/default/isc-dhcp-server 
+ 1949  sudo reboot now
+ 1950  script 
+ 1951  script /tmp/tien.log
+ 1952  ls
+ 1953  sudo systemctl restart isc-dhcp-server
+ 1954  systemctl status isc-dhcp-server
+ 1955  sudo systemctl restart isc-dhcp-server
+ 1956  sudo service network-manager restart
+ 1957  ls
+ 1958  ifconfig 
+ 1959  sudo systemctl restart isc-dhcp-server
+ 1960  sudo systemctl status isc-dhcp-server
+ 1961  vi /etc/dhcp/dhcpd.conf 
+ 1962  vi /etc/lts
+ 1963  vi /etc/dhcp/dhcpd.conf 
+ 1964  cd /etc/
+ 1965  grep -nre "CONFIG_FILE" *
+ 1966  sudo grep -nre "CONFIG_FILE" *
+ 1967  vi init/isc-dhcp-server.conf 
+ 1968  ll /etc/ltsp/dhcpd.conf
+ 1969  vi init/isc-dhcp-server.conf 
+ 1970  sudo grep -nre "Not configured to listen on any interfaces" *
+ 1971  sudo grep -nre "Not configured to listen on any interfaces" -R *
+ 1972  vi init/isc-dhcp-server.conf 
+ 1973  sudo apt-get install isc-dhcp-server
+ 1974  sudo systemctl enable isc-dhcp-server
+ 1975  sudo systemctl restart isc-dhcp-server
+ 1976  sudo systemctl status isc-dhcp-server
+ 1977  ip addr show
+ 1978  su -m
+ 1979  su -
+ 1980  su - phan
+ 1981  ping 8.8.8.8
+ 1982  /sbin/ifconfig
+ 1983  sudo reboot now
+ 1984  ifconfig 
+ 1985  ping 192.168.1.152
+ 1986  cd /data/SmartHome/UDPServer/
+ 1987  ls
+ 1988  vi main.cpp 
+ 1989  rm -rf main.o run 
+ 1990  ls
+ 1991  rm -rf UDPServer.o
+ 1992  ls
+ 1993  g++ -c -g main.cpp UDPServer.cpp
+ 1994  g++ -c -g main.cpp UDPServer.cpp -I /development/poco-1.7.5-all/lib/
+ 1995  g++ -c -g main.cpp UDPServer.cpp -I /development/poco-1.7.5-all/include/
+ 1996  ls
+ 1997  rm -rf main.o UDPServer.o
+ 1998  g++ -c -g main.cpp -I /development/poco-1.7.5-all/include/
+ 1999  g++ -c -g UDPServer.cpp -I /development/poco-1.7.5-all/include/
+ 2000  g++ -g main.o UDPServer.o -L /development/poco-1.7.5-all/lib/ -lPocoNet -lPocoNetd -lPocoFoundation -lPocoFoundationd
+ 2001  ls
+ 2002  ./a.out 
+ 2003  export LD_LIBRARY_PATH=/development/poco-1.7.5-all/lib/
+ 2004  ls
+ 2005  ./a.out 
+ 2006  history 
+ 2007  history > ha.diff
