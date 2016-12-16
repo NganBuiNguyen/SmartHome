@@ -1,0 +1,29 @@
+#-----------------------------------------------------------------------------
+# Makefile - make/Makefile.mysql
+# Copyright (c) Tien Anh Nguyen
+# Modified history
+#    Created: 2016-Dec-04 
+#-----------------------------------------------------------------------------
+
+ifndef make_app
+make_app = once_only
+
+ifndef MYSQL_CONN_ROOT
+	MYSQL_CONN_ROOT = /development/mysql-connector-c++
+endif
+
+IEXTRA += $(MYSQL_CONN_ROOT)
+
+ifndef MYSQL_CPPCONN_LIB
+	MYSQL_SERIALIZATION_LIB = mysqlcppconn
+endif
+
+ifndef MYSQL_LIB
+	MYSQL_LIB=$(MYSQL_CONN_ROOT)/lib
+endif
+
+LIBS_MYSQL = -L$(MYSQL_LIB) -l$(MYSQL_CPPCONN_LIB)
+
+LIBS += $(LIBS_MYSQL)
+
+endif   # once_only

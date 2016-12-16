@@ -1,0 +1,37 @@
+#-----------------------------------------------------------------------------
+# Makefile - make/Makefile.boost
+# Copyright Tien Nguyen Anh
+# Modified history
+#    Created: 2016-Dec-03 
+#-----------------------------------------------------------------------------
+
+ifndef make_boost
+make_boost = once_only
+
+ifndef BOOST_ROOT
+	BOOST_ROOT = /development/boost_1_62_0
+endif
+
+IEXTRA += $(BOOST_ROOT)
+
+ifndef BOOST_SERIALIZATION_LIB
+	BOOST_SERIALIZATION_LIB = boost_serialization
+endif
+
+ifndef BOOST_THREAD_LIB
+	BOOST_THREAD_LIB=boost_thread
+endif
+
+ifndef BOOST_LIB_REGEX
+	BOOST_LIB_REGEX = boost_regex
+endif
+
+ifndef BOOST_LIB
+	BOOST_LIB=$(BOOST_ROOT)/lib
+endif
+
+LIBS_BOOST = -L$(BOOST_LIB) -l$(BOOST_THREAD_LIB) -l$(BOOST_SERIALIZATION_LIB) -l$(BOOST_LIB_REGEX)
+
+LIBS += $(LIBS_BOOST)
+
+endif #once_only

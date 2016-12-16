@@ -1,0 +1,120 @@
+#-----------------------------------------------------------------------------
+# Makefile - make/Makefile.poco
+#
+# Copyright (c) Tien Nguyen Anh
+#
+# Modified History
+# ----------------
+#    Created: 2016-Dec-04 
+#    Modified: 2016-Dec-07
+#-----------------------------------------------------------------------------
+
+ifndef make_poco
+make_poco = once_only
+
+#-----------------------------------------------------------------------------
+ifndef POCO_ROOT
+    POCO_ROOT = /development/poco-1.7.5-all
+endif
+
+IEXTRA += $(POCO_ROOT)
+
+ifndef POCO_LIB
+    POCO_LIB = $(POCO_ROOT)/lib
+endif
+
+ifndef POCO_CRYPTOD_LIB
+    POCO_CRYPTOD_LIB = PocoCryptod
+endif
+
+ifndef POCO_CRYPTO_LIB
+    POCO_CRYPTO_LIB = PocoCrypto
+endif
+
+ifndef POCO_DATAD_LIB
+    POCO_DATAD_LIB = PocoDatad
+endif
+
+ifndef POCO_DATA_LIB
+    POCO_DATA_LIB = PocoData
+endif
+
+ifndef POCO_FOUNDATION_LIB
+    POCO_FOUNDATION_LIB = PocoFoundation
+endif
+
+ifndef POCO_FOUNDATIOND_LIB
+    POCO_FOUNDATIOND_LIB = PocoFoundationd
+endif
+
+ifndef POCO_JSON_LIB
+    POCO_JSON_LIB = PocoJSON
+endif
+
+ifndef POCO_JSOND_LIB
+    POCO_JSOND_LIB = PocoJSONd
+endif
+
+ifndef POCO_NETD_LIB
+    POCO_NETD_LIB = PocoNetd
+endif
+
+ifndef POCO_NET_LIB
+    POCO_NET_LIB = PocoNet
+endif
+
+ifndef POCO_NET_SSL_LIB
+    POCO_NET_SSL_LIB = PocoNetSSL
+endif
+
+ifndef POCO_NET_SSLD_LIB
+    POCO_NET_SSLD_LIB = PocoNetSSLd
+endif
+
+ifndef POCO_DATA_SQLITE_LIB
+    POCO_DATA_SQLITE_LIB = PocoDataSQLite
+endif
+
+ifndef POCO_DATA_SQLITED_LIB
+    POCO_DATA_SQLITED_LIB = PocoDataSQLited
+endif
+
+ifndef POCO_UTIL_LIB
+    POCO_UTIL_LIB = PocoUtil
+endif
+
+ifndef POCO_UTILD_LIB
+    POCO_UTILD_LIB = PocoUtild
+endif
+
+ifndef POCO_XML_LIB
+    POCO_XML_LIB = PocoXML
+endif
+
+ifndef POCO_XMLD_LIB
+    POCO_XMLD_LIB = PocoXMLd
+endif
+
+ifndef POCO_ZIP_LIB
+    POCO_ZIP_LIB = PocoZip
+endif
+
+ifndef POCO_ZIPD_LIB
+    POCO_ZIPD_LIB = PocoZipd
+endif
+
+LIBS_POCO = -L$(POCO_LIB) \
+			-l$(POCO_CRYPTO_LIB) -l$(POCO_CRYPTOD_LIB) \
+			-l$(POCO_DATA_LIB) -l$(POCO_DATAD_LIB) \
+			-l$(POCO_FOUNDATION_LIB) -l$(POCO_FOUNDATIOND_LIB) \
+			-l$(POCO_JSON_LIB) -l$(POCO_JSOND_LIB) \
+			-l$(POCO_NET_LIB) -l$(POCO_NETD_LIB) \
+			-l$(POCO_NET_SSL_LIB) -l$(POCO_NET_SSLD_LIB) \
+			-l$(POCO_DATA_SQLITE_LIB) -l$(POCO_DATA_SQLITED_LIB) \
+			-l$(POCO_UTIL_LIB) -l$(POCO_UTILD_LIB) \
+			-l$(POCO_XML_LIB) -l$(POCO_XMLD_LIB) \
+			-l$(POCO_ZIP_LIB) -l$(POCO_ZIPD_LIB)
+
+LIBS += $(LIBS_POCO)
+
+endif #once_only
