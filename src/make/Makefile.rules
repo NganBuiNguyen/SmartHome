@@ -8,7 +8,6 @@
 #    Created: 2016-Dec-04 
 #    Modified: 2016-Dec-07
 #-------------------------------------------------------------------------------
-
 ifndef  make_rules
 make_rules = once_only
 
@@ -21,9 +20,7 @@ ifndef  OBJ_DIR
     OBJ_DIR = .
 endif
 
-ifndef  TARGET_DIR
-    TARGET_DIR = $(OBJ_DIR)
-endif
+TARGET_DIR = $(LIDT_ROOT)/runtime
 
 #-------------------------------------------------------------------------------
 
@@ -42,11 +39,13 @@ CMNOBJS := $(strip $(CMNOBJS))
 TARGET  := $(addprefix  $(TARGET_DIR)/, $(TARGET))
 PROGRAM := $(addprefix $(RUN_TIME)/, $(PROGRAM))
 ARCHIVES := $(addprefix  $(LIB_DIR)/, $(patsubst %, lib%.a, $(ARCHIVES)))
-
 SUBDIRS := $(addprefix  $(PWD)/, $(SUBDIRS))
-
-
+LIDT_LIBS := $(patsubst %, lib%.a, $(LIBRARY))
+LIDT_LIBS_DIR := /data/projects/LightDetector/obj/app/libs/
 CLEAN   := $(CLEAN) $(OBJS)
+
+#-------------------------------------------------------------------------------
+INCLUDES = $(foreach i, $(INCS_DIRS), -I $(LIDT_ROOT)/$(i))
 
 #-------------------------------------------------------------------------------
 ifndef  TARGET
@@ -60,15 +59,12 @@ endif
 
 .PHONY: all
 
-all:    $(OBJS) $(SUBOBJS)
+all:    $(OBJS)
 
 all:    $(LOCAL_TARGET) $(TARGET) $(PROGRAM) $(ARCHIVES)
 
 #-------------------------------------------------------------------------------
 # Compiler flags
-INCS   := src $(INCS)
-
-
 ifdef USE_CPP_LANG
     LIBS += -lstdc++
 endif
@@ -77,6 +73,13 @@ CC 		= gcc
 CPP 	= g++
 AR 		= ar
 
+#----------------------------------------------------------------------------
+ifdef TARGET
+$(TARGET): $(OBJS) $(ARCHIVES)
+	$(ECHO) "Linking " $@
+	$(RM) $@;
+	$(LD) $(strip $(filter %.o, $^) -L$(LIB_DIR) $(patsubst lib%.a, -l%, $(LIDT_LIBS)) $(LIBS) $(LIBS_BOOST) -o $@)
+endif
 #----------------------------------------------------------------------------
 # Unittest
 
@@ -97,12 +100,12 @@ report_cover: report_xml
 $(OBJ_DIR)/%.o:     ../%.c
 	$(ECHO) " Compiling " $< "For UT"
 	$(RM) $@;
-	$(CC) -o $@ -c $(COMMON_FLAGS) $(INC_FLAGS) $(INCLUDE_LIBS) $< 
+	$(CC) $(COMMON_FLAGS) -o $@ -c $(INCLUDES) $(INCLUDE_LIBS) $< 
 
 $(OBJ_DIR)/%.o:     ../%.cpp
 	$(ECHO) " Compiling " $<  "For UT"
 	$(RM) $@;
-	$(CPP) -o $@ -c $(COMMON_FLAGS) $(INC_FLAGS) $(INCLUDE_LIBS) $< 
+	$(CPP) $(COMMON_FLAGS) -o $@ -c $(INCLUDES) $(INCLUDE_LIBS) $< 
 
 gtest.bin: $(TEST_OBJS) $(OBJS)
 	$(ECHO) " Linking " $@
@@ -114,23 +117,23 @@ CLEAN += $(OBJS)
 endif
 
 #------------------------------------------------------------------------------
-# Compile rules - the rules all look like this:
+# Compile rules:
 
 $(OBJ_DIR)/%.o:     %.c
 	$(ECHO) "Compiling to Object" $<
 	$(RM) $@
-	$(CC) -c $< -o $@ $(LIBS) $(INC_FLAGS) $(INCLUDE_LIBS) $(COMMON_FLAGS)
+	$(CC) $(COMMON_FLAGS) -c $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
 
-$(OBJ_DIR)/%.o:	%.cpp
+$(OBJ_DIR)/%.o:     %.cpp
 	$(ECHO) "Compiling to Object" $<
 	$(RM) $@
-	$(CPP) -c $< -o $@ $(LIBS) $(INC_FLAGS) $(INCLUDE_LIBS) $(COMMON_FLAGS)
+	$(CPP) $(COMMON_FLAGS) -c $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
 
 $(LIB_DIR)/lib%_$(ARCHIVE_ALT).a: $(OBJS)
 	$(ECHO) "Creating archive" $@
 	$(AR) -cr $@ $^ $(LIBS)
 
-$(LIB_DIR)/lib%.a:    $(OBJS) 
+$(LIB_DIR)/lib%.a: $(OBJS)
 	$(ECHO) "Creating archive" $@
 	$(AR) -cr $@ $^
 
@@ -146,3 +149,4 @@ $(OBJ_DIR)/lib%.so:     %.o
 include $(LIDT_MAKEDIR)/Makefile.clean
 
 endif   # once_only
+
