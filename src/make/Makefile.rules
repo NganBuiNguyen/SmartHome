@@ -41,7 +41,7 @@ PROGRAM := $(addprefix $(RUN_TIME)/, $(PROGRAM))
 ARCHIVES := $(addprefix  $(LIB_DIR)/, $(patsubst %, lib%.a, $(ARCHIVES)))
 SUBDIRS := $(addprefix  $(PWD)/, $(SUBDIRS))
 LIDT_LIBS := $(patsubst %, lib%.a, $(LIBRARY))
-LIDT_LIBS_DIR := /data/projects/LightDetector/obj/app/libs/
+LIDT_LIBS_DIR := /data/SmartHome/obj/app/libs/
 CLEAN   := $(CLEAN) $(OBJS)
 
 #-------------------------------------------------------------------------------
@@ -149,4 +149,6 @@ $(OBJ_DIR)/lib%.so:     %.o
 include $(LIDT_MAKEDIR)/Makefile.clean
 
 endif   # once_only
+
+Contact GitHub API Training Shop Blog About
 
