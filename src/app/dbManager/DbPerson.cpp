@@ -1,6 +1,6 @@
     
     #include "DbPerson.h"
-
+    #include "/data/SmartHome/src/app/dataConverter/Card.h"
     
     DbPerson* DbPerson::instance = NULL;
     std::string DbPerson::database = DATABASE;
@@ -55,12 +55,12 @@
     {
         DbPerson* dbPerson = DbPerson::getInstance();
 
-       conn = dbPerson->getConn(this->user,this->password,this->url);
+        conn = dbPerson->getConn(this->user,this->password,this->url);
         if(conn==NULL)
         {
             return;
         }
-        this->prep_stmt = conn->prepareStatement("INSERT INTO Person(personID,personName,age) values(?,?)");
+        this->prep_stmt = conn->prepareStatement("INSERT INTO Person(personID,personName,cardID,age,grantPerson) values(?,?,?,?)");
         if(this->prep_stmt==NULL)
         {
              return;
@@ -68,7 +68,9 @@
         try{
         (this->prep_stmt)->setString(1, person.getPersonID());
         (this->prep_stmt)->setString(2, person.getPersonName());
-        (this->prep_stmt)->setInt(3, person.getAge());
+        (this->prep_stmt)->setString(3, getCardID);
+        (this->prep_stmt)->setInt(4, person.getAge());
+        (this->prep_stmt)->setBoolean(5, person.getGrantPerson());
 
         int i=(this->prep_stmt)->executeUpdate();
         if(i>0)
@@ -76,6 +78,7 @@
             std::cout<<"Them thanh cong";
         }else{
             std::cout<<"Them that bai";
+          }
         }catch(sql::SQLException& e)
         {
             conn->rollback();
