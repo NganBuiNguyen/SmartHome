@@ -92,7 +92,7 @@
 
         stmt = conn->createStatement();
 
-        dbCard->getConn(this->user,this->password,this->url);
+        conn=  dbCard->getConn(this->user,this->password,this->url);
 
         this->res = stmt->executeQuery("SELECT * FROM Card");
 

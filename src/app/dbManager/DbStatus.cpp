@@ -24,7 +24,9 @@
     }
     DbStatus::DbStatus()
     {
-
+       this->url=DBHOST;
+       this->user=USER;
+       this->password=PASSWORD;
     }
     void DbStatus::closeConn()
     {
@@ -50,15 +52,29 @@
     {
         DbStatus* dbStatus = DbStatus::getInstance();
 
-        dbStatus->getConn(this->user,this->password,this->url);
+        conn= dbStatus->getConn(this->user,this->password,this->url);
+         if(conn==NULL)
+           {
+            return;
+           }
         this->prep_stmt = conn->prepareStatement("INSERT INTO Status(statusID,statusName,timeIn,timeOut) values(?,?,?,?)");//chua insert card
+        if(this->prep_stmt==NULL)
+         {
+            return;
+         }
+        try{
         (this->prep_stmt)->setString(1, status.getStatusID());
         (this->prep_stmt)->setBoolean(2, status.getStatusName());
 
         
         (this->prep_stmt)->setInt(3, (int) status.getTimeIn()) ;
         (this->prep_stmt)->setInt(4, (int) status.getTimeOut()) ;
-
+        }catch(sql::SQLException& e)
+        {
+          conn->rollback();
+        }
+         
+         conn->commit();
          dbStatus->closeConn();
     }
     void DbStatus::select_to_db(sql::Connection* conn)
@@ -66,8 +82,7 @@
         DbStatus* dbStatus = DbStatus::getInstance();
 
         stmt = conn->createStatement();
-
-        dbStatus->getConn(this->user,this->password,this->url);
+        conn=dbStatus->getConn(this->user,this->password,this->url);
 
         this->res = stmt->executeQuery("SELECT * FROM Status");
 
@@ -80,12 +95,12 @@
         
         dbStatus->closeConn();
     }
-    void DbStatus::update_to_db(sql::Connection* conn, Status status)
-    {
-        
+    void DbStatus::update_to_db(sql::Connection* conn,Status status)
+     {
+      
         DbStatus* dbStatus = DbStatus::getInstance();
 
-        dbStatus->getConn(this->user,this->password,this->url);
+        conn= dbStatus->getConn(this->user,this->password,this->url);
 
         this->prep_stmt = conn->prepareStatement("UPDATE Status SET statusName = ? WHERE statusID = ?");
 
@@ -100,7 +115,7 @@
     {
         DbStatus* dbStatus = DbStatus::getInstance();
 
-        dbStatus->getConn(this->user,this->password,this->url);
+        conn= dbStatus->getConn(this->user,this->password,this->url);
         this->prep_stmt = conn->prepareStatement("DELETE FROM Status WHERE statusID = ?");
 
         (this->prep_stmt)->setString(1, status.getStatusID());
@@ -110,4 +125,3 @@
 
         dbStatus->closeConn();
     }
-   
