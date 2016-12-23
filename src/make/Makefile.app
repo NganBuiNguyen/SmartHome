@@ -1,4 +1,4 @@
-#:---------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # Makefile - make/Makefile.app
 # Copyright (c) Tien Nguyen Anh
 # Modification history
@@ -38,7 +38,8 @@ CFLAGS += -ansi
 CC = gcc
 
 COMMON_FLAGS = -ansi -g
-INC_FLAGS = -I.
+
+INC_FLAGS = -I $(INCS_DIRS)
 
 STRIP = strip
 INCS := src/app $(INCS)
@@ -60,10 +61,6 @@ ifeq ($(APP),unittest)
 endif
 
 #-----------------------------------------------------------------------------
-#
-ifeq ($(APP),unittest)
-	LDFLAGS =
-endif
 
 #-----------------------------------------------------------------------------
 

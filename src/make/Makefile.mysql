@@ -5,8 +5,8 @@
 #    Created: 2016-Dec-04 
 #-----------------------------------------------------------------------------
 
-ifndef make_app
-make_app = once_only
+ifndef make_mysql
+make_mysql = once_only
 
 ifndef MYSQL_CONN_ROOT
 	MYSQL_CONN_ROOT = /development/mysql-connector-c++
@@ -15,7 +15,7 @@ endif
 IEXTRA += $(MYSQL_CONN_ROOT)
 
 ifndef MYSQL_CPPCONN_LIB
-	MYSQL_SERIALIZATION_LIB = mysqlcppconn
+	MYSQL_CPPCONN_LIB = mysqlcppconn
 endif
 
 ifndef MYSQL_LIB
@@ -25,5 +25,7 @@ endif
 LIBS_MYSQL = -L$(MYSQL_LIB) -l$(MYSQL_CPPCONN_LIB)
 
 LIBS += $(LIBS_MYSQL)
+MYSQL_INCS = -I $(MYSQL_CONN_ROOT)/include
+INCLUDE_LIBS += $(MYSQL_INCS)
 
 endif   # once_only

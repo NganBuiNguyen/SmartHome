@@ -33,10 +33,15 @@ TOUCH := touch
 CHMOD := chmod
 PYTHON := python
 MAKE := make
+LD      = gcc
+
+ifeq ($(USING_LANGUAGE), CPP)
+    LD = g++
+endif
 
 #------------------------------------------------------------------------------
 ifndef  LIDT_ROOT
-    $(ECHO) "ERROR: LIDT_ROOT environment variable is not set."
+	$(ECHO) "ERROR: LIDT_ROOT environment variable is not set."
 endif
 
 #------------------------------------------------------------------------------
@@ -56,5 +61,3 @@ else
 	RUN_TIME = .
 
 endif
-
-

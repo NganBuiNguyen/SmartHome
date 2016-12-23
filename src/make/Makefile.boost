@@ -12,8 +12,6 @@ ifndef BOOST_ROOT
 	BOOST_ROOT = /development/boost_1_62_0
 endif
 
-IEXTRA += $(BOOST_ROOT)
-
 ifndef BOOST_SERIALIZATION_LIB
 	BOOST_SERIALIZATION_LIB = boost_serialization
 endif
@@ -33,5 +31,8 @@ endif
 LIBS_BOOST = -L$(BOOST_LIB) -l$(BOOST_THREAD_LIB) -l$(BOOST_SERIALIZATION_LIB) -l$(BOOST_LIB_REGEX)
 
 LIBS += $(LIBS_BOOST)
+BOOT_INCS= -I $(BOOST_ROOT)/include
+INCLUDE_LIBS +=$(BOOT_INCS)
+
 
 endif #once_only

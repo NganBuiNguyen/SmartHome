@@ -14,7 +14,7 @@ endif
 
 #------------------------------------------------------------------------------
 #source
-SRCS =Card.cpp Person.cpp  Room.cpp  Status.cpp Door.cpp 
+SRCS = Card.cpp Person.cpp  Room.cpp  Status.cpp Door.cpp 
 OBJS = $(SRCS:.cpp=.o)
 
 #------------------------------------------------------------------------------

@@ -24,6 +24,7 @@ GCOVFLAGS = -fprofile-arcs -ftest-coverage
 ifndef GTEST_ROOT
     GTEST_ROOT = /development/gtest-1.7
 endif
+
 UTTEST_INCS = -I $(GTEST_ROOT)/include -I ../
 UTTEST_LIBS = -L$(GTEST_ROOT)/lib -lgtest_main -lgtest
 REPORT_COVER_DIR = REPORT_COVERAGE
