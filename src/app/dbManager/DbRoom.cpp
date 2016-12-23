@@ -23,7 +23,9 @@
     }
     DbRoom::DbRoom()
     {
-
+     this->url=DBHOST;
+     this->user=USER;
+     this->password=PASSWORD;    
     }
     void DbRoom::closeConn()
     {
@@ -49,12 +51,35 @@
     {
         DbRoom* dbRoom = DbRoom::getInstance();
 
-        dbRoom->getConn(this->user,this->password,this->url);
+        conn = dbRoom->getConn(this->user,this->password,this->url);
+        if(conn==NULL)
+        {
+          return;
+         }
         this->prep_stmt = conn->prepareStatement("INSERT INTO Room(roomID,roomName) values(?,?)");
+        if(this->prep_stmt==NULL)
+         {
+          return;
+         }
+        try{
         (this->prep_stmt)->setString(1, room.getRoomID());
         (this->prep_stmt)->setString(2, room.getNameRoom());
-        
+        int i=(this->prep_stmt)->executeUpdate();
+        if(i>0)
+         {
+          std::cout<<"Them thanh cong";
+         }
+         else
+         {
+         std::cout<<"Them that bai";
+         }
+        }catch(sql::SQLException& e)
+          {
+            conn->rollback();
+          }
+         conn->commit();
          dbRoom->closeConn();
+         
     }
 
 
@@ -64,7 +89,7 @@
 
         stmt = conn->createStatement();
 
-        dbRoom->getConn(this->user,this->password,this->url);
+        conn = dbRoom->getConn(this->user,this->password,this->url);
 
         this->res = stmt->executeQuery("SELECT * FROM Room");
 
@@ -82,7 +107,7 @@
         
         DbRoom* dbRoom = DbRoom::getInstance();
 
-        dbRoom->getConn(this->user,this->password,this->url);
+        conn= dbRoom->getConn(this->user,this->password,this->url);
 
         this->prep_stmt = conn->prepareStatement("UPDATE Room SET roomName = ? WHERE roomID = ?");
 
@@ -94,8 +119,8 @@
         dbRoom->closeConn();
     }
     void DbRoom::delete_to_db(sql::Connection* conn,Room room)
-    {
-        DbRoom* dbRoom = DbRoom::getInstance();
+       {
+         DbRoom* dbRoom = DbRoom::getInstance();
 
         dbRoom->getConn(this->user,this->password,this->url);
         this->prep_stmt = conn->prepareStatement("DELETE FROM Room WHERE roomID = ?");

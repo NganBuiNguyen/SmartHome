@@ -14,6 +14,7 @@
       }
       return instance;
     }
+
     sql::Connection* DbPerson::getConn(std::string userName,std::string password,std::string url)
     {
         this->driver=get_driver_instance();
@@ -24,8 +25,11 @@
     }
     DbPerson::DbPerson()
     {
-
+        this->url=DBHOST;
+        this->user=USER;
+        this->password=PASSWORD;
     }
+
     void DbPerson::closeConn()
     {
         if(this->res!=NULL)
@@ -51,14 +55,31 @@
     {
         DbPerson* dbPerson = DbPerson::getInstance();
 
-        dbPerson->getConn(this->user,this->password,this->url);
-        this->prep_stmt = conn->prepareStatement("INSERT INTO Person(personID,personName,age) values(?,?)");//chua insert card
+       conn = dbPerson->getConn(this->user,this->password,this->url);
+        if(conn==NULL)
+        {
+            return;
+        }
+        this->prep_stmt = conn->prepareStatement("INSERT INTO Person(personID,personName,age) values(?,?)");
+        if(this->prep_stmt==NULL)
+        {
+             return;
+        }
+        try{
         (this->prep_stmt)->setString(1, person.getPersonID());
         (this->prep_stmt)->setString(2, person.getPersonName());
-        //(this->prep_stmt)->setString(2, (std::string) person.getCardID());
         (this->prep_stmt)->setInt(3, person.getAge());
 
-        int updateCount = prep_stmt->executeUpdate();
+        int i=(this->prep_stmt)->executeUpdate();
+        if(i>0)
+        {
+            std::cout<<"Them thanh cong";
+        }else{
+            std::cout<<"Them that bai";
+        }catch(sql::SQLException& e)
+        {
+            conn->rollback();
+        }
         conn->commit();
          dbPerson->closeConn();
     }
@@ -68,7 +89,7 @@
 
         stmt = conn->createStatement();
 
-        dbPerson->getConn(this->user,this->password,this->url);
+        conn= dbPerson->getConn(this->user,this->password,this->url);
 
         this->res = stmt->executeQuery("SELECT * FROM Person");
 
@@ -86,7 +107,7 @@
         
         DbPerson* dbPerson = DbPerson::getInstance();
 
-        dbPerson->getConn(this->user,this->password,this->url);
+        conn=dbPerson->getConn(this->user,this->password,this->url);
 
         this->prep_stmt = conn->prepareStatement("UPDATE Person SET personName = ? age = ? WHERE personID = ?");
 
@@ -101,7 +122,7 @@
     {
         DbPerson* dbPerson = DbPerson::getInstance();
 
-        dbPerson->getConn(this->user,this->password,this->url);
+        conn=dbPerson->getConn(this->user,this->password,this->url);
         this->prep_stmt = conn->prepareStatement("DELETE FROM Person WHERE personID = ?");
 
         (this->prep_stmt)->setString(1, person.getPersonID());
