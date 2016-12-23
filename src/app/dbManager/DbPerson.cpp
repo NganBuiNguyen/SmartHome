@@ -66,9 +66,10 @@
              return;
         }
         try{
+        Card card;
         (this->prep_stmt)->setString(1, person.getPersonID());
         (this->prep_stmt)->setString(2, person.getPersonName());
-        (this->prep_stmt)->setString(3, getCardID);
+        (this->prep_stmt)->setString(3, card.getCardID());
         (this->prep_stmt)->setInt(4, person.getAge());
         (this->prep_stmt)->setBoolean(5, person.getGrantPerson());
 
