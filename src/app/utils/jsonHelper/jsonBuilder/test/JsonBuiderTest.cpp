@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <gtest/gtest.h>
 
-#include "JsonBuilder.h"
+#include "jsonBuilder.h"
 
 extern bool buildJsonMessageType(const MESSAGE_TYPE& messageType,
                                 boost::property_tree::ptree& messageTypeTree);
@@ -24,7 +24,7 @@ protected:
 TEST_F(JsonBuilderTest, TestbuildJsonMessageType_RESULT_OK)
 {
     boost::property_tree::ptree messageTypeTree;
-    MESSAGE_TYPE messageType = MESSAGE_TYPE_LIGHT_INTENSITY;
+    MESSAGE_TYPE messageType = MESSAGE_TYPE_CARD;
     
     boost::property_tree::ptree expectedTree;
     expectedTree.put("MESSAGE_TYPE", "LIGHT_INTENSITY_VALUE");
