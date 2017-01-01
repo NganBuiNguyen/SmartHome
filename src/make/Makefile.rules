@@ -8,7 +8,6 @@
 #    Created: 2016-Dec-04 
 #    Modified: 2016-Dec-07
 #-------------------------------------------------------------------------------
-
 ifndef  make_rules
 make_rules = once_only
 
@@ -42,7 +41,11 @@ PROGRAM := $(addprefix $(RUN_TIME)/, $(PROGRAM))
 ARCHIVES := $(addprefix  $(LIB_DIR)/, $(patsubst %, lib%.a, $(ARCHIVES)))
 SUBDIRS := $(addprefix  $(PWD)/, $(SUBDIRS))
 LIDT_LIBS := $(patsubst %, lib%.a, $(LIBRARY))
+
 LIDT_LIBS_DIR := $(LIDT_ROOT)/obj/app/libs/
+
+LIDT_LIBS_DIR := /data/SmartHome/obj/app/libs/
+
 CLEAN   := $(CLEAN) $(OBJS)
 
 #-------------------------------------------------------------------------------
@@ -83,6 +86,7 @@ AR 		= ar
 #----------------------------------------------------------------------------
 ifdef TARGET
 $(TARGET): $(OBJS) $(ARCHIVES) $(LIDT_LIBS)
+$(TARGET): $(OBJS) $(ARCHIVES)
 	$(ECHO) "Linking " $@
 	$(RM) $@;
 	$(LD) $(strip $(filter %.o, $^) -L$(LIB_DIR) $(patsubst lib%.a, -l%, $(LIDT_LIBS)) $(LIBS) $(LIBS_BOOST) -o $@)
@@ -143,6 +147,7 @@ $(OBJ_DIR)/%.o:     %.cpp
 	$(ECHO) "Compiling to Object" $<
 	$(RM) $@
 	$(ECHO) "MYSQL ROOT " $(MYSQL_CONN_ROOT)
+
 	$(CPP) $(COMMON_FLAGS) -c $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
 
 $(LIB_DIR)/lib%_$(ARCHIVE_ALT).a: $(OBJS)
@@ -165,3 +170,6 @@ $(OBJ_DIR)/lib%.so:     %.o
 include $(LIDT_MAKEDIR)/Makefile.clean
 
 endif   # once_only
+
+
+

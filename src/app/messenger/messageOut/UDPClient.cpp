@@ -41,11 +41,11 @@ int main(int argc,char **argv)
     {
         printf("socket()"); 
     }
-
+  
     strcpy(dgram, "EMB");
     
-    for (;;)
-    {
+//    for (;;)
+  //  {
         z = sendto(fd,
                    dgram,
                    strlen(dgram),
@@ -53,7 +53,7 @@ int main(int argc,char **argv)
                    (struct sockaddr *)&adr_srvr,
                    len_inet);
 
-    }
+   // }
 
     close(fd);
 
