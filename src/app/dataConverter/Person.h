@@ -22,12 +22,15 @@ public:
     void setCardID(Card cardID);
     int getAge();
     void setAge(int age);
+    bool getGrantPerson();
+    void setGrantPerson(bool grantPerson);
 
 private:
     std::string personID;
     std::string personName;
     Card cardID;
     int age;
+    bool grantPerson;
 };
 #endif
 

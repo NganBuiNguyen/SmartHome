@@ -14,8 +14,14 @@ endif
 
 #------------------------------------------------------------------------------
 #source
+<<<<<<< HEAD
 SRCS =DbCard.cpp DbRoom.cpp 
 OBJS=$(SRCS:.cpp=.o)
+=======
+SRCS =DbCard.cpp DbRoom.cpp DbStatus.cpp 
+OBJS=$(SRCS:.cpp=.o)
+
+>>>>>>> 0e8f4d9bd61e723e6a6f015fd81189d7f731bd2f
 
 #------------------------------------------------------------------------------
 #include source code

@@ -23,8 +23,11 @@
     }
     DbDoor::DbDoor()
     {
-
+       this->url=DBHOST;
+       this->user=USER;
+       this->password=PASSWORD;
     }
+
     void DbDoor::closeConn()
     {
         if(this->res!=NULL)
@@ -45,24 +48,46 @@
             delete this->conn;
         }
     }
+
     void DbDoor::insert_node_to_db(sql::Connection* conn,Door door)
     {
         DbDoor* dbDoor= DbDoor::getInstance();
 
-        dbDoor->getConn(this->user,this->password,this->url);
+        conn = dbDoor->getConn(this->user,this->password,this->url);
+        if(conn==NULL)
+        {
+             return;
+        }
         this->prep_stmt = conn->prepareStatement("INSERT INTO Door(DoorID,DoorName) values(?,?)");
-        (this->prep_stmt)->setString(1, door.getDoorID());
-        (this->prep_stmt)->setString(2, door.getNameDoor());
-        
+        if(this->prep_stmt==NULL)
+        {
+             return;
+        }try{
+        (this->prep_stmt)->setString(1, door.getIDDoor());
+        (this->prep_stmt)->setString(2, door.getnameDoor());
+        int i = (this->prep_stmt)->executeUpdate();
+        if(i>0)
+        {
+          std::cout<<"Them thanh cong";
+        }else
+        {
+          std::cout<<"Them that bai";
+        }
+        }catch(sql::SQLException& e)
+          {
+              conn->rollback(); 
+          }
+         conn->commit();
          dbDoor->closeConn();
     }
+
    void DbDoor::select_to_db(sql::Connection* conn)
     {
         DbDoor* dbDoor = DbDoor::getInstance();
 
         stmt = conn->createStatement();
 
-        dbDoor->getConn(this->user,this->password,this->url);
+        conn= dbDoor->getConn(this->user,this->password,this->url);
 
         this->res = stmt->executeQuery("SELECT * FROM Door");
 
@@ -80,12 +105,12 @@
         
         DbDoor* dbDoor = DbDoor::getInstance();
 
-        dbDoor->getConn(this->user,this->password,this->url);
+        conn=dbDoor->getConn(this->user,this->password,this->url);
 
         this->prep_stmt = conn->prepareStatement("UPDATE Door SET DoorName = ? WHERE DoorID = ?");
 
-        (this->prep_stmt)->setString(1, door.getNameDoor());
-        (this->prep_stmt)->setString(2, door.getDoorID());
+        (this->prep_stmt)->setString(1, door.getnameDoor());
+        (this->prep_stmt)->setString(2, door.getIDDoor());
         
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();
@@ -95,10 +120,10 @@
     {
         DbDoor* dbDoor = DbDoor::getInstance();
 
-        dbDoor->getConn(this->user,this->password,this->url);
+        conn=dbDoor->getConn(this->user,this->password,this->url);
         this->prep_stmt = conn->prepareStatement("DELETE FROM Door WHERE DoorID = ?");
 
-        (this->prep_stmt)->setString(1, door.getDoorID());
+        (this->prep_stmt)->setString(1, door.getIDDoor());
 
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();

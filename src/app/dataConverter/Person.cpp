@@ -56,3 +56,14 @@ void Person::setAge(int age)
 {
  	this->age = age;
 }
+
+bool Person::getGrantPerson()
+{
+     return this->grantPerson;
+}
+
+void Person::setGrantPerson(bool grantPerson)
+{
+    this->grantPerson = grantPerson;
+}
+
