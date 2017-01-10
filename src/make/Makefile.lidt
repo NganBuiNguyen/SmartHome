@@ -24,25 +24,31 @@ RM := rm -f
 LN := ln -f
 CP := cp -f
 
-CAT := cat
-CUT := cut
-AWK := awk
-SED := sed
-ECHO := echo
-TOUCH := touch
-CHMOD := chmod
-PYTHON := python
-MAKE := make
+CAT 	:= cat
+CUT 	:= cut
+AWK 	:= awk
+SED 	:= sed
+ECHO 	:= echo
+TOUCH 	:= touch
+CHMOD 	:= chmod
+PYTHON 	:= python
+MAKE 	:= make
+LD      := gcc
+PYTHON 	:= python3
+
+ifeq ($(USING_LANGUAGE), CPP)
+    LD = g++
+endif
 
 #------------------------------------------------------------------------------
 ifndef  LIDT_ROOT
-    $(ECHO) "ERROR: LIDT_ROOT environment variable is not set."
+	$(ECHO) "ERROR: LIDT_ROOT environment variable is not set."
 endif
 
 #------------------------------------------------------------------------------
 APP_SRC = $(LIDT_ROOT)/src/app
 
-APP_OBJ = $(LIDT_ROOT)/obj/app
+APP_OBJ = $(LIDT_ROOT)/obj
 LIB_DIR = $(APP_OBJ)/libs
 
 #------------------------------------------------------------------------------

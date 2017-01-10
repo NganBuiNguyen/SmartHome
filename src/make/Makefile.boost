@@ -12,8 +12,6 @@ ifndef BOOST_ROOT
 	BOOST_ROOT = /development/boost_1_62_0
 endif
 
-IEXTRA += $(BOOST_ROOT)
-
 ifndef BOOST_SERIALIZATION_LIB
 	BOOST_SERIALIZATION_LIB = boost_serialization
 endif
@@ -23,15 +21,22 @@ ifndef BOOST_THREAD_LIB
 endif
 
 ifndef BOOST_LIB_REGEX
-	BOOST_LIB_REGEX = boost_regex
+	BOOST_LIB_REGEX=boost_regex
+endif
+
+ifndef BOOST_LIB_SYSTEM
+	BOOST_LIB_SYSTEM=boost_system
 endif
 
 ifndef BOOST_LIB
 	BOOST_LIB=$(BOOST_ROOT)/lib
 endif
 
-LIBS_BOOST = -L$(BOOST_LIB) -l$(BOOST_THREAD_LIB) -l$(BOOST_SERIALIZATION_LIB) -l$(BOOST_LIB_REGEX)
+LIBS_BOOST = -L$(BOOST_LIB) -l$(BOOST_THREAD_LIB) -l$(BOOST_SERIALIZATION_LIB) -l$(BOOST_LIB_REGEX) -l$(BOOST_LIB_SYSTEM)
+
+BOOST_INCS = -I $(BOOST_ROOT)/include/
 
 LIBS += $(LIBS_BOOST)
+INCLUDE_LIBS += $(BOOST_INCS)
 
 endif #once_only

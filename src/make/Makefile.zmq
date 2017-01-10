@@ -1,0 +1,30 @@
+#-----------------------------------------------------------------------------
+# Makefile - make/Makefile.boost
+# Copyright Tien Nguyen Anh
+# Modified history
+#    Created: 2016-Dec-19 
+#-----------------------------------------------------------------------------
+
+ifndef make_zmq
+make_zmq = once_only
+
+ifndef ZMQ_ROOT
+	ZMQ_ROOT = /development/zeromq-4.1.6
+endif
+
+ifndef ZMQ_LIB
+	ZMQ_LIB = zmq
+endif
+
+ifndef ZMQ_LIB_DIR
+	ZMQ_LIB_DIR=$(ZMQ_ROOT)/lib
+endif
+
+LIBS_ZMQ = -L$(ZMQ_LIB_DIR) -l$(ZMQ_LIB)
+
+LIBS += $(LIBS_ZMQ)
+
+ZMQ_INCS = -I $(ZMQ_ROOT)/include
+INCLUDE_LIBS += $(ZMQ_INCS)
+
+endif #once_only

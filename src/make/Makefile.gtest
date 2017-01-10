@@ -24,6 +24,7 @@ GCOVFLAGS = -fprofile-arcs -ftest-coverage
 ifndef GTEST_ROOT
     GTEST_ROOT = /development/gtest-1.7
 endif
+
 UTTEST_INCS = -I $(GTEST_ROOT)/include -I ../
 UTTEST_LIBS = -L$(GTEST_ROOT)/lib -lgtest_main -lgtest
 REPORT_COVER_DIR = REPORT_COVERAGE
@@ -33,17 +34,18 @@ CLEAN += *.bin *.info* *.xml log/*
 CLEAN += $(REPORT_COVER_DIR)
 #-----------------------------------------------------------------------------
 TEST_SRCS_CPP = $(wildcard *.cpp)
-TEST_SRCS_CC = $(wildcard *.cc)
-TEST_OBJS = $(addprefix $(OBJ_DIR)/, $(TEST_SRCS_CPP:.cpp=.o))\
-            $(addprefix $(OBJ_DIR)/, $(TEST_SRCS_CC:.cc=.o))
+
+TEST_OBJS = $(addprefix $(OBJ_DIR)/, $(TEST_SRCS_CPP:.cpp=.o))
 
 TEST_BIN = gtest.bin
 
 #-----------------------------------------------------------------------------
 INCS += $(TEST_OBJECT) .
-INC_FLAGS += $(UTTEST_INCS)
-INC_FLAGS += $(GCOVFLAGS)
+
 LIBS += $(UTTEST_LIBS) -lgcov -lpthread -lrt $(LIBS_BOOST)
+
+INCLUDE_LIBS += $(UTTEST_INCS)
+COMMON_FLAGS += $(GCOVFLAGS)
 
 #-----------------------------------------------------------------------------
 ut: all unittest

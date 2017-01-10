@@ -17,8 +17,6 @@ ifndef POCO_ROOT
     POCO_ROOT = /development/poco-1.7.5-all
 endif
 
-IEXTRA += $(POCO_ROOT)
-
 ifndef POCO_LIB
     POCO_LIB = $(POCO_ROOT)/lib
 endif
@@ -103,6 +101,8 @@ ifndef POCO_ZIPD_LIB
     POCO_ZIPD_LIB = PocoZipd
 endif
 
+POCO_INCS = -I $(POCO_ROOT)/include
+
 LIBS_POCO = -L$(POCO_LIB) \
 			-l$(POCO_CRYPTO_LIB) -l$(POCO_CRYPTOD_LIB) \
 			-l$(POCO_DATA_LIB) -l$(POCO_DATAD_LIB) \
@@ -116,5 +116,6 @@ LIBS_POCO = -L$(POCO_LIB) \
 			-l$(POCO_ZIP_LIB) -l$(POCO_ZIPD_LIB)
 
 LIBS += $(LIBS_POCO)
+INCLUDE_LIBS += $(POCO_INCS)
 
 endif #once_only

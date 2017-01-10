@@ -8,6 +8,7 @@
 #    Created: 2016-Dec-04 
 #    Modified: 2016-Dec-07
 #-------------------------------------------------------------------------------
+
 ifndef  make_rules
 make_rules = once_only
 
@@ -23,6 +24,8 @@ endif
 TARGET_DIR = $(LIDT_ROOT)/runtime
 
 #-------------------------------------------------------------------------------
+
+RUN_TIME := $(TARGET_DIR)
 
 ifdef ARCHIVE_ALT
     ADD_ARCHIVES := $(addsuffix _$(ARCHIVE_ALT), $(ARCHIVES))
@@ -41,7 +44,7 @@ PROGRAM := $(addprefix $(RUN_TIME)/, $(PROGRAM))
 ARCHIVES := $(addprefix  $(LIB_DIR)/, $(patsubst %, lib%.a, $(ARCHIVES)))
 SUBDIRS := $(addprefix  $(PWD)/, $(SUBDIRS))
 LIDT_LIBS := $(patsubst %, lib%.a, $(LIBRARY))
-LIDT_LIBS_DIR := /data/SmartHome/obj/app/libs/
+LIDT_LIBS_DIR := $(LIDT_ROOT)/obj/app/libs/
 CLEAN   := $(CLEAN) $(OBJS)
 
 #-------------------------------------------------------------------------------
@@ -55,13 +58,23 @@ ifndef  TARGET
 endif
 
 #-------------------------------------------------------------------------------
+TARGET_CLEAN := $(TARGET)
+
+#-------------------------------------------------------------------------------
+ARCHIVES_CLEAN := $(ARCHIVES)
+
+#-------------------------------------------------------------------------------
 # Default action: build the list of targets in the correct order
 
 .PHONY: all
 
 all:    $(OBJS)
 
-all:    $(LOCAL_TARGET) $(TARGET) $(PROGRAM) $(ARCHIVES)
+all:    $(LIDT_LIBS) $(LOCAL_TARGET) $(TARGET) $(PROGRAM) $(ARCHIVES)
+
+ifdef CFFI_SRCS
+all: $(CFFI_OBJS)
+endif
 
 #-------------------------------------------------------------------------------
 # Compiler flags
@@ -75,11 +88,18 @@ AR 		= ar
 
 #----------------------------------------------------------------------------
 ifdef TARGET
-$(TARGET): $(OBJS) $(ARCHIVES)
+$(TARGET): $(OBJS) $(ARCHIVES) $(LIDT_LIBS)
 	$(ECHO) "Linking " $@
 	$(RM) $@;
 	$(LD) $(strip $(filter %.o, $^) -L$(LIB_DIR) $(patsubst lib%.a, -l%, $(LIDT_LIBS)) $(LIBS) $(LIBS_BOOST) -o $@)
 endif
+
+#-------------------------------------------------------------------------------
+#Compiling rules for CFFI
+__cffi_%.pyc: __cffi_%.py
+	$(ECHO) Compile CFFI interace $^
+	$(PYTHON)  $^
+
 #----------------------------------------------------------------------------
 # Unittest
 
@@ -90,30 +110,31 @@ report_xml: $(TEST_BIN)
 	./$^ $(LIBS) --gtest_output=xml
 
 report_cover: report_xml
-	$(ECHO) 'Generating HTML output'
-	$(LCOV) -q -c -b $(LCOV_BASEDIR) -d $(OBJ_DIR) -o r.info.all
-	$(LCOV) -q -e r.info.all "*$(TCS_ROOT)/$(TEST_OBJECT)*" -b $(LCOV_BASEDIR) -o r.info.all
+	$(ECHO) 'Generating UNITTEST_REPORT'
+	$(LCOV) --capture -q -c -b $(LCOV_BASEDIR) -d $(OBJ_DIR) -o r.info.all
+	@$(LCOV) --remove r.info.all "/usr*" -o r.info.all > /dev/null
+	@$(LCOV) --remove r.info.all "gtest*" -o r.info.all > /dev/null
+	@$(LCOV) --remove r.info.all "/development/*" -o r.info.all > /dev/null
 	$(LCOV) -q -r r.info.all "*/test/*" -b $(LCOV_BASEDIR) -o r.info
 	$(GENHTML) -q -o $(REPORT_COVER_DIR) --t VARBASE_TEST_RESULT r.info 
 	$(LCOV) -q -z -b $(LCOV_BASEDIR) -d $(OBJ_DIR)
 
 $(OBJ_DIR)/%.o:     ../%.c
-	$(ECHO) " Compiling " $< "For UT"
+	@$(ECHO) " Compiling " $< "for unittest"
 	$(RM) $@;
-	$(CC) $(COMMON_FLAGS) -o $@ -c $(INCLUDES) $(INCLUDE_LIBS) $< 
+	$(CC) -c $(COMMON_FLAGS) $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
 
 $(OBJ_DIR)/%.o:     ../%.cpp
-	$(ECHO) " Compiling " $<  "For UT"
+	@$(ECHO) " Compiling " $<  "for unittest"
 	$(RM) $@;
-	$(CPP) $(COMMON_FLAGS) -o $@ -c $(INCLUDES) $(INCLUDE_LIBS) $< 
+	$(CPP) -c $(COMMON_FLAGS) -std=c++11 $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
 
 gtest.bin: $(TEST_OBJS) $(OBJS)
 	$(ECHO) " Linking " $@
 	$(RM) $@
-	$(CPP) $^ $(LIBS) -L$(LIB_DIR) $(patsubst lib%.a, -l%, $(filter %.a, $^)) -o $@
+	$(CPP) $^ $(LIBS) -L$(LIB_DIR) -L$(LIDT_LIBS_DIR) $(patsubst lib%.a, -l%, $(filter %.a, $(LIDT_LIBS))) -o $@
 
 CLEAN += $(OBJS)
-
 endif
 
 #------------------------------------------------------------------------------
@@ -127,7 +148,7 @@ $(OBJ_DIR)/%.o:     %.c
 $(OBJ_DIR)/%.o:     %.cpp
 	$(ECHO) "Compiling to Object" $<
 	$(RM) $@
-	$(CPP) $(COMMON_FLAGS) -c $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
+	$(CPP) -c $(COMMON_FLAGS) -std=c++11 $< -o $@ $(LIBS) $(INCLUDES) $(INCLUDE_LIBS)
 
 $(LIB_DIR)/lib%_$(ARCHIVE_ALT).a: $(OBJS)
 	$(ECHO) "Creating archive" $@
@@ -135,10 +156,18 @@ $(LIB_DIR)/lib%_$(ARCHIVE_ALT).a: $(OBJS)
 
 $(LIB_DIR)/lib%.a: $(OBJS)
 	$(ECHO) "Creating archive" $@
-	$(AR) -cr $@ $^
+	$(AR) -cr $@ $^ $(SUBOBJS)
 
 $(OBJ_DIR)/lib%.so:     %.o
 	$(CC) -shared -o $@ $<
+
+#-------------------------------------------------------------------------------
+#Compile library
+ifdef   LIBRARY
+lib%.a: 
+	$(ECHO) "Compiling library " $(LIBDIRS_$*)
+	@cd $(LIBDIRS_$*); $(MAKE)
+endif
 
 #-------------------------------------------------------------------------------
 # clean and clobber etc.
@@ -149,6 +178,3 @@ $(OBJ_DIR)/lib%.so:     %.o
 include $(LIDT_MAKEDIR)/Makefile.clean
 
 endif   # once_only
-
-Contact GitHub API Training Shop Blog About
-

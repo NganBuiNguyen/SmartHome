@@ -11,13 +11,18 @@ make_tidy = once_only
 .PHONY: cleanall
 
 cleanall:
-ifneq   ($(wildcard $(CLEAN)),)
+	$(RM) $(LIDT_ROOT)/obj/$(OBJS).o
+ifneq   ($(wildcard $(CLEAN) $(TARGET_CLEAN) $(ARCHIVES_CLEAN)), )
 	$(ECHO) Removing all target files for $(PWD) ...; \
-	$(RM) -r $(wildcard $(CLEAN));
+	$(RM) -r $(wildcard $(CLEAN) $(TARGET_CLEAN) $(ARCHIVES_CLEAN));
 endif
 
 ifdef   CLEAN_DIRS
 	$(foreach dir, $(CLEAN_DIRS), cd $(dir); $(MAKE) $@;)
+endif
+
+ifdef CFFI_SRCS
+	$(RM) -r __pycache__
 endif
 
 endif

@@ -1,4 +1,4 @@
-#:---------------------------------------------------------------------------
+#-----------------------------------------------------------------------------
 # Makefile - make/Makefile.app
 # Copyright (c) Tien Nguyen Anh
 # Modification history
@@ -21,7 +21,11 @@ endif
 # Definition
 
 ifndef OBJ_DIR
-	OBJ_DIR = $(APP_OBJ)/$(APP)
+	OBJ_DIR = $(APP_OBJ)/
+endif
+
+ifndef RUN_TIME
+	RUN_TIME = $(LIDT_ROOT)/runtime
 endif
 
 ifneq ($(APP),unittest)
@@ -37,8 +41,13 @@ CFLAGS += -ansi
 
 CC = gcc
 
-COMMON_FLAGS = -ansi -g
-INC_FLAGS = -I.
+COMMON_FLAGS = -ansi -g -fPIC
+
+ifeq ($(APP),unittest)
+	COMMON_FLAGS += -DUNITTEST
+endif
+
+INC_FLAGS = -I $(INCS_DIRS)
 
 STRIP = strip
 INCS := src/app $(INCS)
@@ -55,15 +64,14 @@ include $(LIDT_MAKEDIR)/Makefile.poco
 include $(LIDT_MAKEDIR)/Makefile.mysql
 
 #-----------------------------------------------------------------------------
+include $(LIDT_MAKEDIR)/Makefile.zmq
+
+#-----------------------------------------------------------------------------
 ifeq ($(APP),unittest)
 	include $(LIDT_MAKEDIR)/Makefile.gtest
 endif
 
 #-----------------------------------------------------------------------------
-#
-ifeq ($(APP),unittest)
-	LDFLAGS =
-endif
 
 #-----------------------------------------------------------------------------
 
