@@ -1,40 +1,28 @@
-CC  = g++
+#-----------------------------------------------------------------------------
+# Makefile - src/app/messenger/messageReceiver
+#
+# Copyright (c) Tien Nguyen Anh
+#
+# Modified History
+# ----------------
+# 2016-Dec-08 Created Tien Nguyen Anh 
+#-----------------------------------------------------------------------------
 
-SRC = 	main.cpp\
-		MsgIn.cpp\
-		MsgInConnection.cpp\
-		MsgInConnectionFactory.cpp\
-		
-OBJFILES := $(patsubst %.cpp, %.o, $(SRC))
+ifneq ($(APP), unittest)
+    override APP = messageSender
+    TARGET = 
+    ARCHIVES = messageSender
+endif
 
-TARGET      =
-LIB_INC     = 	-I /development/poco-1.7.5-all/include/
-LIB_DIRS    = 	-L /development/poco-1.7.5-all/lib
-LIBRARY     = 	-lPocoNet \
-				-lPocoNetd \
-				-lPocoData \
-				-lPocoDatad \
-				-lPocoFoundation \
-				-lPocoFoundationd \
-				-lPocoUtil \
-				-lPocoUtild \
-				-lPocoXML\
-				-lPocoXMLd\
-				-lPocoJSON\
-				-lPocoJSONd
+#-----------------------------------------------------------------------------
+#Source
+SRCS = MessageSender.cpp
+OBJS = $(SRCS:.cpp=.o)
 
-COMMONFLAGS = -g --std=c++11
-LDFLAGS     =
+#-----------------------------------------------------------------------------
+INCS_DIRS += . 
 
-all: MsgIn 
+#-----------------------------------------------------------------------------
 
-MsgIn: $(OBJFILES)
-	$(CC) $(OBJFILES) $(LIB_INC) $(LIB_DIRS) $(LIBRARY) $(COMMONFLAGS) -o $@
-	
-%.o: %.cpp
-	@echo C++ compiling $<
-	$(CC) -c $(LIB_INC) $(LIB_DIRS) $(LIBRARY) $(COMMONFLAGS) $< -o $@
-        
-cleanall:
-	$(E) Removing files
-	@rm -rf *.o
+#-----------------------------------------------------------------------------
+include $(LIDT_MAKEDIR)/Makefile.app 

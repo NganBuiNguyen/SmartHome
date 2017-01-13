@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="9" failures="1" disabled="0" errors="0" timestamp="2017-01-10T12:30:58" time="0.001" name="AllTests">
+  <testsuite name="JsonBuilderTest" tests="9" failures="1" disabled="0" errors="0" time="0.001">
+    <testcase name="TestbuildJsonMessageType_RESULT_OK" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildJsonMessageType_MESSAGE_TYPE_DEFAULT" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildCardOpenJson_RESULT_OK" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildOpenDoorJson_NOT_SENSOR_MESSAGE" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildOpenDoorJson_NOT_CARD_MESSAGE" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildJson_RESULT_OK" status="run" time="0" classname="JsonBuilderTest">
+      <failure message="JsonBuilderTest.cpp:102&#x0A;Value of: actualTree&#x0A;  Actual: { (&quot;MESSAGE_TYPE&quot;, {}), (&quot;data&quot;, { (&quot;CARD_VALUE&quot;, {}) }), (&quot;Sender&quot;, { (&quot;IP&quot;, {}), (&quot;Port&quot;, {}) }) }&#x0A;Expected: expectedTree&#x0A;Which is: { (&quot;MESSAGE_TYPE&quot;, {}), (&quot;data&quot;, { (&quot;CARD_VALUE&quot;, {}) }), (&quot;Sender&quot;, { (&quot;IP&quot;, {}), (&quot;Port&quot;, {}) }) }" type=""><![CDATA[JsonBuilderTest.cpp:102
+Value of: actualTree
+  Actual: { ("MESSAGE_TYPE", {}), ("data", { ("CARD_VALUE", {}) }), ("Sender", { ("IP", {}), ("Port", {}) }) }
+Expected: expectedTree
+Which is: { ("MESSAGE_TYPE", {}), ("data", { ("CARD_VALUE", {}) }), ("Sender", { ("IP", {}), ("Port", {}) }) }]]></failure>
+    </testcase>
+    <testcase name="TestbuildJson_MESSAGE_TYPE_RESULT_FAILURE_1" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildJson_RESULT_FAILURE_2" status="run" time="0" classname="JsonBuilderTest" />
+    <testcase name="TestbuildJson_RESULT_FAILURE_3" status="run" time="0.001" classname="JsonBuilderTest" />
+  </testsuite>
+</testsuites>

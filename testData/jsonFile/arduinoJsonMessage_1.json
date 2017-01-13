@@ -1,0 +1,12 @@
+{
+    "MESSAGE_TYPE" : "CARD_VALUE",
+    "data" : 
+    {
+        "CARD_VALUE" : "4897AB125"
+    },
+    "Sender" : 
+    {
+        "IP" : "197.168.1.177",
+        "Port" : "5600"
+    }
+}
