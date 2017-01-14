@@ -56,7 +56,7 @@ class Processor(threading.Thread):
         for item in topic:
             self.sock.setsockopt_string(zmq.SUBSCRIBE, item)            
 
-    def parseLightIntensityJson(self, jsonMessage):
+    def parseOpenDoorJson(self, jsonMessage):
         info = jsonParser_cffi.new("LightIntensityInfo* ");
         
         jsonParser_c.parseLightInteJsonForC(jsonMessage, info);
