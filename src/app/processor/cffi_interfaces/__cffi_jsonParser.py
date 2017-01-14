@@ -1,14 +1,3 @@
-"""
-File: __cffi_jsonCommon.py
-=========================
-
-Copyright (c) Tien Nguyen Anh
-
-Modified History
-----------------
-2017-Jan-05 Created tien.nguyenanh94@gmail.com
-"""
-
 import cffi
 import os
 
@@ -33,29 +22,28 @@ jsonParser_cffi = cffi.FFI()
 jsonParser_cffi.cdef("""
     typedef struct
     {
-        char ip[20];
+     char ip[20];
         long port;
     }Sender;
 
     typedef struct
     {
-        long lightIntensity;
-    }LightIntensity;
+         char cardID[25];
+    }OpenDoor;
 
     typedef struct
     {
-        LightIntensity data;
+        OpenDoor data;
         Sender sender;
 
-    }LightIntensityInfo;
+    }CardInfo;
 
-    bool parseLightInteJsonForC(const char* jsonString, LightIntensityInfo* info);
+    
+    bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 
 jsonParser_c = jsonParser_cffi.verify("""
-
-                #include "JsonParserForC.h"
-
+                #include "jsonParserForC.h"
                 """,
                 include_dirs = [JSON_PARSER_FOR_C_INCLUDES,
                                 DATA_TYPE_DEF_INCLUDES, BOOST_INCLUDES],

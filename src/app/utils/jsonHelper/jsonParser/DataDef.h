@@ -5,22 +5,22 @@
 #include <string.h>
 #include <string>
 
-struct Sender
-{
-    char ip[20];
-    long port;
-};
+typedef struct
+  {
+     char ip[20];
+     long port;
+  }Sender;
 
-struct OpenDoor
-{
-     char cardID[25];
-};
+typedef struct
+  {
+      char cardID[25];
+  }OpenDoor;
 
-struct CardInfo
-{
-    OpenDoor data;
-    Sender sender;
+typedef struct
+  {
+     OpenDoor data;
+     Sender sender;
 
-};
+  }CardInfo;
 
 #endif

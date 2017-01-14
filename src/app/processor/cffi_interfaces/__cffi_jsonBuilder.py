@@ -1,14 +1,3 @@
-"""
-File: __cffi_jsonBuilder.py
-=========================
-
-Copyright (c) Tien Nguyen Anh
-
-Modified History
-----------------
-2017-Jan-05 Created tien.nguyenanh94@gmail.com
-"""
-
 import cffi
 import os
 
@@ -33,9 +22,7 @@ jsonBuilder_cffi.cdef("""
 """)
 
 jsonBuilder_c = jsonBuilder_cffi.verify("""
-
-                #include "JsonBuilderForC.h"
-
+                #include "jsonBuilderForC.h"
                 """,
                 include_dirs = [JSON_BUILDER_FOR_C_INCLUDES, BOOST_INCLUDES],
                 libraries = JSON_BUILDER_FOR_C_LIBS + BOOST_LIBS,
