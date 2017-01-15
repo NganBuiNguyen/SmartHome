@@ -14,13 +14,14 @@ endif
 
 #------------------------------------------------------------------------------
 #source
-SRCS = common.cpp
+SRCS = JsonCommon.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #------------------------------------------------------------------------------
 #include source code
-INCS += src/app/dataManager \
- 			src/app/dataManager
+INCS_DIRS += src/app/dataManager \
+ 			src/app/dataManager \
+ 			src/app/utils/jsonHelper/jsonParser
 
 #------------------------------------------------------------------------------
 #include makefile

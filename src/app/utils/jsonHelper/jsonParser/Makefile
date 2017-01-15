@@ -8,7 +8,7 @@ endif
 #source
 SRCS = JsonParser.cpp
 OBJS = $(SRCS:.cpp=.o)
-SUBOBJS = common.o
+SUBOBJS = JsonCommon.o
 
 #-----------------------------------------------------------------------------
 LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common/
@@ -17,7 +17,8 @@ LIBRARY             += jsonCommon
 #------------------------------------------------------------------------------
 #include source code
 INCS_DIRS += src/app/utils/jsonHelper/common \
-			src/app/dataConverter
+			src/app/dataConverter \
+ 			src/app/utils/jsonHelper/jsonParser
 
 #------------------------------------------------------------------------------
 #include makefile

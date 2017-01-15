@@ -2,7 +2,7 @@
 #define __JSON_PARSER_H__
 
 #include "DataDef.h"
-#include "common.h"
+#include "JsonCommon.h"
 
 bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info);
 

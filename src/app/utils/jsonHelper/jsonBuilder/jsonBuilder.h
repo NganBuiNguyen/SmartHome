@@ -1,7 +1,7 @@
 #ifndef __JSON_BUILDER_H__
 #define __JSON_BUILDER_H__
 
-#include "common.h"
+#include "JsonCommon.h"
 
 /*!
  * @brief

@@ -8,8 +8,8 @@ LIDT_LIBS = os.path.sep.join((LIDT_ROOT, 'obj', 'libs'))
 JSON_PARSER_FOR_C_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 
                             'app', 'utils', 'jsonHelper', 'cWrapper',
                             'jsonParserWrapper'))
-DATA_TYPE_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 
-                            'app', 'dataManager'))
+DATA_TYPE_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'utils',
+                                        'jsonHelper','jsonParser'))
 JSON_PARSER_FOR_C_LIBS = ["jsonParserForC"]
 
 #define common libraries
@@ -43,7 +43,7 @@ jsonParser_cffi.cdef("""
 """)
 
 jsonParser_c = jsonParser_cffi.verify("""
-                #include "jsonParserForC.h"
+                #include "JsonParserForC.h"
                 """,
                 include_dirs = [JSON_PARSER_FOR_C_INCLUDES,
                                 DATA_TYPE_DEF_INCLUDES, BOOST_INCLUDES],

@@ -22,7 +22,7 @@ jsonBuilder_cffi.cdef("""
 """)
 
 jsonBuilder_c = jsonBuilder_cffi.verify("""
-                #include "jsonBuilderForC.h"
+                #include "JsonBuilderForC.h"
                 """,
                 include_dirs = [JSON_BUILDER_FOR_C_INCLUDES, BOOST_INCLUDES],
                 libraries = JSON_BUILDER_FOR_C_LIBS + BOOST_LIBS,
