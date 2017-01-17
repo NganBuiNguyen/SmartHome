@@ -1,5 +1,5 @@
 
-#include "common.h"
+#include "JsonCommon.h"
 
 
 bool isSensorMessage(const std::string& message)

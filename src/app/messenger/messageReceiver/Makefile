@@ -6,7 +6,7 @@ endif
 
 #-----------------------------------------------------------------------------
 #Source
-SRCS = messageReceiver.cpp
+SRCS = MessageReceiver.cpp
 OBJS = $(SRCS:.cpp=.o)
 SUBOBJS += jsonBuilder.o
 SUBOBJS += common.o
@@ -14,7 +14,8 @@ SUBOBJS += common.o
 #------------------------------------------------------------------------------
 #include source code
 INCS_DIRS = src/app/utils/jsonHelper/common \
-			src/app/utils/jsonHelper/jsonBuilder
+			src/app/utils/jsonHelper/jsonBuilder \
+			src/app/utils/jsonHelper/jsonParser
 
 #-----------------------------------------------------------------------------
 LIBDIRS_jsonCommon  = $(LIDT_ROOT)/src/app/utils/jsonHelper/common/

@@ -13,7 +13,7 @@
 #include "Poco/Event.h"
 #include "Poco/Timespan.h"
 
-#include "common.h"
+#include "JsonCommon.h"
 #include "jsonBuilder.h"
 
 #define PUBLISHER_PORT_OPT 5600

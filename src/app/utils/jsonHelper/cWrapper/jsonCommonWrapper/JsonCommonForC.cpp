@@ -20,16 +20,17 @@
  */
 void getJSONMessageTypeForC(const char* message, MESSAGE_TYPE* messageType)
 {
-
+    *messageType = getJSONMessageType(std::string(message));
 }
 
 /*!
  * @internal
  */
 bool convertMessageTypeToStrForC(const MESSAGE_TYPE* messageType,
-                                                    char** messageTypeStr)
+                                                        char** messageTypeStr)
 {
-    
+    std::string messageTypeString = convertMessageTypeToStr(*messageType);
+    *messageTypeStr = strdup(messageTypeString.c_str());
 }
 
 /*!
@@ -38,4 +39,5 @@ bool convertMessageTypeToStrForC(const MESSAGE_TYPE* messageType,
 bool isSensorMessageForC(const char* message)
 {
 
+    return isSensorMessage(std::string(message));
 }

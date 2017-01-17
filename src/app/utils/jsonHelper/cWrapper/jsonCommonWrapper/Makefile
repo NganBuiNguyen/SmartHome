@@ -18,7 +18,7 @@ SRCS = JsonCommonForC.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #------------------------------------------------------------------------------
-SUBOBJS = common.o
+SUBOBJS = JsonCommon.o
 
 #------------------------------------------------------------------------------
 LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common/

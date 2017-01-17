@@ -21,5 +21,5 @@
  */
 bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info)
 {
-    
+    return parseOpenDoorJson(std::string(jsonString), *info);
 }

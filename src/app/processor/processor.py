@@ -57,11 +57,11 @@ class Processor(threading.Thread):
             self.sock.setsockopt_string(zmq.SUBSCRIBE, item)            
 
     def parseOpenDoorJson(self, jsonMessage):
-        info = jsonParser_cffi.new("LightIntensityInfo* ");
+        info = jsonParser_cffi.new("CardInfo* ");
         
-        jsonParser_c.parseLightInteJsonForC(jsonMessage, info);
-
-        return info[0].data.lightIntensity, jsonParser_cffi.string(info[0].sender.ip),\
+        jsonParser_c.parseOpenDoorJsonForC(jsonMessage, info);
+        print("Message: ", jsonMessage)
+        return jsonParser_cffi.string(info[0].data.cardID), jsonParser_cffi.string(info[0].sender.ip),\
                 info[0].sender.port
 
     def buildJsonMessage(self, message):
@@ -82,7 +82,10 @@ class Processor(threading.Thread):
             topic = self.sock.recv()
             message = self.sock.recv()
             
-            lightInte, ip, port = self.parseLightIntensityJson(message)
+            cardID, ip, port = self.parseOpenDoorJson(message)
+            print(cardID)
+            print(ip)
+            print(port)
 
 if __name__ == '__main__':
 

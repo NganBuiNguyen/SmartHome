@@ -1,5 +1,4 @@
-
-#include "messageReceiver.h"
+#include "MessageReceiver.h"
 
 
 
@@ -41,8 +40,7 @@ void MessageReceiver::run()
 {
     this->ready.set();
     Poco::Timespan span(250000);
-    char* pBuffer =new char[this->bufferSize];
-    std::string pBuffer1= std::string(pBuffer);
+    char* pBuffer = new char[this->bufferSize];
 
     void *context = zmq_ctx_new ();
     void *publisher = zmq_socket (context, ZMQ_PUB);
@@ -57,28 +55,33 @@ void MessageReceiver::run()
                 Poco::Net::SocketAddress sender;
                 int n = this->socket.receiveFrom(pBuffer, this->bufferSize, sender);
 
-                char* jsonString = NULL;
+                std::string jsonString;
 
-                std::string jsonString1(jsonString);
-                std::string& jsonStr= jsonString1;
                 /*!
                  * Appending IP of Sender to message
                  */
                 strcat(pBuffer, SENSOR_MESSAGE_SPLITTER);
                 strcat(pBuffer, sender.toString().c_str());
 
-                if (isSensorMessage(pBuffer1))
+                std::cout << "01: " << pBuffer << std::endl;
+
+
+                if (isSensorMessage(pBuffer))
                 {
-                    if (!buildJson(pBuffer1, jsonStr))
+                    std::cout << "03: " << pBuffer << std::endl;
+                    if (!buildJson(pBuffer, jsonString))
                     {
+                        std::cout << "04: " << pBuffer << std::endl;
                         continue;
                     }
 
-                    MESSAGE_TYPE messageType = getJSONMessageType(pBuffer1);
+                    MESSAGE_TYPE messageType = getJSONMessageType(pBuffer);
+
+                    std::cout<< "02: " << pBuffer << std::endl;
                     
                     std::string topic = convertMessageTypeToStr(messageType);
                     s_sendmore (publisher, (char*)topic.c_str());
-                    s_send (publisher, jsonString);
+                    s_send (publisher, (char*)jsonString.c_str());
                     sleep (1);
                 }
 
@@ -90,9 +93,9 @@ void MessageReceiver::run()
         }
     }
 
-    if (pBuffer1.compare("")==0)
+    if (pBuffer != NULL)
     {
-       pBuffer1.erase(pBuffer1.begin(),pBuffer1.end());
+        delete pBuffer;
     }
 }
 
