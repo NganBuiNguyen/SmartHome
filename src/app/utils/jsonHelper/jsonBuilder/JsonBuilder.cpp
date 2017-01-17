@@ -3,7 +3,7 @@
 #include <string>
 #include <string.h>
 
-#include "jsonBuilder.h"
+#include "JsonBuilder.h"
 
 #ifdef UNITTEST
 #define STATIC
