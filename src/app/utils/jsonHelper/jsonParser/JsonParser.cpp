@@ -37,16 +37,6 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
     /*!
      * Parse Information of Sender
      */
-    // std::string ipStr = pTree.get<std::string>("Sender.IP");
-    // std::string portStr = pTree.get<std::string>("Sender.Port");
-
-    
-    // std::string cardValueStr = 
-    //                     pTree.get<std::string>("data.CARD_VALUE");
-
-    // info->data.cardID = std::stol(cardValueStr);
-    // info->sender.port = std::stol(portStr);
-    // strcpy(info->sender.ip, ipStr.c_str());
 
 
     std::string jsonIPPath = getJsonPath(ATTR_JSON_SENDER, ATTR_JSON_CARD_IP);
@@ -54,17 +44,26 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
     std::string ipStr = pTree.get<std::string>(jsonIPPath);
     std::string portStr = pTree.get<std::string>(jsonPortPath);
 
-    /*!
-     * Parse Light Intensity
-     */
+    
     std::string jsonCardIntPath = getJsonPath(ATTR_JSON_DATA,
                                                 ATTR_JSON_CARD_OPEN);
+
     std::string cardValueStr = 
                         pTree.get<std::string>(jsonCardIntPath);
+
+
+    std::string jsonDatePath = getJsonPath(ATTR_JSON_REALTIME, ATTR_JSON_DATE);
+    std::string jsonTimePath = getJsonPath(ATTR_JSON_REALTIME, ATTR_JSON_TIME);
+    std::string dateStr = pTree.get<std::string>(jsonDatePath);
+    std::string timeStr = pTree.get<std::string>(jsonTimePath);
+
 
     strcpy(info.data.cardID, cardValueStr.c_str());
     info.sender.port = std::stol(portStr);
     strcpy(info.sender.ip, ipStr.c_str());
+
+    strcpy(info.realTime.date, dateStr.c_str());
+    strcpy(info.realTime.time, timeStr.c_str());
     return true;
 }
 

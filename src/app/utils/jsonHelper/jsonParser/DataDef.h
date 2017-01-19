@@ -5,6 +5,7 @@
 #define SENSOR_MESSAGE_SPLITTER ";"
 #define IP_MESSAGE_SPLITTER ":"
 #define JSON_PATH_SPLITTER "."
+#define TIME_SPLITTER " "
 
 #define MAX_SENSOR_MESSAGE_LENGTH 50
 #define IP_PORT_TOKEN_SIZE 2
@@ -17,6 +18,9 @@
 #define ATTR_JSON_CARD_IP "IP"
 #define ATTR_JSON_CARD_PORT "Port"
 #define ATTR_JSON_SENDER "Sender"
+#define ATTR_JSON_DATE "Date"
+#define ATTR_JSON_TIME "Time"
+#define ATTR_JSON_REALTIME "RealTime"
 
 
 
@@ -35,6 +39,12 @@ typedef struct
 
 typedef struct
   {
+     char date[20];
+     char time[20];
+  }RealTime;
+
+typedef struct
+  {
       char cardID[25];
   }OpenDoor;
 
@@ -42,7 +52,7 @@ typedef struct
   {
      OpenDoor data;
      Sender sender;
-
+     RealTime realTime;
   }CardInfo;
 
 #endif

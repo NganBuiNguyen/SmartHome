@@ -38,5 +38,7 @@ TEST_F(JsonParserTest, TestparseOpenDoorJson_RESULT_OK)
     EXPECT_TRUE(status);
     EXPECT_TRUE(strcmp(info.data.cardID, "4897AB125")==0);
     EXPECT_TRUE(info.sender.port == 5600);
-    EXPECT_TRUE(strcmp(info.sender.ip, "197.168.1.177") == 0);
+    EXPECT_TRUE(strcmp(info.sender.ip, "192.168.1.177") == 0);
+    EXPECT_TRUE(strcmp(info.realTime.date, "2017/11/01") == 0);
+    EXPECT_TRUE(strcmp(info.realTime.time, "33:12:01") == 0);
 }

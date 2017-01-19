@@ -68,10 +68,21 @@ STATIC bool buildOpenDoorsityJson(const std::string& message,
 }
 
 /*!
- * @internal
+ * built Time json
  */
 
+STATIC bool buildTimeJson(const std::string& pTime,
+                                    boost::property_tree::ptree& timeTree)
+{
+    std::vector<std::string> token = splitWordRegex(pTime,
+                                    std::string(TIME_SPLITTER));
+    
+      
+    timeTree.put(ATTR_JSON_DATE, token[0]);
+    timeTree.put(ATTR_JSON_TIME, token[1]);
 
+    return true;
+}
 
 /*!
  * @internal
@@ -116,6 +127,7 @@ bool buildJson(const std::string& message, std::string& jsonString)
     boost::property_tree::ptree messageTypeTree;
     boost::property_tree::ptree dataTree;
     boost::property_tree::ptree senderTree;
+    boost::property_tree::ptree timeTree;
 
     std::vector<std::string> token = splitWordRegex(message,
                                     std::string(SENSOR_MESSAGE_SPLITTER));
@@ -144,9 +156,14 @@ bool buildJson(const std::string& message, std::string& jsonString)
     {
         return false;
     }
+    if (!buildTimeJson(token[2].c_str(), timeTree))
+    {
+        return false;
+    }
 
     root.add_child(ATTR_JSON_DATA, dataTree);
     root.add_child(ATTR_JSON_SENDER, senderTree);
+    root.add_child(ATTR_JSON_REALTIME, timeTree);
 
     jsonString = writeJsonToString(root);
 
