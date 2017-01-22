@@ -144,28 +144,35 @@ bool buildJson(const std::string& message, std::string& jsonString)
 
     if (!buildJsonMessageType(messageType, root)) 
     {
+        
         return false;
     }
-
+    
     if (!buildOpenDoorsityJson(token[0].c_str(), dataTree))
     {
+       
         return false;
     }
-
+    
     if (!buildIPSenderJSON(token[1].c_str(), senderTree))
     {
+        
         return false;
     }
-    if (!buildTimeJson(token[2].c_str(), timeTree))
-    {
-        return false;
-    }
-
+   
+    // if (!buildTimeJson(token[2].c_str(), timeTree))
+    // {
+    //     std::cout << "08: " << std::endl;
+    //     return false;
+    // }
+    
     root.add_child(ATTR_JSON_DATA, dataTree);
+    
     root.add_child(ATTR_JSON_SENDER, senderTree);
-    root.add_child(ATTR_JSON_REALTIME, timeTree);
-
+    
+    //root.add_child(ATTR_JSON_REALTIME, timeTree);
+    
     jsonString = writeJsonToString(root);
-
+    
     return true;
 }
