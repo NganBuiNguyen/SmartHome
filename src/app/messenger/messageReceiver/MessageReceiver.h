@@ -14,8 +14,7 @@
 #include "Poco/Timespan.h"
 
 #include "JsonCommon.h"
-#include "JsonBuilder.h"
-#include "Timer.h"
+#include "jsonBuilder.h"
 
 #define PUBLISHER_PORT_OPT 5600
 

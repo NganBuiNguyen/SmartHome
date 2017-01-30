@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="1" failures="0" disabled="0" errors="0" timestamp="2017-01-10T13:21:54" time="0" name="AllTests">
-  <testsuite name="JsonParserTest" tests="1" failures="0" disabled="0" errors="0" time="0">
-    <testcase name="TestparseOpenDoorJson_RESULT_OK" status="run" time="0" classname="JsonParserTest" />
-  </testsuite>
-</testsuites>

@@ -82,7 +82,7 @@ TEST_F(JsonBuilderTest, TestbuildOpenDoorJson_NOT_CARD_MESSAGE)
 TEST_F(JsonBuilderTest, TestbuildJson_RESULT_OK)
 {
     std::string jsonString ;
-    std::string message("R4897AB125;192.168.1.177:5600;2017/11/01-33:12:01");
+    std::string message("R4897AB125;192.168.1.177:5600;2017/11/01 33:12:01");
 
     boost::property_tree::ptree expectedTree;
     char* rootENV = std::getenv("LIDT_ROOT");
