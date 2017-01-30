@@ -1,6 +1,8 @@
 import cffi
 import os
 
+
+
 #LIDT declare
 LIDT_ROOT = os.getenv('LIDT_ROOT')
 LIDT_LIBS = os.path.sep.join((LIDT_ROOT, 'obj', 'libs'))
@@ -20,22 +22,31 @@ BOOST_LIBS = ["boost_serialization", 'boost_thread', 'stdc++']
 
 jsonParser_cffi = cffi.FFI()
 jsonParser_cffi.cdef("""
+    #define IP_PORT_DATE_TIME_SIZE 20
+    #define ID_CARD_SIZE 25
+
     typedef struct
     {
-     char ip[20];
+        char ip[IP_PORT_DATE_TIME_SIZE];
         long port;
     }Sender;
 
     typedef struct
     {
-         char cardID[25];
+        char cardID[ID_CARD_SIZE];
     }OpenDoor;
+
+    typedef struct
+    {
+        char date[IP_PORT_DATE_TIME_SIZE];
+        char time[IP_PORT_DATE_TIME_SIZE];
+    }Timer;
 
     typedef struct
     {
         OpenDoor data;
         Sender sender;
-
+        Timer timer;
     }CardInfo;
 
     

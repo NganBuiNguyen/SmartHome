@@ -76,11 +76,15 @@ STATIC bool buildTimeJson(const std::string& pTime,
 {
     std::vector<std::string> token = splitWordRegex(pTime,
                                     std::string(TIME_SPLITTER));
-    
-      
+    if (pTime.find(TIME_SPLITTER) == std::string::npos)// co nghia la -1
+    {
+        return false;
+    }
+    std::cout << "06: " << std::endl;
     timeTree.put(ATTR_JSON_DATE, token[0]);
+    std::cout << token[0] << std::endl;
     timeTree.put(ATTR_JSON_TIME, token[1]);
-
+    std::cout << token[1] << std::endl;
     return true;
 }
 
@@ -90,7 +94,7 @@ STATIC bool buildTimeJson(const std::string& pTime,
 STATIC bool buildIPSenderJSON(const std::string& ipAddress,
                                 boost::property_tree::ptree& senderTree)
 {
-    boost::property_tree::ptree senderDataTree;
+    //boost::property_tree::ptree senderDataTree;
 
     std::vector<std::string> token = splitWordRegex(ipAddress,
                                     std::string(IP_MESSAGE_SPLITTER));
@@ -159,18 +163,18 @@ bool buildJson(const std::string& message, std::string& jsonString)
         
         return false;
     }
-   
-    // if (!buildTimeJson(token[2].c_str(), timeTree))
-    // {
-    //     std::cout << "08: " << std::endl;
-    //     return false;
-    // }
+  
+    if (!buildTimeJson(token[2].c_str(), timeTree))
+    {
+        return false;
+    }
+
     
     root.add_child(ATTR_JSON_DATA, dataTree);
     
     root.add_child(ATTR_JSON_SENDER, senderTree);
-    
-    //root.add_child(ATTR_JSON_REALTIME, timeTree);
+   
+    root.add_child(ATTR_JSON_REALTIME, timeTree);
     
     jsonString = writeJsonToString(root);
     

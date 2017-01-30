@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include "common.h"
+#include "JsonCommon.h"
 
 class CommonTest : public ::testing::Test
 {

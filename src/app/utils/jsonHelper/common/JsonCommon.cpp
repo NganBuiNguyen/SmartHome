@@ -21,6 +21,11 @@ bool isSensorMessage(const std::string& message)
     {
         return false;
     }
+    
+    // if (messageStr.find(TIME_SPLITTER) == std::string::npos)// co nghia la -1
+    // {
+    //     return false;
+    // }
 
     return true;
 }

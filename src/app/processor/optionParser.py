@@ -1,13 +1,4 @@
-"""
-File: optionParser.py
-=========================
 
-Copyright (c) Tien Nguyen Anh
-
-Modified History
-----------------
-2017-Jan-09 Created tien.nguyenanh94@gmail.com
-"""
 import sys
 
 def parseCmdLineArg(cmd_line_arg):

@@ -2,12 +2,13 @@
 #define __Card_H_
 
 
-#include<iostream>
-#include<string>
-#include<string.h>
+#include <iostream>
+#include <string>
+#include <string.h>
 
 
-class Card 
+  
+/*class Card 
 {
 public:
     Card(); 
@@ -21,5 +22,7 @@ private:
     std::string cardID;
     std::string kindCard;
 
-};
+};*/
+
+
 #endif

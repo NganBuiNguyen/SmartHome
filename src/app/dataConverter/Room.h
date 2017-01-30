@@ -13,25 +13,26 @@
 #include "Person.h"
 #include "Door.h"
 
-class Room
-{
-public:
-    std::string getRoomID();
-    void setRoomID(std::string roomID);
-    std::string getNameRoom();
-    void setNameRoom(std::string nameRoom);
-    int getCountRoom();
-    void setCountRoom(int countRoom);
-    Person getIDPerson();
-	void setIDPerson(Person IDPerson);
-	Door getIDDoor();
-	void setIDDoor(Door IDDoor);
-private:
-    std::string roomID;
-    std::string nameRoom;
-    int countRoom;
-    Person IDPerson;
-    Door IDDoor;
-};
+// class Room
+// {
+// public:
+//     std::string getRoomID();
+//     void setRoomID(std::string roomID);
+//     std::string getNameRoom();
+//     void setNameRoom(std::string nameRoom);
+//     int getCountRoom();
+//     void setCountRoom(int countRoom);
+//     Person getIDPerson();
+// 	void setIDPerson(Person IDPerson);
+// 	Door getIDDoor();
+// 	void setIDDoor(Door IDDoor);
+// private:
+//     std::string roomID;
+//     std::string nameRoom;
+//     int countRoom;
+//     Person IDPerson;
+//     Door IDDoor;
+// };
+
 #endif
 

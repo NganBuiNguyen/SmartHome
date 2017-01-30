@@ -6,15 +6,16 @@
 #include <string>
 #include <string.h>
 
-class Door
-{
-public:
-	std::string getIDDoor();
-    void setIDDoor(std::string IdDoor);
-    std::string getnameDoor();
-    void setnameDoor(std::string name);
-private:
-	std::string IDDoor;
-	std::string NameDoor;
-};
+// class Door
+// {
+// public:
+// 	std::string getIDDoor();
+//     void setIDDoor(std::string IdDoor);
+//     std::string getnameDoor();
+//     void setnameDoor(std::string name);
+// private:
+// 	std::string IDDoor;
+// 	std::string NameDoor;
+// };
+
 #endif

@@ -12,30 +12,32 @@
 #include "Door.h"
 #include "Card.h"
 
-class Status
-{
-public:
-    std::string getStatusID();
-    void setStatusID(std::string statusID);
-    bool getStatusName();
-    void setSatusName(bool statusName);
+// class Status
+// {
+// public:
+//     std::string getStatusID();
+//     void setStatusID(std::string statusID);
+//     bool getStatusName();
+//     void setSatusName(bool statusName);
 
-    Door getDoorID();
-    void setDoorID(Door doorID);
-    Card getCardID();
-    void setCardID(Card cardID);
+//     Door getDoorID();
+//     void setDoorID(Door doorID);
+//     Card getCardID();
+//     void setCardID(Card cardID);
 
-    time_t getTimeIn();
-    void setTimeIn(time_t timeIn);
-    time_t getTimeOut();
-    void setTimeOut(time_t timeOut); 
+//     time_t getTimeIn();
+//     void setTimeIn(time_t timeIn);
+//     time_t getTimeOut();
+//     void setTimeOut(time_t timeOut); 
 
-private:
-    std::string statusID;
-    bool statusName;
-    Door doorID;
-    Card cardID;
-    time_t timeIn;
-    time_t timeOut;
-};
+// private:
+//     std::string statusID;
+//     bool statusName;
+//     Door doorID;
+//     Card cardID;
+//     time_t timeIn;
+//     time_t timeOut;
+// };
+
+
 #endif

@@ -5,10 +5,13 @@
 #define SENSOR_MESSAGE_SPLITTER ";"
 #define IP_MESSAGE_SPLITTER ":"
 #define JSON_PATH_SPLITTER "."
-#define TIME_SPLITTER " "
+#define TIME_SPLITTER "-"
 
-#define MAX_SENSOR_MESSAGE_LENGTH 50
+#define MAX_SENSOR_MESSAGE_LENGTH 80
 #define IP_PORT_TOKEN_SIZE 2
+#define IP_PORT_DATE_TIME_SIZE 20
+#define ID_CARD_SIZE 25
+
 #define CARD_MESSAGE 'R'
 #define ATTR_JSON_DATA "data"
 #define ATTR_JSON_MESSAGE_TYPE "MESSAGE_TYPE"
@@ -32,27 +35,27 @@ typedef enum
 
 
 typedef struct
-  {
-     char ip[20];
-     long port;
-  }Sender;
+{
+    char ip[IP_PORT_DATE_TIME_SIZE];
+    long port;
+}Sender;
 
 typedef struct
-  {
-     char date[20];
-     char time[20];
-  }RealTime;
+{
+    char date[IP_PORT_DATE_TIME_SIZE];
+    char time[IP_PORT_DATE_TIME_SIZE];
+}Timer;
 
 typedef struct
-  {
-      char cardID[25];
-  }OpenDoor;
+{
+    char cardID[ID_CARD_SIZE];
+}OpenDoor;
 
 typedef struct
-  {
-     OpenDoor data;
-     Sender sender;
-     RealTime realTime;
-  }CardInfo;
+{
+    OpenDoor data;
+    Sender sender;
+    Timer timer;
+}CardInfo;
 
 #endif
