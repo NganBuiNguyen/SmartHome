@@ -1,3 +1,4 @@
+
 #ifndef __DATA_STRUCT_DEF_H__
 #define __DATA_STRUCT_DEF_H__
 
@@ -5,7 +6,7 @@
 #define SENSOR_MESSAGE_SPLITTER ";"
 #define IP_MESSAGE_SPLITTER ":"
 #define JSON_PATH_SPLITTER "."
-#define TIME_SPLITTER " "
+#define TIME_SPLITTER "  "
 
 #define MAX_SENSOR_MESSAGE_LENGTH 50
 #define IP_PORT_TOKEN_SIZE 2
