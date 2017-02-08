@@ -8,8 +8,7 @@ LIDT_LIBS = os.path.sep.join((LIDT_ROOT, 'obj', 'libs'))
 JSON_PARSER_FOR_C_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 
                             'app', 'utils', 'jsonHelper', 'cWrapper',
                             'jsonParserWrapper'))
-DATA_TYPE_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'utils',
-                                        'jsonHelper','jsonParser'))
+DATA_TYPE_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'dataConverter'))
 JSON_PARSER_FOR_C_LIBS = ["jsonParserForC"]
 
 #define common libraries
@@ -33,12 +32,17 @@ jsonParser_cffi.cdef("""
 
     typedef struct
     {
+        char date[20];
+        char time[20];
+    }Date_Time;
+    
+    typedef struct
+    {
         OpenDoor data;
         Sender sender;
-
+        Date_Time dateTime;
     }CardInfo;
 
-    
     bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 

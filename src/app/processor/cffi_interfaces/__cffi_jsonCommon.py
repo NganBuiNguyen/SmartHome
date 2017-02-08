@@ -6,8 +6,7 @@ LIDT_ROOT = os.getenv('LIDT_ROOT')
 LIDT_LIBS = os.path.sep.join((LIDT_ROOT, 'obj', 'libs'))
 
 #include JsonCommon and DataDef
-DATA_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'utils',
-                                        'jsonHelper','jsonParser'))
+DATA_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'dataConverter'))
 JSONCOMMON_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'utils',
                                 'jsonHelper', 'common'))
 JSON_COMMON_FOR_C_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app',

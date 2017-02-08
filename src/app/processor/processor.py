@@ -1,14 +1,3 @@
-"""
-File: processor.py
-=========================
-
-Copyright (c) Tien Nguyen Anh
-
-Modified History
-----------------
-2016-Dec-19 Created tien.nguyenanh94@gmail.com
-"""
-
 import sys
 import threading
 import zmq

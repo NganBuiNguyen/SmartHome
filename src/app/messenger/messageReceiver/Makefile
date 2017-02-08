@@ -8,8 +8,8 @@ endif
 #Source
 SRCS = MessageReceiver.cpp
 OBJS = $(SRCS:.cpp=.o)
-SUBOBJS += jsonBuilder.o
-SUBOBJS += common.o
+SUBOBJS += JsonBuilder.o
+SUBOBJS += JsonCommon.o
 
 #------------------------------------------------------------------------------
 #include source code

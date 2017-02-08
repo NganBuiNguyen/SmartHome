@@ -32,7 +32,7 @@ LIBRARY             += jsonBuilder
 INCS_DIRS += src/app/utils/jsonHelper/common \
 			 src/app/utils/jsonHelper/jsonBuilder \
 			 src/app/dataManager \
-			 src/app/utils/jsonHelper/jsonParser
+			 src/app/dataConverter
 
 #-----------------------------------------------------------------------------
 CLEAN_DIRS += 	$(LIDT_ROOT)/src/app/utils/jsonHelper/common \

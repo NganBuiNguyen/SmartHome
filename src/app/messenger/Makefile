@@ -1,12 +1,3 @@
-#-----------------------------------------------------------------------------
-# Makefile - src/app/messenger
-#
-# Copyright (c) Tien Nguyen Anh
-#
-# Modified History
-# ----------------
-# 2016-Dec-08 Created tien.nguyenanh94@gmail.com 
-#-----------------------------------------------------------------------------
 
 ifneq ($(APP), unittest)
     override APP = messenger

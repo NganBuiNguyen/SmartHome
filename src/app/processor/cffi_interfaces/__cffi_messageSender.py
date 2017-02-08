@@ -1,14 +1,3 @@
-"""
-File: __cffi_messageSender.py
-=========================
-
-Copyright (c) Tien Nguyen Anh
-
-Modified History
-----------------
-2017-Jan-05 Created tien.nguyenanh94@gmail.com
-"""
-
 import cffi
 import os
 

@@ -62,8 +62,8 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
     info.sender.port = std::stol(portStr);
     strcpy(info.sender.ip, ipStr.c_str());
 
-    strcpy(info.realTime.date, dateStr.c_str());
-    strcpy(info.realTime.time, timeStr.c_str());
+    strcpy(info.dateTime.date, dateStr.c_str());
+    strcpy(info.dateTime.time, timeStr.c_str());
     return true;
 }
 

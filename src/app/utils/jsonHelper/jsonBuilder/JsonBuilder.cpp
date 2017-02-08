@@ -160,17 +160,17 @@ bool buildJson(const std::string& message, std::string& jsonString)
         return false;
     }
    
-    // if (!buildTimeJson(token[2].c_str(), timeTree))
-    // {
-    //     std::cout << "08: " << std::endl;
-    //     return false;
-    // }
+    if (!buildTimeJson(token[2].c_str(), timeTree))
+    {
+        std::cout << "08: " << std::endl;
+        return false;
+    }
     
     root.add_child(ATTR_JSON_DATA, dataTree);
     
     root.add_child(ATTR_JSON_SENDER, senderTree);
     
-    //root.add_child(ATTR_JSON_REALTIME, timeTree);
+    root.add_child(ATTR_JSON_REALTIME, timeTree);
     
     jsonString = writeJsonToString(root);
     
