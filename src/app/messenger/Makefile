@@ -8,7 +8,7 @@ endif
 #-----------------------------------------------------------------------------
 SRCS = messenger.cpp
 OBJS = $(SRCS:.cpp=.o)
-
+SUBOBJS += Timer.o
 #-----------------------------------------------------------------------------
 USING_LANGUAGE = CPP
 
@@ -16,7 +16,9 @@ USING_LANGUAGE = CPP
 INCS_DIRS += src/app/messenger/messageReceiver \
 			 src/app/utils/jsonHelper/common \
 			 src/app/utils/jsonHelper/jsonBuilder \
-			 src/app/utils/jsonHelper/jsonParser
+			 src/app/utils/jsonHelper/jsonParser \
+			 src/app/dataConverter \
+			 src/app/timer
 
 #-----------------------------------------------------------------------------
 LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common/

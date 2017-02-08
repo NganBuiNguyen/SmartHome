@@ -15,6 +15,7 @@
 
 #include "JsonCommon.h"
 #include "JsonBuilder.h"
+#include "Timer.h"
 
 #define PUBLISHER_PORT_OPT 5600
 

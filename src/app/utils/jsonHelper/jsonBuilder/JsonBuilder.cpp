@@ -170,7 +170,7 @@ bool buildJson(const std::string& message, std::string& jsonString)
     
     root.add_child(ATTR_JSON_SENDER, senderTree);
     
-    root.add_child(ATTR_JSON_REALTIME, timeTree);
+    root.add_child(ATTR_JSON_DATETIME, timeTree);
     
     jsonString = writeJsonToString(root);
     

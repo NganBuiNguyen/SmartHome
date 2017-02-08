@@ -16,7 +16,7 @@ LIBRARY             += jsonCommon
 #------------------------------------------------------------------------------                                                                
 #include source code                                                                                                                           
 INCS_DIRS += src/app/utils/jsonHelper/common \
- 			src/app/dataConverter \
+ 			src/app/dataConverter 
 
 #------------------------------------------------------------------------------                                                                
 #include makefile                                                                                                                              

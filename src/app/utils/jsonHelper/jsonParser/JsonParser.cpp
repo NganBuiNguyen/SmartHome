@@ -52,8 +52,8 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
                         pTree.get<std::string>(jsonCardIntPath);
 
 
-    std::string jsonDatePath = getJsonPath(ATTR_JSON_REALTIME, ATTR_JSON_DATE);
-    std::string jsonTimePath = getJsonPath(ATTR_JSON_REALTIME, ATTR_JSON_TIME);
+    std::string jsonDatePath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_DATE);
+    std::string jsonTimePath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_TIME);
     std::string dateStr = pTree.get<std::string>(jsonDatePath);
     std::string timeStr = pTree.get<std::string>(jsonTimePath);
 

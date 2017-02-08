@@ -1,6 +1,6 @@
 #include "Timer.h"
 
-char* getTime ()
+char* getTime()
 {
     char* pTime = new char[30];
     memset(pTime, 0, 30 * sizeof(char));
@@ -30,7 +30,7 @@ char* getTime ()
     strcat(pTime,yearStr.c_str());
     
     
-    strcat(pTime,"-");
+    strcat(pTime," ");
    
     strcat(pTime,hourStr.c_str());
     strcat(pTime,":");

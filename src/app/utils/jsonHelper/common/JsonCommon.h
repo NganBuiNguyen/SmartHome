@@ -11,7 +11,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/json_parser.hpp>
 
-#include "/data/SmartHome/src/app/dataConverter/DataDef.h"
+#include "DataDef.h"
 
 MESSAGE_TYPE getJSONMessageType(const std::string& message);
 
