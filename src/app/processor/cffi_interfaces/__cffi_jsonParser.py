@@ -21,19 +21,23 @@ jsonParser_cffi = cffi.FFI()
 jsonParser_cffi.cdef("""
     typedef struct
     {
-     char ip[20];
+        char ip[20];
         long port;
     }Sender;
 
     typedef struct
     {
-         char cardID[25];
+        char cardID[25];
     }OpenDoor;
 
     typedef struct
     {
-        char date[20];
-        char time[20];
+        int year ;
+        int mon ;
+        int day ;
+        int sec ;   
+        int min ;   
+        int hour ;
     }Date_Time;
     
     typedef struct
