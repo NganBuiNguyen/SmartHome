@@ -73,7 +73,7 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
     strcpy(info.sender.ip, ipStr.c_str());
 
     info.dateTime.day = std::stoi(dayStr);
-    info.dateTime.month = std::stoi(monthStr);
+    info.dateTime.mon = std::stoi(monthStr);
     info.dateTime.year = std::stoi(yearStr);
     info.dateTime.hour = std::stoi(hourStr);
     info.dateTime.min = std::stoi(minStr);
