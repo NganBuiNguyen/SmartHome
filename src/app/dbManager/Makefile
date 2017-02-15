@@ -14,13 +14,13 @@ endif
 
 #------------------------------------------------------------------------------
 #source
-SRCS =DbCard.cpp DbRoom.cpp DbStatus.cpp 
+SRCS =DbCard.cpp 
 OBJS=$(SRCS:.cpp=.o)
 
 
 #------------------------------------------------------------------------------
 #include source code
-INCS_DIRS +=/data/SmartHome/src/app/dataConverter/ 
+INCS_DIRS +=src/app/dataConverter/ 
 
 #------------------------------------------------------------------------------
 #include makefile

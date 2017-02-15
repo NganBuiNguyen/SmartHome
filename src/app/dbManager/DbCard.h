@@ -20,7 +20,7 @@
 #include <cppconn/warning.h>
 
 
-#include "/data/SmartHome/src/app/dataConverter/Card.h"
+#include "Card.h"
 
 
 
