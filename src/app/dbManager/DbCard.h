@@ -32,36 +32,36 @@
 #define NUMOFFSET 100
 #define COLNAME 200
 
-// class DbCard
-// {
-// public:
-//     DbCard();
-//     static std::string database;// lam cho chung mot cai
-//     static DbCard* instance;// lam cho chung mot cai
-//     static DbCard* getInstance();// lam cho chung mot cai
-//     sql::Connection* getConn(std::string userName,std::string password,std::string url);
-//     void closeConn();// lam cho chung mot cai
+class DbCard
+{
+public:
+    DbCard();
+    static std::string database;// lam cho chung mot cai
+    static DbCard* instance;// lam cho chung mot cai
+    static DbCard* getInstance();// lam cho chung mot cai
+    sql::Connection* getConn(std::string userName,std::string password,std::string url);
+    void closeConn();// lam cho chung mot cai
      void insert_to_db(sql::Connection* conn,Card card);
      void select_to_db(sql::Connection* conn);
      void update_to_db(sql::Connection* conn,Card card);
      void delete_to_db(sql::Connection* conn,Card card);
    
 
-// private:
+private:
    
     
-//     sql::PreparedStatement* prep_stmt;
-//     sql::Connection* conn;
-//     sql::ResultSet* res;
-//     sql::Statement* stmt;
-//     sql::Driver* driver;
-//     sql::Savepoint* savept;
+    sql::PreparedStatement* prep_stmt;
+    sql::Connection* conn;
+    sql::ResultSet* res;
+    sql::Statement* stmt;
+    sql::Driver* driver;
+    sql::Savepoint* savept;
 
-//     std::string url;
-//     std::string user;
-//     std::string password;
+    std::string url;
+    std::string user;
+    std::string password;
 
-// };
+};
 
 
 #endif
