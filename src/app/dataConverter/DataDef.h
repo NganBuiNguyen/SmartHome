@@ -85,7 +85,7 @@ typedef struct
 {
     int idDoor;
     char nameDoor[NAME_DOOR_ROOM];
-    //list <int> listIdCard; // door need to save idcard 
+    std::list <int> listIdCard; // door need to save idcard 
 }Door;
 
 typedef struct
