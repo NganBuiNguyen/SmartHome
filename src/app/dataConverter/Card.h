@@ -8,7 +8,7 @@
 
 
   
-/*class Card 
+class Card 
 {
 public:
     Card(); 
@@ -22,7 +22,7 @@ private:
     std::string cardID;
     std::string kindCard;
 
-};*/
+};
 
 
 #endif
