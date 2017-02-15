@@ -19,7 +19,7 @@
     {
         this->driver = get_driver_instance();
         this->conn = driver->connect(url, userName, password);
-        this->conn->setSchema(database);// phan quyen
+        this->conn->setSchema(database);
         this->conn->setAutoCommit(0);
         return this->conn;
     }
@@ -53,7 +53,7 @@
     }
 
 
-    void DbCard::insert_to_db(sql::Connection* conn,Card card)
+    void DbCard::insert_to_db(sql::Connection* conn,CardInfo &info)
     {
         DbCard* dbCard = DbCard::getInstance();
         conn = dbCard->getConn(this->user, this->password, this->url);
@@ -67,8 +67,8 @@
             return;
         }
         try{
-        (this->prep_stmt)->setString(1, card.getCardID());
-        (this->prep_stmt)->setString(2, card.getKindCard());
+        (this->prep_stmt)->setString(1, info.card.idCard);
+        (this->prep_stmt)->setString(2, info.card.nameKindCard);
          int i=(this->prep_stmt)->executeUpdate();
        if(i>0)
        { 
@@ -105,7 +105,7 @@
         
         dbCard->closeConn();
     }
-    void DbCard::update_to_db(sql::Connection* conn, Card card)
+    void DbCard::update_to_db(sql::Connection* conn, CardInfo &info)
     {
         
         DbCard* dbCard = DbCard::getInstance();
@@ -114,21 +114,21 @@
 
         this->prep_stmt = conn->prepareStatement("UPDATE Card SET kindCard = ? WHERE cardID = ?");
 
-        (this->prep_stmt)->setString(1, card.getKindCard());
-        (this->prep_stmt)->setString(2, card.getCardID());
+        (this->prep_stmt)->setString(1, info.card.idCard);
+        (this->prep_stmt)->setString(2, info.card.nameKindCard);
         
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();
         dbCard->closeConn();
     }
-    void DbCard::delete_to_db(sql::Connection* conn,Card card)
+    void DbCard::delete_to_db(sql::Connection* conn, CardInfo &info)
     {
         DbCard* dbCard = DbCard::getInstance();
 
         conn= dbCard->getConn(this->user,this->password,this->url);
         this->prep_stmt = conn->prepareStatement("DELETE FROM Card WHERE cardID = ?");
 
-        (this->prep_stmt)->setString(1, card.getCardID());
+        (this->prep_stmt)->setString(1,info.card.idCard);
 
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();

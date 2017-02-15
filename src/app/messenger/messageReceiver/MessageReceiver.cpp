@@ -67,7 +67,6 @@ void MessageReceiver::run()
                 strcat(pBuffer, sender.toString().c_str());
                 strcat(pBuffer, SENSOR_MESSAGE_SPLITTER);
                 strcat(pBuffer, pTime);
-
             
 
                 if (isSensorMessage(pBuffer))

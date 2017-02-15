@@ -1,10 +1,3 @@
-#-----------------------------------------------------------------------------
-#Makefile - src/app/dataConverter
-# Copyright (c) Tien Anh Nguyen
-# Modification history
-# --------------------
-#    Created: 2016-Dec-03 
-#-----------------------------------------------------------------------------
 
 ifneq ($(APP), unittest)
 	override APP = dbManager
@@ -14,13 +7,13 @@ endif
 
 #------------------------------------------------------------------------------
 #source
-SRCS =DbCard.cpp DbRoom.cpp DbStatus.cpp 
+SRCS =DbCard.cpp 
 OBJS=$(SRCS:.cpp=.o)
 
 
 #------------------------------------------------------------------------------
 #include source code
-INCS_DIRS +=/data/SmartHome/src/app/dataConverter/ 
+INCS_DIRS +=src/app/dataConverter/ 
 
 #------------------------------------------------------------------------------
 #include makefile

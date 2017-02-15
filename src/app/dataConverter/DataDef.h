@@ -30,7 +30,7 @@
 #define ATTR_JSON_SEC "Sec"
 #define ATTR_JSON_DATETIME "DateTime"
 
-
+#include <list>
 
 typedef enum 
 {
@@ -60,12 +60,7 @@ typedef struct
       char cardID[25];
   }OpenDoor;
 
-typedef struct
-  {
-     OpenDoor data;
-     Sender sender;
-     Date_Time dateTime;
-  }CardInfo;
+
 /*!
  * @Struct data
  */
@@ -84,37 +79,39 @@ typedef struct
 {
     char idCard[NAME_CARD_PERSON_LENGTH];
     char nameKindCard[NAME_CARD_PERSON_LENGTH];
-    int idStatus;
 }Card;
-
-typedef struct
-{
-    int idStatus;
-    bool nameStatus;
-    time_t timeIn;
-    time_t timeOut;
-}Status;
 
 typedef struct
 {
     int idDoor;
     char nameDoor[NAME_DOOR_ROOM];
+    //list <int> listIdCard; // door need to save idcard 
 }Door;
 
 typedef struct
 {
     int idRoom;
     char nameRoom[NAME_DOOR_ROOM];
-     //int countRoom;
+    int idDoor;
 }Room;
 
-  typedef struct
-{
+//   typedef struct
+// {
+//     Card card;
+//     Person person;
+//     Door door;
+//     Room room;
+// }Info;
+
+typedef struct
+  {
+    OpenDoor data;
+    Sender sender;
+    Date_Time dateTime;
     Card card;
     Person person;
     Door door;
     Room room;
-    Status status;
-}Info;
+  }CardInfo;
 
 #endif
