@@ -32,6 +32,7 @@
 class DbCard
 {
 public:
+    DbCard();
     static std::string database;
     static DbCard* instance;
     static DbCard* getInstance();
@@ -44,7 +45,7 @@ public:
    
 
 private:
-	DbCard();
+	
 
     sql::PreparedStatement* prep_stmt;
     sql::Connection* conn;

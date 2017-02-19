@@ -41,12 +41,6 @@ typedef enum
 
 typedef struct
   {
-     char ip[20];
-     long port;
-  }Sender;
-
-typedef struct
-  {
     int year ;
     int mon ;
     int day ;
@@ -56,22 +50,11 @@ typedef struct
   }Date_Time;
 
 typedef struct
-  {
-      char cardID[25];
-  }OpenDoor;
-
-
-/*!
- * @Struct data
- */
-
-typedef struct
 {
     int idPerson;
     char namePerson[NAME_CARD_PERSON_LENGTH];
     int age;
     bool grantPerson;
-    char idCard[NAME_CARD_PERSON_LENGTH];
     int idRoom;
 }Person;
 
@@ -79,13 +62,15 @@ typedef struct
 {
     char idCard[NAME_CARD_PERSON_LENGTH];
     char nameKindCard[NAME_CARD_PERSON_LENGTH];
+    int idPerson;
 }Card;
 
 typedef struct
 {
     int idDoor;
-    char nameDoor[NAME_DOOR_ROOM];
-    std::list <int> listIdCard; // door need to save idcard 
+    char nameDoor[NAME_DOOR_ROOM]; 
+    char ip[20];
+    long port;
 }Door;
 
 typedef struct
@@ -95,18 +80,8 @@ typedef struct
     int idDoor;
 }Room;
 
-//   typedef struct
-// {
-//     Card card;
-//     Person person;
-//     Door door;
-//     Room room;
-// }Info;
-
 typedef struct
   {
-    OpenDoor data;
-    Sender sender;
     Date_Time dateTime;
     Card card;
     Person person;

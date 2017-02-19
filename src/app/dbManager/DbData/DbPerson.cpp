@@ -1,6 +1,6 @@
     
     #include "DbPerson.h"
-    #include "/data/SmartHome/src/app/dataConverter/Card.h"
+    
     
     DbPerson* DbPerson::instance = NULL;
     std::string DbPerson::database = DATABASE;
