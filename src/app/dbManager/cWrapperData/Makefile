@@ -1,33 +1,29 @@
 ifneq ($(APP), unittest)
-    override APP = jsonParserForC
+    override APP = DbCardForC
     TARGET = #none
-    ARCHIVES = jsonParserForC
+    ARCHIVES = DbCardForC
 endif
 
 #-----------------------------------------------------------------------------
 #source
-SRCS = JsonParserForC.cpp
+SRCS = DbCardForC.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #-----------------------------------------------------------------------------
-SUBOBJS = 	common.o \
-		JsonParser.o
+SUBOBJS = DbCard.o 
 
 #-----------------------------------------------------------------------------
-LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common/
-LIBRARY             += jsonCommon
-LIBDIRS_jsonParser  += $(LIDT_ROOT)/src/app/utils/jsonHelper/jsonParser/
-LIBRARY             += jsonParser
+LIBDIRS_dbData  += $(LIDT_ROOT)/src/app/dbManager/DbData/
+LIBRARY         += dbData
 
 #-----------------------------------------------------------------------------
 #include source code
-INCS_DIRS += src/app/utils/jsonHelper/common \
-			 src/app/utils/jsonHelper/jsonParser \
+INCS_DIRS += src/app/dbManager/DbData \
 			 src/app/dataConverter
 
 #-----------------------------------------------------------------------------
-CLEAN_DIRS += $(LIDT_ROOT)/src/app/utils/jsonHelper/common \
-				$(LIDT_ROOT)/src/app/utils/jsonHelper/jsonParser
+CLEAN_DIRS += $(LIDT_ROOT)/src/app/dbManager/DbData
+			
 
 #-----------------------------------------------------------------------------
 #include makefile

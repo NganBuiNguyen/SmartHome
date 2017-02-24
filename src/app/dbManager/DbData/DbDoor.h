@@ -20,7 +20,7 @@
 #include <cppconn/warning.h>
 
 
-#include "/data/SmartHome/src/app/dataConverter/Door.h"
+#include "DataDef.h"
 
 
 
@@ -39,10 +39,10 @@ public:
     static DbDoor* instance;
     sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
-    void insert_node_to_db(sql::Connection* conn,Door door);
+    void insert_node_to_db(sql::Connection* conn, CardInfo &info);
     void select_to_db(sql::Connection* conn);
-    void update_to_db(sql::Connection* conn,Door door);
-    void delete_to_db(sql::Connection* conn,Door door);
+    void update_to_db(sql::Connection* conn, CardInfo &info);
+    void delete_to_db(sql::Connection* conn, CardInfo &info);
     static DbDoor* getInstance();
    
 

@@ -21,6 +21,7 @@
 
 
 #include "DataDef.h"
+
 #define DBHOST "tcp://127.0.0.1:3306"
 #define USER "root"
 #define PASSWORD "hongha17"
@@ -38,7 +39,7 @@ public:
     static DbCard* getInstance();
     sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
-    void insert_to_db(sql::Connection* conn,CardInfo &info);
+    void insert_to_db( sql::Connection* conn,const CardInfo &info);
     void select_to_db(sql::Connection* conn);
     void update_to_db(sql::Connection* conn,CardInfo &info);
     void delete_to_db(sql::Connection* conn,CardInfo &info);

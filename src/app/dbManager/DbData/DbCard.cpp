@@ -53,7 +53,7 @@
     }
 
 
-    void DbCard::insert_to_db(sql::Connection* conn,CardInfo &info)
+    void DbCard::insert_to_db(sql::Connection* conn, const CardInfo &info)
     {
         DbCard* dbCard = DbCard::getInstance();
         conn = dbCard->getConn(this->user, this->password, this->url);
@@ -61,7 +61,7 @@
         {
             return;
         }
-        this->prep_stmt = conn->prepareStatement("INSERT INTO Card(cardID,kindCard) values(?,?)");
+        this->prep_stmt = conn->prepareStatement("INSERT INTO tbl_Card (IDCard,kindCard,IDPerson) values(?,?,?)");
         if( this->prep_stmt==NULL)
         {
             return;
@@ -69,6 +69,7 @@
         try{
         (this->prep_stmt)->setString(1, info.card.idCard);
         (this->prep_stmt)->setString(2, info.card.nameKindCard);
+        (this->prep_stmt)->setInt(3, info.card.idPerson);
          int i=(this->prep_stmt)->executeUpdate();
        if(i>0)
        { 
@@ -94,11 +95,11 @@
 
         conn=  dbCard->getConn(this->user,this->password,this->url);
 
-        this->res = stmt->executeQuery("SELECT * FROM Card");
+        this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
 
          while (res->next())
         {
-            std::cout << res->getString("cardID") << std::endl;
+            std::cout << res->getString("IDCard") << std::endl;
         }
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();
@@ -112,7 +113,7 @@
 
         conn=dbCard->getConn(this->user,this->password,this->url);
 
-        this->prep_stmt = conn->prepareStatement("UPDATE Card SET kindCard = ? WHERE cardID = ?");
+        this->prep_stmt = conn->prepareStatement("UPDATE tbl_Card SET kindCard = ? WHERE IDCard = ?");
 
         (this->prep_stmt)->setString(1, info.card.idCard);
         (this->prep_stmt)->setString(2, info.card.nameKindCard);
@@ -126,7 +127,7 @@
         DbCard* dbCard = DbCard::getInstance();
 
         conn= dbCard->getConn(this->user,this->password,this->url);
-        this->prep_stmt = conn->prepareStatement("DELETE FROM Card WHERE cardID = ?");
+        this->prep_stmt = conn->prepareStatement("DELETE FROM tbl_Card WHERE IDCard = ?");
 
         (this->prep_stmt)->setString(1,info.card.idCard);
 

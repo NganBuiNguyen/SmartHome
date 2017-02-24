@@ -7,6 +7,7 @@ LIDT_LIBS = os.path.sep.join((LIDT_ROOT, 'obj', 'libs'))
 
 #include JsonCommon and DataDef
 DATA_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'dataConverter'))
+
 JSONCOMMON_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'utils',
                                 'jsonHelper', 'common'))
 JSON_COMMON_FOR_C_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app',
@@ -31,6 +32,7 @@ jsonCommon_cffi.cdef("""
 
     #define MAX_SENSOR_MESSAGE_LENGTH 50
     #define IP_PORT_TOKEN_SIZE 2
+    #define NAME_CARD_PERSON_LENGTH 20
     #define CARD_MESSAGE ...
     #define ATTR_JSON_DATA ...
     #define ATTR_JSON_MESSAGE_TYPE ...
@@ -53,6 +55,7 @@ jsonCommon_cffi.cdef("""
 """)
 
 jsonCommon_c = jsonCommon_cffi.verify("""
+                #include <stdbool.h>
                 #include "DataDef.h"
                 #include "JsonCommonForC.h"
                 """,

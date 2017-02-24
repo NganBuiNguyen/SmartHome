@@ -20,13 +20,13 @@
 #include <cppconn/warning.h>
 
 
-#include "Person.h"
+#include "DataDef.h"
 
 
 
 #define DBHOST "tcp://127.0.0.1:3306"
 #define USER "root"
-#define PASSWORD "nganbui123"
+#define PASSWORD "hongha17"
 #define DATABASE "SmartHome"
 
 #define NUMOFFSET 100
@@ -40,10 +40,10 @@ public:
     static DbPerson* instance;
     sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
-    void insert_to_db(sql::Connection* conn,Person person);
+    void insert_to_db(sql::Connection* conn, CardInfo &info);
     void select_to_db(sql::Connection* conn);
-    void update_to_db(sql::Connection* conn,Person person);
-    void delete_to_db(sql::Connection* conn,Person person);
+    void update_to_db(sql::Connection* conn, CardInfo &info);
+    void delete_to_db(sql::Connection* conn, CardInfo &info);
     static DbPerson* getInstance();
    
 private:

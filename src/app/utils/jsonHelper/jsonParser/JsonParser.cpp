@@ -68,9 +68,9 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
     std::string secStr = pTree.get<std::string>(jsonSecPath);
 
     
-    strcpy(info.data.cardID, cardValueStr.c_str());
-    info.sender.port = std::stol(portStr);
-    strcpy(info.sender.ip, ipStr.c_str());
+    strcpy(info.card.idCard, cardValueStr.c_str());
+    info.door.port = std::stol(portStr);
+    strcpy(info.door.ip, ipStr.c_str());
 
     info.dateTime.day = std::stoi(dayStr);
     info.dateTime.mon = std::stoi(monthStr);

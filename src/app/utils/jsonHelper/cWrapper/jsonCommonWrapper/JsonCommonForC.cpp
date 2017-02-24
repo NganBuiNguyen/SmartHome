@@ -1,17 +1,4 @@
-/***************************************************************************/
-/*!
- * @file JsonCommonForC.c
- * @brief
- *
- * Copyright (c) Tien Nguyen Anh
- *
- * @detail
- *
- * Modified History
- * ---------------
- * 2017-Jan-06 Created tien.nguyenanh94@gmail.com
- */
-/***************************************************************************/
+
 #include "JsonCommon.h"
 #include "JsonCommonForC.h"
 

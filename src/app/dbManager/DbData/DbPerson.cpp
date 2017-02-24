@@ -1,4 +1,3 @@
-    
     #include "DbPerson.h"
     
     
@@ -51,7 +50,7 @@
         }
     }
 
-    void DbPerson::insert_to_db(sql::Connection* conn,Person person)
+    void DbPerson::insert_to_db(sql::Connection* conn, CardInfo &info)
     {
         DbPerson* dbPerson = DbPerson::getInstance();
 
@@ -60,18 +59,23 @@
         {
             return;
         }
-        this->prep_stmt = conn->prepareStatement("INSERT INTO Person(personID,personName,cardID,age,grantPerson) values(?,?,?,?)");
+        int idPerson;
+    char namePerson[NAME_CARD_PERSON_LENGTH];
+    int age;
+    bool grantPerson;
+    int idRoom;
+        this->prep_stmt = conn->prepareStatement("INSERT INTO tbl_Person(IDPerson, NamePerson, Age , GrantPerson, IDRoom) values(?,?,?,?)");
         if(this->prep_stmt==NULL)
         {
              return;
         }
         try{
         Card card;
-        (this->prep_stmt)->setString(1, person.getPersonID());
-        (this->prep_stmt)->setString(2, person.getPersonName());
-        (this->prep_stmt)->setString(3, card.getCardID());
-        (this->prep_stmt)->setInt(4, person.getAge());
-        (this->prep_stmt)->setBoolean(5, person.getGrantPerson());
+        (this->prep_stmt)->setString(1, info.person.idPerson);
+        (this->prep_stmt)->setString(2, info.person.namePerson);
+        (this->prep_stmt)->setInt(3, info.person.age);
+        (this->prep_stmt)->setBoolean(4, info.person.grantPerson);
+        (this->prep_stmt)->setInt(5, info.person.idRoom);
 
         int i=(this->prep_stmt)->executeUpdate();
         if(i>0)
@@ -95,39 +99,39 @@
 
         conn= dbPerson->getConn(this->user,this->password,this->url);
 
-        this->res = stmt->executeQuery("SELECT * FROM Person");
+        this->res = stmt->executeQuery("SELECT * FROM tbl_Person");
 
          while (res->next())
         {
-            std::cout << res->getString("personID") << std::endl;
+            std::cout << res->getString("IDPerson") << std::endl;
         }
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();
         
         dbPerson->closeConn();
     }
-    void DbPerson::update_to_db(sql::Connection* conn, Person person)
+    void DbPerson::update_to_db(sql::Connection* conn, CardInfo &info)
     {
         
         DbPerson* dbPerson = DbPerson::getInstance();
 
         conn=dbPerson->getConn(this->user,this->password,this->url);
 
-        this->prep_stmt = conn->prepareStatement("UPDATE Person SET personName = ? age = ? WHERE personID = ?");
+        this->prep_stmt = conn->prepareStatement("UPDATE tbl_Person SET NamePerson = ? Age = ? GrantPerson = ? WHERE IDPerson = ?");
 
-        (this->prep_stmt)->setString(1, person.getPersonName());
+        (this->prep_stmt)->setString(1, info.person.getPersonName());
         (this->prep_stmt)->setInt(2, person.getAge());
         (this->prep_stmt)->setString(3, person.getPersonID());
         int updateCount = prep_stmt->executeUpdate();
         conn->commit();
         dbPerson->closeConn();
     }
-    void DbPerson::delete_to_db(sql::Connection* conn,Person person)
+    void DbPerson::delete_to_db(sql::Connection* conn, CardInfo &info)
     {
         DbPerson* dbPerson = DbPerson::getInstance();
 
         conn=dbPerson->getConn(this->user,this->password,this->url);
-        this->prep_stmt = conn->prepareStatement("DELETE FROM Person WHERE personID = ?");
+        this->prep_stmt = conn->prepareStatement("DELETE FROM tbl_Person WHERE personID = ?");
 
         (this->prep_stmt)->setString(1, person.getPersonID());
 

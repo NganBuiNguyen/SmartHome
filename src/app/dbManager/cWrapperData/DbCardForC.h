@@ -1,5 +1,5 @@
-#ifndef __JSON_PARSER_FOR_C__
-#define __JSON_PARSER_FOR_C__
+#ifndef __DBCARD_FOR_C__
+#define __DBCARD_FOR_C__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,9 +16,11 @@ extern "C"{
  * param[in] message
  * return
  */
-bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
+
+void insert_to_db_Card_ForC(const CardInfo* info);
 
 #ifdef __cplusplus
 }
 #endif
+
 #endif

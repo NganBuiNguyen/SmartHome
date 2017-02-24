@@ -19,38 +19,64 @@ BOOST_LIBS = ["boost_serialization", 'boost_thread', 'stdc++']
 
 jsonParser_cffi = cffi.FFI()
 jsonParser_cffi.cdef("""
-    typedef struct
-    {
-        char ip[20];
-        long port;
-    }Sender;
+    #define NAME_CARD_PERSON_LENGTH 20
+    #define NAME_DOOR_ROOM 10
 
     typedef struct
-    {
-        char cardID[25];
-    }OpenDoor;
+  {
+    int year ;
+    int mon ;
+    int day ;
+    int sec ;   
+    int min ;   
+    int hour ;
+  }Date_Time;
 
-    typedef struct
-    {
-        int year ;
-        int mon ;
-        int day ;
-        int sec ;   
-        int min ;   
-        int hour ;
-    }Date_Time;
-    
-    typedef struct
-    {
-        OpenDoor data;
-        Sender sender;
-        Date_Time dateTime;
-    }CardInfo;
+typedef struct
+{
+    int idPerson;
+    char namePerson[NAME_CARD_PERSON_LENGTH];
+    int age;
+    bool grantPerson;
+    int idRoom;
+}Person;
+
+typedef struct
+{
+    char idCard[NAME_CARD_PERSON_LENGTH];
+    char nameKindCard[NAME_CARD_PERSON_LENGTH];
+    int idPerson;
+}Card;
+
+typedef struct
+{
+    int idDoor;
+    char nameDoor[NAME_DOOR_ROOM]; 
+    char ip[20];
+    long port;
+}Door;
+
+typedef struct
+{
+    int idRoom;
+    char nameRoom[NAME_DOOR_ROOM];
+    int idDoor;
+}Room;
+
+typedef struct
+  {
+    Date_Time dateTime;
+    Card card;
+    Person person;
+    Door door;
+    Room room;
+  }CardInfo;
 
     bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 
 jsonParser_c = jsonParser_cffi.verify("""
+                #include <stdbool.h>
                 #include "JsonParserForC.h"
                 """,
                 include_dirs = [JSON_PARSER_FOR_C_INCLUDES,

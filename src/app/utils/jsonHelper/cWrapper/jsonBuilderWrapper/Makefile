@@ -1,11 +1,3 @@
-#-----------------------------------------------------------------------------
-#Makefile - src/app/utils/jsonHelper/cWrapper/jsonBuilderWrapper
-# Copyright (c) Tien Nguyen Anh
-# Modification history
-# --------------------
-#    Created: 2016-Dec-21 tien.nguyenanh94@gmail.com
-#-----------------------------------------------------------------------------
-
 ifneq ($(APP), unittest)
     override APP = jsonBuilderForC
     TARGET = #none

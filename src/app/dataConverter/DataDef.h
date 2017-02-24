@@ -30,7 +30,7 @@
 #define ATTR_JSON_SEC "Sec"
 #define ATTR_JSON_DATETIME "DateTime"
 
-#include <list>
+#include <stdbool.h>
 
 typedef enum 
 {

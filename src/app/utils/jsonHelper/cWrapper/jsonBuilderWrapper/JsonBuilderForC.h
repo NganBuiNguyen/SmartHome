@@ -1,18 +1,3 @@
-/***************************************************************************/
-/*!
- * @file JsonBuilderForC.h
- * @brief
- *
- * Copyright (c) Tien Nguyen Anh
- *
- * @detail
- *
- * Modified History
- * ---------------
- * 2017-Jan-07 Created tien.nguyenanh94@gmail.com
- */
-/***************************************************************************/
-
 #ifndef __JSON_BUILDER_FOR_C__
 #define __JSON_BUILDER_FOR_C__
 
