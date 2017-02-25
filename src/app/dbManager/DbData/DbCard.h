@@ -7,8 +7,6 @@
 #include <string>
 #include <stdexcept>
 
-
-
 #include <mysql_driver.h>
 #include <cppconn/connection.h>
 #include <cppconn/statement.h>
@@ -27,6 +25,7 @@
 #define PASSWORD "hongha17"
 #define DATABASE "SmartHome"
 
+#define NO_ROW_EFFECTED 0
 #define NUMOFFSET 100
 #define COLNAME 200
 
@@ -34,31 +33,17 @@ class DbCard
 {
 public:
     DbCard();
-    static std::string database;
-    static DbCard* instance;
-    static DbCard* getInstance();
-    sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
-    void insert_to_db( sql::Connection* conn,const CardInfo &info);
-    void select_to_db(sql::Connection* conn);
-    void update_to_db(sql::Connection* conn,CardInfo &info);
-    void delete_to_db(sql::Connection* conn,CardInfo &info);
+    bool insert_to_db(const CardInfo &info);
+    bool select_to_db();
+    // void update_to_db(sql::Connection* conn,CardInfo &info);
+    // void delete_to_db(sql::Connection* conn,CardInfo &info);
    
-
 private:
-	
-
     sql::PreparedStatement* prep_stmt;
-    sql::Connection* conn;
     sql::ResultSet* res;
     sql::Statement* stmt;
-    sql::Driver* driver;
     sql::Savepoint* savept;
-
-    std::string url;
-    std::string user;
-    std::string password;
-
 };
 
 

@@ -16,8 +16,8 @@ extern "C"{
  * param[in] message
  * return
  */
-
-void insert_to_db_Card_ForC(const CardInfo* info);
+bool insert_to_db_Card_ForC(const CardInfo* info);
+//bool select_to_db_Card_ForC();
 
 #ifdef __cplusplus
 }

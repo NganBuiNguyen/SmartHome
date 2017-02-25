@@ -80,6 +80,7 @@ class Processor(threading.Thread):
         dbCard_c.insert_to_db_Card_ForC(info);
         print("6")
 
+
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))
         
@@ -87,11 +88,11 @@ class Processor(threading.Thread):
             topic = self.sock.recv()
             message = self.sock.recv()
             
-            idCard , ip, port = self.parseOpenDoorJson(message)
+            idCard, ip, port = self.parseOpenDoorJson(message)
+            idCard = ""
+            self.dbCard(idCard, ip, port)
 
-            self.dbCard(idCard,ip,port)
-
-            print(cardID)
+            print(idCard)
             print(ip)
             print(port)
 

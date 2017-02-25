@@ -1,21 +1,27 @@
 #include "DbCardForC.h"
 #include "DbCard.h"
 
-/*!
- * @internal
- */
 #include <iostream>
 #include <sstream>
 #include <memory>
 #include <string>
 #include <stdexcept>
 
+#include <mysql_driver.h>
 #include <cppconn/connection.h>
 
+static DbCard DB_CARD_MANAGER;
 
-void insert_to_db_Card_ForC(const CardInfo* info)
+/*!
+ * @internal
+ */
+bool insert_to_db_Card_ForC(const CardInfo* info)
 {
-	DbCard dbCard;
-	sql::Connection* conn;
-	dbCard.insert_to_db(conn, *info);
+    return DB_CARD_MANAGER.insert_to_db(*info);
+
 }
+// bool select_to_db_Card_ForC()
+// {
+//     return DB_CARD_MANAGER.select_to_db();
+
+// }
