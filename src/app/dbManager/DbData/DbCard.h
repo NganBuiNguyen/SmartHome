@@ -36,8 +36,8 @@ public:
     void closeConn();
     bool insert_to_db(const CardInfo &info);
     bool select_to_db();
-    // void update_to_db(sql::Connection* conn,CardInfo &info);
-    // void delete_to_db(sql::Connection* conn,CardInfo &info);
+    bool update_to_db(const CardInfo &info);
+    bool delete_to_db(const CardInfo &info);
    
 private:
     sql::PreparedStatement* prep_stmt;

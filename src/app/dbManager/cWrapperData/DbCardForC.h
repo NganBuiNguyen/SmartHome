@@ -17,7 +17,9 @@ extern "C"{
  * return
  */
 bool insert_to_db_Card_ForC(const CardInfo* info);
-//bool select_to_db_Card_ForC();
+bool select_to_db_Card_ForC();
+bool update_to_db_Card_ForC(const CardInfo* info);
+bool delete_to_db_Card_ForC(const CardInfo* info);
 
 #ifdef __cplusplus
 }

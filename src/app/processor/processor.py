@@ -54,7 +54,7 @@ class Processor(threading.Thread):
         jsonParser_c.parseOpenDoorJsonForC(jsonMessage, info);
         print("Message: ", jsonMessage)
         return jsonParser_cffi.string(info[0].card.idCard), jsonParser_cffi.string(info[0].door.ip),\
-                info[0].door.port
+                info[0].door.port 
 
     def buildJsonMessage(self, message):
         pass
@@ -67,17 +67,21 @@ class Processor(threading.Thread):
 
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
 
-    def dbCard(self, IDCard , NameKindCard , IDPerson):
+    #def dbCard(self, IDCard , NameKindCard , IDPerson):
+    def dbCard(self, IDCard):
         print("1");
         info = dbCard_cffi.new("CardInfo* ");
         print("2");
         info.card.idCard = IDCard;
         print("3");
-        info.card.nameKindCard = NameKindCard;
-        print("4");
-        info.card.idPerson = IDPerson;
-        print("5");
-        dbCard_c.insert_to_db_Card_ForC(info);
+        # info.card.nameKindCard = NameKindCard;
+        # print("4");
+        # info.card.idPerson = IDPerson;
+        # print("5");
+        # dbCard_c.insert_to_db_Card_ForC(info);
+        # dbCard_c.select_to_db_Card_ForC();
+        # dbCard_c.update_to_db_Card_ForC(info);
+        dbCard_c.delete_to_db_Card_ForC(info);
         print("6")
 
 
@@ -89,8 +93,7 @@ class Processor(threading.Thread):
             message = self.sock.recv()
             
             idCard, ip, port = self.parseOpenDoorJson(message)
-            idCard = ""
-            self.dbCard(idCard, ip, port)
+            self.dbCard(idCard)
 
             print(idCard)
             print(ip)

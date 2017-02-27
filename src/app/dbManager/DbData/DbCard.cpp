@@ -40,7 +40,7 @@ bool DbCard::insert_to_db(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
-    printf("I am here 01\n");
+    
     this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_Card (IDCard,kindCard,IDPerson) values(?,?,?)");
     if (this->prep_stmt == NULL)
     {
@@ -76,46 +76,64 @@ bool DbCard::select_to_db()
 {
     stmt = MYSQL_DB_CONNECTION->createStatement();
     this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
-
+   
      while (res->next())
     {
         std::cout << res->getString("IDCard") << std::endl;
     }
-    int updateCount = prep_stmt->executeUpdate();
+    
     MYSQL_DB_CONNECTION->commit();
     
     this->closeConn();
     return true;
 }
-/*void DbCard::update_to_db(sql::Connection* conn, CardInfo &info)
+
+bool DbCard::update_to_db(const CardInfo &info)
 {
-    
-    DbCard* dbCard = DbCard::getInstance();
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+    //this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Card SET kindCard = ? WHERE IDCard = ?");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Card SET IDPerson = ? WHERE IDCard = ?");
+    if (this->prep_stmt == NULL)
+    {
+        return false;
+    }
+    int result = NO_ROW_EFFECTED;
+    try
+    {
+        (this->prep_stmt)->setString(2, info.card.idCard);
+        //(this->prep_stmt)->setString(2, info.card.nameKindCard);
+        (this->prep_stmt)->setInt(1, info.card.idPerson);
+         result = (this->prep_stmt)->executeUpdate();
 
-    conn=dbCard->getConn(this->user,this->password,this->url);
-
-    this->prep_stmt = conn->prepareStatement("UPDATE tbl_Card SET kindCard = ? WHERE IDCard = ?");
-
-    (this->prep_stmt)->setString(1, info.card.idCard);
-    (this->prep_stmt)->setString(2, info.card.nameKindCard);
-    
-    int updateCount = prep_stmt->executeUpdate();
-    conn->commit();
-    dbCard->closeConn();
+        if(result < NO_ROW_EFFECTED)
+        {
+            return false;
+        }
+    }
+    catch(sql::SQLException& e)
+    {
+        MYSQL_DB_CONNECTION->rollback();
+        return false;
+    }
+    //(this->prep_stmt)->executeUpdate();
+    MYSQL_DB_CONNECTION->commit();
+    this->closeConn();
+    return true;
 }
 
-void DbCard::delete_to_db(sql::Connection* conn, CardInfo &info)
+bool DbCard::delete_to_db(const CardInfo &info)
 {
-    DbCard* dbCard = DbCard::getInstance();
-
-    conn= dbCard->getConn(this->user,this->password,this->url);
-    this->prep_stmt = conn->prepareStatement("DELETE FROM tbl_Card WHERE IDCard = ?");
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("DELETE FROM tbl_Card WHERE IDCard = ?");
 
     (this->prep_stmt)->setString(1,info.card.idCard);
 
     int updateCount = prep_stmt->executeUpdate();
-    conn->commit();
 
-    dbCard->closeConn();
+    MYSQL_DB_CONNECTION->commit();
+
+    this->closeConn();
+    return true;
 }
-*/
