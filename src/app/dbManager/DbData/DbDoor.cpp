@@ -1,136 +1,130 @@
  #include "DbDoor.h"
 
+static sql::Driver* MYSQL_DRIVER_INSTANCE = get_driver_instance();
+static sql::Connection* MYSQL_DB_CONNECTION =
+                    MYSQL_DRIVER_INSTANCE->connect(DBHOST, USER, PASSWORD);
     
-    DbDoor* DbDoor::instance = NULL;
-    std::string DbDoor::database = DATABASE;
-   
+DbDoor::DbDoor()
+{
+    this->prep_stmt = NULL;
+    this->res = NULL;
+    this->stmt = NULL;
+    this->savept = NULL;
+}
 
-    DbDoor* DbDoor::getInstance()
+void DbDoor::closeConn()
+{
+    if(this->res!=NULL)
     {
-      if(instance == NULL)
-      {
-         instance= new DbDoor();
-      }
-      return instance;
+        delete this->res;
     }
-    sql::Connection* DbDoor::getConn(std::string userName,std::string password,std::string url)
+    if(this->stmt !=NULL)
     {
-        this->driver=get_driver_instance();
-        this->conn=driver->connect(url,userName,password);
-        this->conn->setSchema(database);
-        this->conn->setAutoCommit(0);
-        return this->conn;
+        delete this->stmt;
     }
-    DbDoor::DbDoor()
+    if(this->prep_stmt !=NULL)
     {
-       this->url=DBHOST;
-       this->user=USER;
-       this->password=PASSWORD;
+        delete this->prep_stmt;
     }
+}
 
-    void DbDoor::closeConn()
+bool DbDoor::insert_to_db_Door(const CardInfo &info)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+    
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_Door(IDDoor, NameDoor, Ip , Port) values(?,?,?,?)");
+    if(this->prep_stmt==NULL)
     {
-        if(this->res!=NULL)
-        {
-            delete this->res;
-        }
-        if(this->stmt !=NULL)
-        {
-            delete this->stmt;
-        }
-        if(this->prep_stmt !=NULL)
-        {
-            delete this->prep_stmt;
-        }
-        if(this->conn !=NULL)
-        {
-            this->conn->close();
-            delete this->conn;
-        }
+         return false;
     }
 
-    void DbDoor::insert_node_to_db(sql::Connection* conn, CardInfo &info)
-    {
-        DbDoor* dbDoor= DbDoor::getInstance();
-
-        conn = dbDoor->getConn(this->user,this->password,this->url);
-        if(conn==NULL)
-        {
-             return;
-        }
-        
-        this->prep_stmt = conn->prepareStatement("INSERT INTO tbl_Door(IDDoor, NameDoor, Ip , Port) values(?,?,?,?)");
-        if(this->prep_stmt==NULL)
-        {
-             return;
-        }try{
+    int result = NO_ROW_EFFECTED;
+    try{
         (this->prep_stmt)->setString(1, info.door.idDoor);
         (this->prep_stmt)->setString(2, info.door.nameDoor);
         (this->prep_stmt)->setString(3, info.door.ip);
         (this->prep_stmt)->setString(4, info.door.port);
 
-        int i = (this->prep_stmt)->executeUpdate();
-        if(i>0)
+        result = (this->prep_stmt)->executeUpdate();
+
+        if(result < NO_ROW_EFFECTED)
         {
-          std::cout<<"Them thanh cong";
-        }else
-        {
-          std::cout<<"Them that bai";
+            return false;
         }
-        }catch(sql::SQLException& e)
-          {
-              conn->rollback(); 
-          }
-         conn->commit();
-         dbDoor->closeConn();
+    }catch(sql::SQLException& e)
+      {
+          MYSQL_DB_CONNECTION->rollback(); 
+      }
+    conn->commit();
+    this->closeConn();
+    return true;
+}
+
+bool DbDoor::select_to_db_Door(sql::Connection* conn)
+{
+    stmt = MYSQL_DB_CONNECTION->createStatement();
+    this->res = stmt->executeQuery("SELECT * FROM tbl_Door");
+
+     while (res->next())
+    {
+        std::cout << res->getString("IDDoor") << std::endl;
     }
 
-   void DbDoor::select_to_db(sql::Connection* conn)
+    MYSQL_DB_CONNECTION->commit();
+    
+    this->closeConn();
+    return true;
+}
+
+bool DbDoor::update_to_db_Door(sql::Connection* conn, CardInfo &info)
+{
+    
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+
+    this->prep_stmt = conn->prepareStatement("UPDATE tbl_Door SET NameDoor = ? WHERE IDDoor = ?");
+
+    if (this->prep_stmt == NULL)
     {
-        DbDoor* dbDoor = DbDoor::getInstance();
+        return false;
+    }
+    int result = NO_ROW_EFFECTED;
 
-        stmt = conn->createStatement();
+    try
+    {
+    (this->prep_stmt)->setString(1, info.door.nameDoor);
+    (this->prep_stmt)->setString(2, info.door.idDoor);
+    result = (this->prep_stmt)->executeUpdate();
 
-        conn= dbDoor->getConn(this->user,this->password,this->url);
-
-        this->res = stmt->executeQuery("SELECT * FROM tbl_Door");
-
-         while (res->next())
+        if(result < NO_ROW_EFFECTED)
         {
-            std::cout << res->getString("IDDoor") << std::endl;
+            return false;
         }
-        int updateCount = prep_stmt->executeUpdate();
-        conn->commit();
-        
-        dbDoor->closeConn();
     }
-    void DbDoor::update_to_db(sql::Connection* conn, CardInfo &info)
+    catch(sql::SQLException& e)
     {
-        
-        DbDoor* dbDoor = DbDoor::getInstance();
-
-        conn=dbDoor->getConn(this->user,this->password,this->url);
-
-        this->prep_stmt = conn->prepareStatement("UPDATE tbl_Door SET NameDoor = ? WHERE IDDoor = ?");
-
-        (this->prep_stmt)->setString(1, info.door.nameDoor);
-        (this->prep_stmt)->setString(2, info.door.idDoor);
-        
-        int updateCount = prep_stmt->executeUpdate();
-        conn->commit();
-        dbDoor->closeConn();
+        MYSQL_DB_CONNECTION->rollback();
+        return false;
     }
-    void DbDoor::delete_to_db(sql::Connection* conn, CardInfo &info)
-    {
-        DbDoor* dbDoor = DbDoor::getInstance();
+   
+    MYSQL_DB_CONNECTION->commit();
+    this->closeConn();
+    return true;
+}
 
-        conn=dbDoor->getConn(this->user,this->password,this->url);
-        this->prep_stmt = conn->prepareStatement("DELETE FROM tbl_Door WHERE IDDoor = ?");
+bool DbDoor::delete_to_db_Door(sql::Connection* conn, CardInfo &info)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+    this->prep_stmt = conn->prepareStatement("DELETE FROM tbl_Door WHERE IDDoor = ?");
 
-        (this->prep_stmt)->setString(1, info.door.idDoor);
+    (this->prep_stmt)->setString(1, info.door.idDoor);
 
-        int updateCount = prep_stmt->executeUpdate();
-        conn->commit();
+    int updateCount = prep_stmt->executeUpdate();
 
-        dbDoor->closeConn();
-    }
+    MYSQL_DB_CONNECTION->commit();
+
+    this->closeConn();
+    return true;
+}

@@ -23,55 +23,62 @@ jsonParser_cffi.cdef("""
     #define NAME_DOOR_ROOM 10
 
     typedef struct
-  {
-    int year ;
-    int mon ;
-    int day ;
-    int sec ;   
-    int min ;   
-    int hour ;
-  }Date_Time;
+    {
+        int year ;
+        int mon ;
+        int day ;
+        int sec ;   
+        int min ;   
+        int hour ;
+    }Date_Time;
 
-typedef struct
-{
-    int idPerson;
-    char namePerson[NAME_CARD_PERSON_LENGTH];
-    int age;
-    bool grantPerson;
-    int idRoom;
-}Person;
+    typedef struct
+    {
+        int idPerson;
+        char namePerson[NAME_CARD_PERSON_LENGTH];
+        int age;
+        bool grantPerson;
+        int idRoom;
+    }Person;
 
-typedef struct
-{
-    char idCard[NAME_CARD_PERSON_LENGTH];
-    char nameKindCard[NAME_CARD_PERSON_LENGTH];
-    int idPerson;
-}Card;
+    typedef struct
+    {
+        char idCard[NAME_CARD_PERSON_LENGTH];
+        char nameKindCard[NAME_CARD_PERSON_LENGTH];
+        int idPerson;
+    }Card;
 
-typedef struct
-{
-    int idDoor;
-    char nameDoor[NAME_DOOR_ROOM]; 
-    char ip[20];
-    long port;
-}Door;
+    typedef struct
+    {
+        int idDoor;
+        char nameDoor[NAME_DOOR_ROOM]; 
+    }Door;
 
-typedef struct
-{
-    int idRoom;
-    char nameRoom[NAME_DOOR_ROOM];
-    int idDoor;
-}Room;
+    typedef struct
+    {
+        int idIP;
+        char ip[20];
+        long port;
+        int idDoor;
+    }IP;
 
-typedef struct
-  {
-    Date_Time dateTime;
-    Card card;
-    Person person;
-    Door door;
-    Room room;
-  }CardInfo;
+    typedef struct
+    {
+        int idRoom;
+        char nameRoom[NAME_DOOR_ROOM];
+        int idDoor;
+    }Room;
 
+    typedef struct
+    {
+        Date_Time dateTime;
+        Card card;
+        Person person;
+        Door door;
+        Room room;
+        IP ip_port;
+    }CardInfo;
+    
     bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 

@@ -53,8 +53,8 @@ class Processor(threading.Thread):
         
         jsonParser_c.parseOpenDoorJsonForC(jsonMessage, info);
         print("Message: ", jsonMessage)
-        return jsonParser_cffi.string(info[0].card.idCard), jsonParser_cffi.string(info[0].door.ip),\
-                info[0].door.port 
+        return jsonParser_cffi.string(info[0].card.idCard), jsonParser_cffi.string(info[0].ip_port.ip),\
+                info[0].ip_port.port 
 
     def buildJsonMessage(self, message):
         pass

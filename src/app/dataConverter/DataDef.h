@@ -69,9 +69,15 @@ typedef struct
 {
     int idDoor;
     char nameDoor[NAME_DOOR_ROOM]; 
+}Door;
+
+typedef struct
+{
+    int idIP;
     char ip[20];
     long port;
-}Door;
+    int idDoor;
+}IP;
 
 typedef struct
 {
@@ -87,6 +93,7 @@ typedef struct
     Person person;
     Door door;
     Room room;
+    IP ip_port;
   }CardInfo;
 
 #endif

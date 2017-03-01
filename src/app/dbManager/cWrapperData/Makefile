@@ -1,16 +1,16 @@
 ifneq ($(APP), unittest)
-    override APP = DbCardForC
+    override APP = DbDataForC
     TARGET = #none
-    ARCHIVES = DbCardForC
+    ARCHIVES = DbDataForC
 endif
 
 #-----------------------------------------------------------------------------
 #source
-SRCS = DbCardForC.cpp
+SRCS = DbCardForC.cpp DbTmpStatusForC.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #-----------------------------------------------------------------------------
-SUBOBJS = DbCard.o 
+SUBOBJS = DbCard.o DbTmpStatus.o
 
 #-----------------------------------------------------------------------------
 LIBDIRS_dbData  += $(LIDT_ROOT)/src/app/dbManager/DbData/

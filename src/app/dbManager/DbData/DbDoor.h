@@ -35,31 +35,18 @@
 class DbDoor
 {
 public:
-    static std::string database;
-    static DbDoor* instance;
-    sql::Connection* getConn(std::string userName,std::string password,std::string url);
+    DbDoor();
     void closeConn();
-    void insert_node_to_db(sql::Connection* conn, CardInfo &info);
-    void select_to_db(sql::Connection* conn);
-    void update_to_db(sql::Connection* conn, CardInfo &info);
-    void delete_to_db(sql::Connection* conn, CardInfo &info);
-    static DbDoor* getInstance();
-   
+    bool insert_to_db_Door(CardInfo &info);
+    bool select_to_db_Door();
+    bool update_to_db_Door(CardInfo &info);
+    bool delete_to_db_Door(CardInfo &info);
 
 private:
-    DbDoor();
-
-    sql::PreparedStatement* prep_stmt;
-    sql::Connection* conn;
     sql::ResultSet* res;
     sql::Statement* stmt;
     sql::Driver* driver;
     sql::Savepoint* savept;
-
-    std::string url;
-    std::string user;
-    std::string password;
-
 };
 
 #endif

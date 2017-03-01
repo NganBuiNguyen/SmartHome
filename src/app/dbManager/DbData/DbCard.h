@@ -34,10 +34,10 @@ class DbCard
 public:
     DbCard();
     void closeConn();
-    bool insert_to_db(const CardInfo &info);
-    bool select_to_db();
-    bool update_to_db(const CardInfo &info);
-    bool delete_to_db(const CardInfo &info);
+    bool insert_to_db_Card(const CardInfo &info);
+    bool select_to_db_Card();
+    bool update_to_db_Card(const CardInfo &info);
+    bool delete_to_db_Card(const CardInfo &info);
    
 private:
     sql::PreparedStatement* prep_stmt;

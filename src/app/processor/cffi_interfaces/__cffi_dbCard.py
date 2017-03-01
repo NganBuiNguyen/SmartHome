@@ -9,7 +9,7 @@ DATA_TYPE_DEF_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 'app', 'dataConvert
 
 DBCARD_FOR_C_INCLUDES = os.path.sep.join((LIDT_ROOT, 'src', 
                             'app', 'dbManager', 'cWrapperData'))
-DBCARD_FOR_C_LIBS = ["DbCardForC"]
+DBCARD_FOR_C_LIBS = ["DbDataForC"]
 
 #define common libraries
 POCO_ROOT = os.getenv('POCO_ROOT')
@@ -58,9 +58,15 @@ dbCard_cffi.cdef("""
     {
         int idDoor;
         char nameDoor[NAME_DOOR_ROOM]; 
+    }Door;
+
+    typedef struct
+    {
+        int idIP;
         char ip[20];
         long port;
-    }Door;
+        int idDoor;
+    }IP;
 
     typedef struct
     {
@@ -70,13 +76,14 @@ dbCard_cffi.cdef("""
     }Room;
 
     typedef struct
-      {
+    {
         Date_Time dateTime;
         Card card;
         Person person;
         Door door;
         Room room;
-      }CardInfo;
+        IP ip_port;
+    }CardInfo;
       
     bool insert_to_db_Card_ForC(CardInfo* info);
     bool select_to_db_Card_ForC(); 

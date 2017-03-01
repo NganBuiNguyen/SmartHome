@@ -36,7 +36,7 @@ void DbCard::closeConn()
     }
 }
 
-bool DbCard::insert_to_db(const CardInfo &info)
+bool DbCard::insert_to_db_Card(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
@@ -72,7 +72,7 @@ bool DbCard::insert_to_db(const CardInfo &info)
     return true;
 }
 
-bool DbCard::select_to_db()
+bool DbCard::select_to_db_Card()
 {
     stmt = MYSQL_DB_CONNECTION->createStatement();
     this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
@@ -88,7 +88,7 @@ bool DbCard::select_to_db()
     return true;
 }
 
-bool DbCard::update_to_db(const CardInfo &info)
+bool DbCard::update_to_db_Card(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
@@ -104,7 +104,7 @@ bool DbCard::update_to_db(const CardInfo &info)
         (this->prep_stmt)->setString(2, info.card.idCard);
         //(this->prep_stmt)->setString(2, info.card.nameKindCard);
         (this->prep_stmt)->setInt(1, info.card.idPerson);
-         result = (this->prep_stmt)->executeUpdate();
+        result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
         {
@@ -122,7 +122,7 @@ bool DbCard::update_to_db(const CardInfo &info)
     return true;
 }
 
-bool DbCard::delete_to_db(const CardInfo &info)
+bool DbCard::delete_to_db_Card(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);

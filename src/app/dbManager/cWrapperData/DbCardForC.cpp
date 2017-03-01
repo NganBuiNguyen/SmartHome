@@ -17,23 +17,23 @@ static DbCard DB_CARD_MANAGER;
  */
 bool insert_to_db_Card_ForC(const CardInfo* info)
 {
-    return DB_CARD_MANAGER.insert_to_db(*info);
+    return DB_CARD_MANAGER.insert_to_db_Card(*info);
 
 }
 
 bool select_to_db_Card_ForC()
 {
-    return DB_CARD_MANAGER.select_to_db();
+    return DB_CARD_MANAGER.select_to_db_Card();
 
 }
 
 bool update_to_db_Card_ForC(const CardInfo* info)
 {
-    return DB_CARD_MANAGER.update_to_db(*info);
+    return DB_CARD_MANAGER.update_to_db_Card(*info);
 
 }
 
 bool delete_to_db_Card_ForC(const CardInfo* info)
 {
-	return DB_CARD_MANAGER.delete_to_db(*info);
+	return DB_CARD_MANAGER.delete_to_db_Card(*info);
 }
