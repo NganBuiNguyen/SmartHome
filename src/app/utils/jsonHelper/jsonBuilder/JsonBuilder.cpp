@@ -75,6 +75,7 @@ STATIC bool buildTimeJson(const std::string& pTime,
                                     boost::property_tree::ptree& timeTree)
 {
     std::vector<std::string> token = splitWordRegex(pTime,
+
                                     std::string(DATETIME_SPLITTER));
     std::cout<<token[0];
     std::cout<<token[1];

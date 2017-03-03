@@ -70,6 +70,7 @@ class Processor(threading.Thread):
         host[0] = host
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
 
+
     #def dbCard(self, IDCard , NameKindCard , IDPerson):
     def dbCard(self):
         # print("1");
@@ -109,6 +110,10 @@ class Processor(threading.Thread):
         dbTmpStatus_c.select_to_db_TmpStatus_ForC(1);
         # dbCard_c.update_to_db_Card_ForC(info);
         # dbTmpStatus_c.insert_to_db_TmpStatus_ForC (info);
+
+    def TimeInOut(self):
+        icount =0
+
         
 
 

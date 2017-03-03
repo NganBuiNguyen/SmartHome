@@ -51,4 +51,13 @@ private:
 
 #endif
 
+<<<<<<< HEAD:src/app/dbManager/DbData/DbDoor.h
+=======
+  DbCard dbCard;
+  sql::Connection* conn;
+  dbCard.insert_to_db(conn,card_User);
+
+  
+  return 0;
+>>>>>>> e550bd49a0035aca1c2386cf7142295f3d1c321c:src/app/dbManager/main.cpp
 
