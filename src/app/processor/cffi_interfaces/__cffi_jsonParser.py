@@ -78,7 +78,7 @@ jsonParser_cffi.cdef("""
         Room room;
         IP ip_port;
     }CardInfo;
-    
+
     bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 

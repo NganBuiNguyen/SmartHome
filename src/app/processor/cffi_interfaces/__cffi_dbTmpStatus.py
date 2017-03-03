@@ -85,7 +85,8 @@ dbTmpStatus_cffi.cdef("""
         IP ip_port;
     }CardInfo;
       
-    bool insert_to_db_TmpStatus_ForC(CardInfo* info);
+    bool insert_to_db_TmpStatus_ForC (CardInfo* info);
+    bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
 """)
 
 dbTmpStatus_c = dbTmpStatus_cffi.verify("""

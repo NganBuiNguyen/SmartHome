@@ -84,9 +84,9 @@ dbCard_cffi.cdef("""
         Room room;
         IP ip_port;
     }CardInfo;
-      
+
     bool insert_to_db_Card_ForC(CardInfo* info);
-    bool select_to_db_Card_ForC(); 
+    char *select_to_db_Card_ForC(); 
     bool update_to_db_Card_ForC(CardInfo* info);
     bool delete_to_db_Card_ForC(CardInfo* info);
 """)

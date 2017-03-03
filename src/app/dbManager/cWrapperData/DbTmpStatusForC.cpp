@@ -15,17 +15,17 @@ static DbTmpStatus DB_TMPSTATUS_MANAGER;
 /*!
  * @internal
  */
-bool insert_to_db_TmpStatus_ForC(const CardInfo* info)
+bool insert_to_db_TmpStatus_ForC (const CardInfo* info)
 {
     return DB_TMPSTATUS_MANAGER.insert_to_db_TmpStatus(*info);
 
 }
 
-// bool select_to_db_TmpStatus_ForC()
-// {
-//     return DB_TMPSTATUS_MANAGER.select_to_db_TmpStatus();
+bool select_to_db_TmpStatus_ForC(int ID_TmpStatus)
+{
+    return DB_TMPSTATUS_MANAGER.select_to_db_TmpStatus(ID_TmpStatus);
 
-// }
+}
 
 // bool update_to_db_TmpStatus_ForC(const CardInfo* info)
 // {

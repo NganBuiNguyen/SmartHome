@@ -6,6 +6,10 @@
 #include <memory>
 #include <string>
 #include <stdexcept>
+#include <vector>
+#include <string>
+#include <string.h>
+
 
 #include <mysql_driver.h>
 #include <cppconn/connection.h>
@@ -35,7 +39,7 @@ public:
     DbCard();
     void closeConn();
     bool insert_to_db_Card(const CardInfo &info);
-    bool select_to_db_Card();
+    char* select_to_db_Card();
     bool update_to_db_Card(const CardInfo &info);
     bool delete_to_db_Card(const CardInfo &info);
    

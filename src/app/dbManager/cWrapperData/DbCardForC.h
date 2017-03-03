@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+
 #include "DataDef.h"
 
 #ifdef __cplusplus
@@ -17,7 +18,7 @@ extern "C"{
  * return
  */
 bool insert_to_db_Card_ForC(const CardInfo* info);
-bool select_to_db_Card_ForC();
+char *select_to_db_Card_ForC();
 bool update_to_db_Card_ForC(const CardInfo* info);
 bool delete_to_db_Card_ForC(const CardInfo* info);
 

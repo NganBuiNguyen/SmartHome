@@ -28,15 +28,15 @@
 #define NO_ROW_EFFECTED 0
 #define NUMOFFSET 100
 #define COLNAME 200
-#define INSERT_DB_TMP_STATUS "INSERT INTO tbl_TmpStatus(ID_Tmp_Status,IDCard,IP, Port, Day, Mon, Year, Hour, Min, Sec) values(?,?,?,?,?,?,?,?,?,?)"
-
+#define INSERT_DB_TMP_STATUS "INSERT INTO tbl_TmpStatus(IDCard, IP, Port, Day, Mon, Year, Hour, Min, Sec) values (?,?,?,?,?,?,?,?,?)"
+#define SELECT_ID_TMP_STATUS "SELECT Sec FROM tbl_TmpStatus WHERE ID_Tmp_Status = ?"
 class DbTmpStatus
 {
 public:
     DbTmpStatus();
     void closeConn();
     bool insert_to_db_TmpStatus(const CardInfo &info);
-    // bool select_to_db_TmpStatus();
+    bool select_to_db_TmpStatus(int ID_TmpStatus);
     // bool update_to_db_TmpStatus(const CardInfo &info);
     // bool delete_to_db_TmpStatus(const CardInfo &info);
    

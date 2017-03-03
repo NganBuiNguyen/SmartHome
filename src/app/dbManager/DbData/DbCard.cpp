@@ -1,4 +1,6 @@
- #include "DbCard.h"
+#include "DbCard.h"
+
+
 
 static sql::Driver* MYSQL_DRIVER_INSTANCE = get_driver_instance();
 static sql::Connection* MYSQL_DB_CONNECTION =
@@ -72,20 +74,33 @@ bool DbCard::insert_to_db_Card(const CardInfo &info)
     return true;
 }
 
-bool DbCard::select_to_db_Card()
+char* DbCard::select_to_db_Card()
 {
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+
+    std::vector<std::string> v;
+
     stmt = MYSQL_DB_CONNECTION->createStatement();
     this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
-   
-     while (res->next())
+    while (res->next())
     {
-        std::cout << res->getString("IDCard") << std::endl;
+        v.push_back(res->getString("IDCard"));
+        
     }
+    char *arr[10];
+    for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
+        {
+            //std::cout << *it <<std::endl;
+            
+                strcpy(arr, (*it).c_str());
+                std::cout<<"ArrCard : "<<arr<<std::endl;
+        }
     
     MYSQL_DB_CONNECTION->commit();
     
     this->closeConn();
-    return true;
+    return arr;
 }
 
 bool DbCard::update_to_db_Card(const CardInfo &info)

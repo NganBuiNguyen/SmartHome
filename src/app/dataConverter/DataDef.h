@@ -96,4 +96,11 @@ typedef struct
     IP ip_port;
   }CardInfo;
 
+// typedef struct Node 
+// {
+//     std::string Data; 
+//     Node *next; 
+// };
+// typedef Node *List;
+
 #endif

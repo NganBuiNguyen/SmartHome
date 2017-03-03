@@ -17,7 +17,7 @@ extern "C"{
  * return
  */
 bool insert_to_db_TmpStatus_ForC(const CardInfo* info);
-// bool select_to_db_TmpStatus_ForC();
+bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
 // bool update_to_db_TmpStatus_ForC(const CardInfo* info);
 // bool delete_to_db_TmpStatus_ForC(const CardInfo* info);
 

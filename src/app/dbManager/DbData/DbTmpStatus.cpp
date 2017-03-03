@@ -52,15 +52,16 @@ bool DbTmpStatus::insert_to_db_TmpStatus(const CardInfo &info)
 
     try
     {
-        (this->prep_stmt)->setString(2, info.card.idCard);
-        (this->prep_stmt)->setString(3, info.ip_port.ip);
-        (this->prep_stmt)->setInt(4, info.ip_port.port);
-        (this->prep_stmt)->setInt(5, info.dateTime.day);
-        (this->prep_stmt)->setInt(6, info.dateTime.mon);
-        (this->prep_stmt)->setInt(7, info.dateTime.year);
-        (this->prep_stmt)->setInt(8, info.dateTime.hour);
-        (this->prep_stmt)->setInt(9, info.dateTime.min);
-        (this->prep_stmt)->setInt(10, info.dateTime.sec);
+        // (this->prep_stmt)->setInt(1, 1);
+        (this->prep_stmt)->setString(1, info.card.idCard);
+        (this->prep_stmt)->setString(2, info.ip_port.ip);
+        (this->prep_stmt)->setInt(3, info.ip_port.port);
+        (this->prep_stmt)->setInt(4, info.dateTime.day);
+        (this->prep_stmt)->setInt(5, info.dateTime.mon);
+        (this->prep_stmt)->setInt(6, info.dateTime.year);
+        (this->prep_stmt)->setInt(7, info.dateTime.hour);
+        (this->prep_stmt)->setInt(8, info.dateTime.min);
+        (this->prep_stmt)->setInt(9, info.dateTime.sec);
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
@@ -79,21 +80,25 @@ bool DbTmpStatus::insert_to_db_TmpStatus(const CardInfo &info)
     return true;
 }
 
-// bool DbCard::select_to_db_Card()
-// {
-//     stmt = MYSQL_DB_CONNECTION->createStatement();
-//     this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
-   
-//      while (res->next())
-//     {
-//         std::cout << res->getString("IDCard") << std::endl;
-//     }
+bool DbTmpStatus::select_to_db_TmpStatus(int ID_TmpStatus)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
     
-//     MYSQL_DB_CONNECTION->commit();
+    stmt = MYSQL_DB_CONNECTION->createStatement();
+    this->res = stmt->executeQuery(SELECT_ID_TMP_STATUS);
+    // this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement(SELECT_ID_TMP_STATUS);
+    // (this->prep_stmt)->setInt(1,ID_TmpStatus);
+     while (res->next())
+    {
+        std::cout << res->getInt("Sec") << std::endl;
+    }
     
-//     this->closeConn();
-//     return true;
-// }
+    MYSQL_DB_CONNECTION->commit();
+    
+    this->closeConn();
+    return true;
+}
 
 // bool DbCard::update_to_db_Card(const CardInfo &info)
 // {
