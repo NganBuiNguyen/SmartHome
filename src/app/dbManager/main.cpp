@@ -42,6 +42,8 @@
   DbCard dbCard;
   sql::Connection* conn;
   dbCard.insert_to_db(conn,card_User);
+
+  
   return 0;
 
 }

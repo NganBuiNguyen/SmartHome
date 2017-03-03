@@ -64,6 +64,11 @@ class Processor(threading.Thread):
 
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
 
+    def TimeInOut(self):
+        icount =0
+        
+
+
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))
         
