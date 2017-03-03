@@ -1,10 +1,3 @@
-#-----------------------------------------------------------------------------
-#Makefile - src/app/dataConverter
-# Copyright (c) Tien Anh Nguyen
-# Modification history
-# --------------------
-#    Created: 2016-Dec-03 
-#-----------------------------------------------------------------------------
 
 ifneq ($(APP), unittest)
 	override APP = dbManager

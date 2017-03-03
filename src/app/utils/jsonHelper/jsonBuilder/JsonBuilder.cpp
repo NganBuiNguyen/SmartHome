@@ -75,12 +75,24 @@ STATIC bool buildTimeJson(const std::string& pTime,
                                     boost::property_tree::ptree& timeTree)
 {
     std::vector<std::string> token = splitWordRegex(pTime,
-                                    std::string(TIME_SPLITTER));
-    
-      
-    timeTree.put(ATTR_JSON_DATE, token[0]);
-    timeTree.put(ATTR_JSON_TIME, token[1]);
 
+                                    std::string(DATETIME_SPLITTER));
+    std::cout<<token[0];
+    std::cout<<token[1];
+
+    std::vector<std::string> date = splitWordRegex(token[0],
+                                    std::string(DATE_SPLITTER));
+
+    timeTree.put(ATTR_JSON_DAY, date[0]);
+    timeTree.put(ATTR_JSON_MONTH, date[1]);
+    timeTree.put(ATTR_JSON_YEAR, date[2]);
+
+    std::vector<std::string> time = splitWordRegex(token[1],
+                                    std::string(IP_MESSAGE_SPLITTER));
+    timeTree.put(ATTR_JSON_HOUR, time[0]);
+    timeTree.put(ATTR_JSON_MIN, time[1]);
+    timeTree.put(ATTR_JSON_SEC, time[2]);
+    
     return true;
 }
 
@@ -160,17 +172,17 @@ bool buildJson(const std::string& message, std::string& jsonString)
         return false;
     }
    
-    // if (!buildTimeJson(token[2].c_str(), timeTree))
-    // {
-    //     std::cout << "08: " << std::endl;
-    //     return false;
-    // }
+    if (!buildTimeJson(token[2].c_str(), timeTree))
+    {
+        std::cout << "08: " << std::endl;
+        return false;
+    }
     
     root.add_child(ATTR_JSON_DATA, dataTree);
     
     root.add_child(ATTR_JSON_SENDER, senderTree);
     
-    //root.add_child(ATTR_JSON_REALTIME, timeTree);
+    root.add_child(ATTR_JSON_DATETIME, timeTree);
     
     jsonString = writeJsonToString(root);
     

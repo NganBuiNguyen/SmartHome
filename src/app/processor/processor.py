@@ -1,14 +1,3 @@
-"""
-File: processor.py
-=========================
-
-Copyright (c) Tien Nguyen Anh
-
-Modified History
-----------------
-2016-Dec-19 Created tien.nguyenanh94@gmail.com
-"""
-
 import sys
 import threading
 import zmq
@@ -74,6 +63,11 @@ class Processor(threading.Thread):
         host[0] = host
 
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
+
+    def TimeInOut(self):
+        icount =0
+        
+
 
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))

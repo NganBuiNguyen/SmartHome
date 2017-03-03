@@ -31,7 +31,8 @@ LIBRARY             += jsonParser
 #include source code
 INCS_DIRS += src/app/utils/jsonHelper/common \
 			 src/app/utils/jsonHelper/jsonParser \
-			 src/app/dataManager
+			 src/app/dataManager \
+			 src/app/dataConverter
 
 #-----------------------------------------------------------------------------
 CLEAN_DIRS += $(LIDT_ROOT)/src/app/utils/jsonHelper/common \

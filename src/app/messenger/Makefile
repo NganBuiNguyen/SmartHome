@@ -1,12 +1,3 @@
-#-----------------------------------------------------------------------------
-# Makefile - src/app/messenger
-#
-# Copyright (c) Tien Nguyen Anh
-#
-# Modified History
-# ----------------
-# 2016-Dec-08 Created tien.nguyenanh94@gmail.com 
-#-----------------------------------------------------------------------------
 
 ifneq ($(APP), unittest)
     override APP = messenger
@@ -17,7 +8,7 @@ endif
 #-----------------------------------------------------------------------------
 SRCS = messenger.cpp
 OBJS = $(SRCS:.cpp=.o)
-
+SUBOBJS += Timer.o
 #-----------------------------------------------------------------------------
 USING_LANGUAGE = CPP
 
@@ -25,7 +16,9 @@ USING_LANGUAGE = CPP
 INCS_DIRS += src/app/messenger/messageReceiver \
 			 src/app/utils/jsonHelper/common \
 			 src/app/utils/jsonHelper/jsonBuilder \
-			 src/app/utils/jsonHelper/jsonParser
+			 src/app/utils/jsonHelper/jsonParser \
+			 src/app/dataConverter \
+			 src/app/timer
 
 #-----------------------------------------------------------------------------
 LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common/

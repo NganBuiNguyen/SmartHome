@@ -2,6 +2,8 @@
 #include <sstream>
 #include <memory>
 #include <string>
+#include <string.h>
+
 #include <stdexcept>
 
 
@@ -16,7 +18,7 @@
 #include <cppconn/warning.h>
 
 
-#include "Card.h"
+#include "DataDef.h"
 #include "DbCard.h"
 
 
@@ -30,13 +32,18 @@
 
  int main()
 {
-  Card card_User("Card 1");
+
+  CardInfo card_User;
+  strcpy(card_User.card.idCard,"C1");
+  strcpy(card_User.card.nameKindCard,"L1");
   //card_User.setCardID("Card 1");
   //card_User.setKindCard("Loai 2");
 
   DbCard dbCard;
   sql::Connection* conn;
-  dbCard.delete_to_db(conn,card_User);
+  dbCard.insert_to_db(conn,card_User);
+
+  
   return 0;
 
 }
