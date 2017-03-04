@@ -26,18 +26,19 @@ bool insert_to_db_Card_ForC(const CardInfo* info)
 
 char *select_to_db_Card_ForC()
 {
-     return DB_CARD_MANAGER.select_to_db_Card();
-    // std::vector<std::string> v = DB_CARD_MANAGER.select_to_db_Card();
-    // char *arr;
-    // for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
-    //     {
-    //         std::cout << *it <<std::endl;
+    // return DB_CARD_MANAGER.select_to_db_Card();
+    std::vector<std::string> v = DB_CARD_MANAGER.select_to_db_Card();
+    char *arr;
+    
+    for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
+        {
+            std::cout << *it <<std::endl;
             
-    //             strcpy(arr,*it);
-    //             std::cout<<"ArrCard"<<arr<<std::endl;
+                strcpy(arr,*it);
+                std::cout<<"ArrCard"<<arr<<std::endl;
             
-    //     }
-    // return arr;
+        }
+    return arr;
 }
 
 bool update_to_db_Card_ForC(const CardInfo* info)

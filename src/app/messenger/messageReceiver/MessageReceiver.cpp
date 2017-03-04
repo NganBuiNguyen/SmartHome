@@ -58,40 +58,48 @@ void MessageReceiver::run()
                 Poco::Net::SocketAddress sender;
                 int n = this->socket.receiveFrom(pBuffer, this->bufferSize, sender);
 
-                std::string jsonString;
-                char* pTime = getTime();
-                /*!
-                 * Appending IP of Sender to message
-                 */
-                strcat(pBuffer, SENSOR_MESSAGE_SPLITTER);
-                strcat(pBuffer, sender.toString().c_str());
-                strcat(pBuffer, SENSOR_MESSAGE_SPLITTER);
-                strcat(pBuffer, pTime);
+                MESSAGE_TYPE messageType = getJSONMessageType(pBuffer.c_str());
 
-                printf("%s\n",pBuffer);
-            
-
-                if (isSensorMessage(pBuffer))
+                if(strcmp(messageType,MESSAGE_TYPE_CARD)<0)
                 {
-                    
-                    if (!buildJson(pBuffer, jsonString))
+                    std::string jsonString;
+                    char* pTime = getTime();
+                    /*!
+                     * Appending IP of Sender to message
+                     */
+                    strcat(pBuffer, SENSOR_MESSAGE_SPLITTER);
+                    strcat(pBuffer, sender.toString().c_str());
+                    strcat(pBuffer, SENSOR_MESSAGE_SPLITTER);
+                    strcat(pBuffer, pTime);
+
+                    printf("%s\n",pBuffer);
+                
+
+                    if (isSensorMessage(pBuffer))
                     {
                         
-                        continue;
+                        if (!buildJson(pBuffer, jsonString))
+                        {
+                            
+                            continue;
+                        }
+
+                        MESSAGE_TYPE messageType = getJSONMessageType(pBuffer);
+                        std::string topic = convertMessageTypeToStr(messageType);
+                        s_sendmore (publisher, (char*)topic.c_str());
+                        s_send (publisher, (char*)jsonString.c_str());
+                        sleep (1);
                     }
 
-                    MESSAGE_TYPE messageType = getJSONMessageType(pBuffer);
-                    std::string topic = convertMessageTypeToStr(messageType);
-                    s_sendmore (publisher, (char*)topic.c_str());
-                    s_send (publisher, (char*)jsonString.c_str());
-                    sleep (1);
-                }
-
-                if (pBuffer != NULL)
-                {
-                    delete pBuffer;
-                    pBuffer = NULL;
-                }
+                    if (pBuffer != NULL)
+                    {
+                        pBuffer = NULL;
+                        delete pBuffer;
+                    }
+                }else
+                    {
+                        std::cout << "Type of message is failed " << std::endl;
+                    }
             }
             catch(Poco::Exception& ex)
             {

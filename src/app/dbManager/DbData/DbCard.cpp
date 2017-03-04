@@ -74,7 +74,7 @@ bool DbCard::insert_to_db_Card(const CardInfo &info)
     return true;
 }
 
-char* DbCard::select_to_db_Card()
+std::vector<std::string> DbCard::select_to_db_Card()
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
@@ -88,19 +88,19 @@ char* DbCard::select_to_db_Card()
         v.push_back(res->getString("IDCard"));
         
     }
-    char *arr[10];
-    for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
-        {
-            //std::cout << *it <<std::endl;
+    // char *arr;
+    // for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
+    //     {
+    //         //std::cout << *it <<std::endl;
             
-                strcpy(arr, (*it).c_str());
-                std::cout<<"ArrCard : "<<arr<<std::endl;
-        }
+    //             strcpy(arr, (*it).c_str());
+    //             std::cout<<"ArrCard : "<<*arr[1]<<std::endl;
+    //     }
     
     MYSQL_DB_CONNECTION->commit();
     
     this->closeConn();
-    return arr;
+    return v;
 }
 
 bool DbCard::update_to_db_Card(const CardInfo &info)
