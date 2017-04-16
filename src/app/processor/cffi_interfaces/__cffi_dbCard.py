@@ -50,7 +50,7 @@ dbCard_cffi.cdef("""
     typedef struct
     {
         char idCard[NAME_CARD_PERSON_LENGTH];
-        char nameKindCard[NAME_CARD_PERSON_LENGTH];
+        char typeCard[NAME_CARD_PERSON_LENGTH];
         int idPerson;
     }Card;
 
@@ -85,10 +85,11 @@ dbCard_cffi.cdef("""
         IP ip_port;
     }CardInfo;
 
-    bool insert_to_db_Card_ForC(CardInfo* info);
-    char *select_to_db_Card_ForC(); 
+    bool insert_to_db_Card_ForC(CardInfo* info); 
     bool update_to_db_Card_ForC(CardInfo* info);
     bool delete_to_db_Card_ForC(CardInfo* info);
+    bool insert_to_db_TmpStatus_ForC (CardInfo* info);
+    bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
 """)
 
 dbCard_c = dbCard_cffi.verify("""

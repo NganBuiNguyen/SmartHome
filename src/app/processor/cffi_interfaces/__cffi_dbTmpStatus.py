@@ -28,6 +28,7 @@ dbTmpStatus_cffi = cffi.FFI()
 dbTmpStatus_cffi.cdef("""
     #define NAME_CARD_PERSON_LENGTH 20
     #define NAME_DOOR_ROOM 10
+
     typedef struct
     {
         int year ;
@@ -50,7 +51,7 @@ dbTmpStatus_cffi.cdef("""
     typedef struct
     {
         char idCard[NAME_CARD_PERSON_LENGTH];
-        char nameKindCard[NAME_CARD_PERSON_LENGTH];
+        char typeCard[NAME_CARD_PERSON_LENGTH];
         int idPerson;
     }Card;
 
@@ -85,13 +86,14 @@ dbTmpStatus_cffi.cdef("""
         IP ip_port;
     }CardInfo;
       
-    bool insert_to_db_TmpStatus_ForC (CardInfo* info);
-    bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
+    
+    
 """)
 
 dbTmpStatus_c = dbTmpStatus_cffi.verify("""
                 #include "DbTmpStatusForC.h"
                 #include "DataDef.h"
+                #include "DbCardForC.h"
                 """,
                 include_dirs = [DBTMPSTATUS_FOR_C_INCLUDES, POCO_INCLUDES, 
                                MYSQL_CONN_INCLUDES, DATA_TYPE_DEF_INCLUDES],

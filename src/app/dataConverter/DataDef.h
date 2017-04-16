@@ -30,6 +30,12 @@
 #define ATTR_JSON_SEC "Sec"
 #define ATTR_JSON_DATETIME "DateTime"
 
+
+#define ATTR_JSON_IDCard "IDCard"
+#define ATTR_JSON_TYPE_CARD "TypeCard"
+#define ATTR_JSON_IDPerson "IDPerson"
+#define ATTR_JSON_ARR_CARD "ARR_CARD"
+
 #include <stdbool.h>
 
 typedef enum 
@@ -40,14 +46,14 @@ typedef enum
 
 
 typedef struct
-  {
+{
     int year ;
     int mon ;
     int day ;
     int sec ;   
     int min ;   
     int hour ;
-  }Date_Time;
+}Date_Time;
 
 typedef struct
 {
@@ -61,7 +67,7 @@ typedef struct
 typedef struct
 {
     char idCard[NAME_CARD_PERSON_LENGTH];
-    char nameKindCard[NAME_CARD_PERSON_LENGTH];
+    char typeCard[NAME_CARD_PERSON_LENGTH];
     int idPerson;
 }Card;
 
@@ -96,11 +102,11 @@ typedef struct
     IP ip_port;
   }CardInfo;
 
-// typedef struct Node 
-// {
-//     std::string Data; 
-//     Node *next; 
-// };
-// typedef Node *List;
+typedef struct  
+{
+    void* result; 
+    int numberOfElement; 
+}DBAResult;
+
 
 #endif

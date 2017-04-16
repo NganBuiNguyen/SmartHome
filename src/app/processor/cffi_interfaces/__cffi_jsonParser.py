@@ -44,7 +44,7 @@ jsonParser_cffi.cdef("""
     typedef struct
     {
         char idCard[NAME_CARD_PERSON_LENGTH];
-        char nameKindCard[NAME_CARD_PERSON_LENGTH];
+        char typeCard[NAME_CARD_PERSON_LENGTH];
         int idPerson;
     }Card;
 
@@ -70,14 +70,14 @@ jsonParser_cffi.cdef("""
     }Room;
 
     typedef struct
-    {
+      {
         Date_Time dateTime;
         Card card;
         Person person;
         Door door;
         Room room;
         IP ip_port;
-    }CardInfo;
+      }CardInfo;
 
     bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)

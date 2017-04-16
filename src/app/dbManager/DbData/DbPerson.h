@@ -59,6 +59,7 @@ private:
     std::string url;
     std::string user;
     std::string password;
+    
 
 };
 

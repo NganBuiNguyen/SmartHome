@@ -6,36 +6,34 @@ import optionParser
 import handle_dbTmpStatus
 import handle_dbCardDoor
 
-from cffi_interfaces.__cffi_jsonCommon import jsonCommon_cffi
-from cffi_interfaces.__cffi_jsonCommon import jsonCommon_c
+from cffi_interfaces import dbCard_c
+from cffi_interfaces import dbCard_cffi
 
-from cffi_interfaces.__cffi_jsonParser import jsonParser_cffi
-from cffi_interfaces.__cffi_jsonParser import jsonParser_c
+from cffi_interfaces import jsonCommon_c
+from cffi_interfaces import jsonCommon_cffi
 
-from cffi_interfaces.__cffi_jsonBuilder import jsonBuilder_cffi
-from cffi_interfaces.__cffi_jsonBuilder import jsonBuilder_c
+from cffi_interfaces import jsonBuilder_c
+from cffi_interfaces import jsonBuilder_cffi
 
-from cffi_interfaces.__cffi_messageSender import messageSender_cffi
-from cffi_interfaces.__cffi_messageSender import messageSender_c
+from cffi_interfaces import jsonParser_c
+from cffi_interfaces import jsonParser_cffi
 
-from cffi_interfaces.__cffi_dbCard import dbCard_cffi
-from cffi_interfaces.__cffi_dbCard import dbCard_c
+from cffi_interfaces import messageSender_c
+from cffi_interfaces import messageSender_cffi
 
-from cffi_interfaces.__cffi_dbTmpStatus import dbTmpStatus_cffi
-from cffi_interfaces.__cffi_dbTmpStatus import dbTmpStatus_c
-
-class Processor(threading.Thread):
+class Processor(object):
     def __init__(self, host, port, topic=None):
         threading.Thread.__init__(self)
         self.host = host 
         self.port = port
         self.topic = topic
         self.context = zmq.Context()
-        self.sock = self.context.socket(zmq.SUB)
+        self.sock = self.context.socket(zmq.PAIR)
 
-        if topic != None:
-            for item in self.topic:
-                self.sock.setsockopt_string(zmq.SUBSCRIBE, item)
+        # if topic != None:
+        #     for item in self.topic:
+        #         self.sock.setsockopt_string(zmq.SUBSCRIBE, item)
+
 
     def connect(self):
         cmd = "tcp://" + self.host
@@ -50,20 +48,8 @@ class Processor(threading.Thread):
         else:    
             self.topic + topic
 
-        for item in topic:
-            self.sock.setsockopt_string(zmq.SUBSCRIBE, item)            
-
-    def parseOpenDoorJson(self, jsonMessage):
-        info = jsonParser_cffi.new("CardInfo* ");
-        
-        jsonParser_c.parseOpenDoorJsonForC(jsonMessage, info);
-        print("Message: ", jsonMessage)
-        return jsonParser_cffi.string(info[0].card.idCard), jsonParser_cffi.string(info[0].ip_port.ip),\
-                info[0].ip_port.port, info[0].dateTime.day,info[0].dateTime.mon,info[0].dateTime.year,\
-                info[0].dateTime.hour,info[0].dateTime.min,info[0].dateTime.sec
-
-    def buildJsonMessage(self, message):
-        pass
+        # for item in topic:
+        #     self.sock.setsockopt_string(zmq.SUBSCRIBE, item)    
 
     def sendMessageToArduino(self, message, host, port):
         messageStr = messageSender_cffi.new("char *")
@@ -72,26 +58,36 @@ class Processor(threading.Thread):
         host[0] = host
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
 
+    '''
+       Function insert data to table StatusCard
+    '''
+    def insertToStatusCard(self, cstatus):
+        info = dbTmpStatus_cffi.new("CardInfo* ");
+
+        info.card.idCard = cstatus.idCard
+        info.ip_port.ip = cstatus.ip
+        info.ip_port.port = cstatus.port
+        info.dateTime.monthSD = cstatus.monthSD
+        info.dateTime.daySD = cstatus.daySD
+        info.dateTime.yearSD = cstatus.yearSD
+        info.dateTime.hourSD = cstatus.hourSD
+        info.dateTime.minSD = cstatus.minuteSD
+        info.dateTime.secSD = cstatus.secondSD
+
+        dbTmpStatus_c.insert_to_db_TmpStatus_ForC(info);
+
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))
         while True:
-            topic = self.sock.recv()
-            message = self.sock.recv()
-            
-            idCard, ip, port , day, mon, year, hour, mins, sec = self.parseOpenDoorJson(message)
-            # self.dbCard(idCard)
-            # self.dbTmpStatus(idCard, ip, port , day, mon, year, hour, mins, sec)
-            # self.dbTmpStatus()
-            self.dbCard()
-            # print(idCard)
-            # print(ip)
-            # print(port)
-            # print(day)
-            # print(mon)
-            # print(year)
-            # print(hour)
-            # print(mins)
-            # print(sec)
+            topic = self.sock.recv(2, zmq.NOBLOCK)
+            message = self.sock.recv(2, zmq.NOBLOCK)
+            print("message", topic)
+            print("message", message)
+            # message_processor = message_handler.MessageHandler(topic, message)
+            # message_processor.run()
+            # time.sleep(1)
+
+        self.sock.close()
 
 if __name__ == '__main__':
 

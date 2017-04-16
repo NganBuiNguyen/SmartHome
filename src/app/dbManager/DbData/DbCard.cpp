@@ -54,7 +54,7 @@ bool DbCard::insert_to_db_Card(const CardInfo &info)
     try
     {
         (this->prep_stmt)->setString(1, info.card.idCard);
-        (this->prep_stmt)->setString(2, info.card.nameKindCard);
+        (this->prep_stmt)->setString(2, info.card.typeCard);
         (this->prep_stmt)->setInt(3, info.card.idPerson);
         result = (this->prep_stmt)->executeUpdate();
 
@@ -74,33 +74,52 @@ bool DbCard::insert_to_db_Card(const CardInfo &info)
     return true;
 }
 
-std::vector<std::string> DbCard::select_to_db_Card()
+bool DbCard::select_to_db_Card(std::vector<CardInfo>& vectorCardInfos)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
-
-    std::vector<std::string> v;
-
-    stmt = MYSQL_DB_CONNECTION->createStatement();
-    this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
-    while (res->next())
-    {
-        v.push_back(res->getString("IDCard"));
-        
+    try{
+        stmt = MYSQL_DB_CONNECTION->createStatement();
+        this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
+        while (res->next())
+        {
+            CardInfo* item = new CardInfo;
+            strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
+            strcpy(item->card.typeCard,(char*)res->getString("TypeCard").c_str());
+            item->card.idPerson = res->getInt("IDPerson");
+            vectorCardInfos.push_back(*item);
+        }
     }
-    // char *arr;
-    // for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
-    //     {
-    //         //std::cout << *it <<std::endl;
+        catch(sql::SQLException& e)
+        {
+            MYSQL_DB_CONNECTION->rollback();
+            return false;
+        }
+        
+        MYSQL_DB_CONNECTION->commit();
+
+    // std::vector<std::string> v;
+
+    // stmt = MYSQL_DB_CONNECTION->createStatement();
+    // this->res = stmt->executeQuery("SELECT * FROM tbl_Card");
+    // while (res->next())
+    // {
+    //     v.push_back(res->getString("IDCard"));
+        
+    // }
+    // // char *arr;
+    // // for(std::vector<std::string>::iterator it = v.begin(); it != v.end() ; ++it )
+    // //     {
+    // //         //std::cout << *it <<std::endl;
             
-    //             strcpy(arr, (*it).c_str());
-    //             std::cout<<"ArrCard : "<<*arr[1]<<std::endl;
-    //     }
+    // //             strcpy(arr, (*it).c_str());
+    // //             std::cout<<"ArrCard : "<<*arr[1]<<std::endl;
+    // //     }
     
-    MYSQL_DB_CONNECTION->commit();
+    // MYSQL_DB_CONNECTION->commit();
     
     this->closeConn();
-    return v;
+    return true;
 }
 
 bool DbCard::update_to_db_Card(const CardInfo &info)

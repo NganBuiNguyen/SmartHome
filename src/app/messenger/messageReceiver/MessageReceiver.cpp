@@ -44,7 +44,7 @@ void MessageReceiver::run()
     Poco::Timespan span(250000);
     
     void *context = zmq_ctx_new ();
-    void *publisher = zmq_socket (context, ZMQ_PUB);
+    void *publisher = zmq_socket (context, ZMQ_PAIR);
     zmq_bind(publisher, "tcp://*:5563");
 
     while(!this->stop)
@@ -57,10 +57,10 @@ void MessageReceiver::run()
                 memset(pBuffer, 0, this->bufferSize * sizeof(char));
                 Poco::Net::SocketAddress sender;
                 int n = this->socket.receiveFrom(pBuffer, this->bufferSize, sender);
+                printf("%s\n",pBuffer);
 
-                MESSAGE_TYPE messageType = getJSONMessageType(pBuffer.c_str());
-
-                if(strcmp(messageType,MESSAGE_TYPE_CARD)<0)
+                MESSAGE_TYPE messageType = getJSONMessageType(pBuffer);
+                if (messageType == MESSAGE_TYPE_CARD)
                 {
                     std::string jsonString;
                     char* pTime = getTime();

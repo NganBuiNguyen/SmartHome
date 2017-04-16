@@ -21,12 +21,6 @@
 #include <cppconn/exception.h>
 #include <cppconn/warning.h>
 
-
-#include "Card.h"
-
-
-
-
 #include "DataDef.h"
 
 #define DBHOST "tcp://127.0.0.1:3306"
@@ -44,7 +38,7 @@ public:
     DbCard();
     void closeConn();
     bool insert_to_db_Card(const CardInfo &info);
-    std::vector<std::string> select_to_db_Card();
+    bool select_to_db_Card(std::vector<CardInfo>& vectorCardInfos);
     bool update_to_db_Card(const CardInfo &info);
     bool delete_to_db_Card(const CardInfo &info);
    

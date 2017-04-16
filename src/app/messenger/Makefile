@@ -8,7 +8,7 @@ endif
 #-----------------------------------------------------------------------------
 SRCS = messenger.cpp
 OBJS = $(SRCS:.cpp=.o)
-SUBOBJS += Timer.o
+# SUBOBJS += Timer.o
 #-----------------------------------------------------------------------------
 USING_LANGUAGE = CPP
 
@@ -21,18 +21,24 @@ INCS_DIRS += src/app/messenger/messageReceiver \
 			 src/app/timer
 
 #-----------------------------------------------------------------------------
-LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common/
+LIBDIRS_timer       += $(LIDT_ROOT)/src/app/timer
+LIBRARY             += timer
+LIBDIRS_jsonCommon  += $(LIDT_ROOT)/src/app/utils/jsonHelper/common
 LIBRARY             += jsonCommon
-LIBDIRS_jsonBuilder += $(LIDT_ROOT)/src/app/utils/jsonHelper/jsonBuilder/
+LIBDIRS_jsonBuilder += $(LIDT_ROOT)/src/app/utils/jsonHelper/jsonBuilder
 LIBRARY             += jsonBuilder
 LIBDIRS_messageReceiver  += $(LIDT_ROOT)/src/app/messenger/messageReceiver
-LIBRARY                  += messageReceiver			
+LIBRARY                  += messageReceiver
+
 #-----------------------------------------------------------------------------
 
 
 #-----------------------------------------------------------------------------
 CLEAN_DIRS += $(LIDT_ROOT)/src/app/messenger/messageReceiver \
-              $(LIDT_ROOT)/src/app/messenger/messageSender
+              $(LIDT_ROOT)/src/app/messenger/messageSender \
+              $(LIDT_ROOT)/src/app/utils/jsonHelper/common \
+              $(LIDT_ROOT)/src/app/utils/jsonHelper/jsonBuilder \
+              $(LIDT_ROOT)/src/app/timer
 
 #-----------------------------------------------------------------------------
 include $(LIDT_MAKEDIR)/Makefile.app 

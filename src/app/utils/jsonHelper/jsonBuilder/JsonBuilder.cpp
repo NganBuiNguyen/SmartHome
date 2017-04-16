@@ -188,3 +188,25 @@ bool buildJson(const std::string& message, std::string& jsonString)
     
     return true;
 }
+
+
+bool buildJsonListCarInfo(std::string &jsonString, std::vector<CardInfo> vectorCardInfos)
+{
+    boost::property_tree::ptree root;
+    boost::property_tree::ptree child_tree;
+        boost::property_tree::ptree children;
+    for(int i = 0; i<vectorCardInfos.size(); i++)
+    {
+        
+        child_tree.put(ATTR_JSON_IDCard, vectorCardInfos[i].card.idCard);
+        child_tree.put(ATTR_JSON_TYPE_CARD, vectorCardInfos[i].card.typeCard);
+        child_tree.put(ATTR_JSON_IDPerson, vectorCardInfos[i].card.idPerson);
+        children.push_back(std::make_pair("", child_tree));
+    }
+    root.add_child(ATTR_JSON_ARR_CARD, children);
+    jsonString = writeJsonToString(root);
+    
+    return true;
+}
+
+
