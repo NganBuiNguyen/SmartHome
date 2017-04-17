@@ -3,8 +3,7 @@ import threading
 import zmq
 
 import optionParser
-import handle_dbTmpStatus
-import handle_dbCardDoor
+import message_handler
 
 from cffi_interfaces import dbCard_c
 from cffi_interfaces import dbCard_cffi
@@ -30,11 +29,6 @@ class Processor(object):
         self.context = zmq.Context()
         self.sock = self.context.socket(zmq.PAIR)
 
-        # if topic != None:
-        #     for item in self.topic:
-        #         self.sock.setsockopt_string(zmq.SUBSCRIBE, item)
-
-
     def connect(self):
         cmd = "tcp://" + self.host
         cmd = cmd + ":"
@@ -48,33 +42,12 @@ class Processor(object):
         else:    
             self.topic + topic
 
-        # for item in topic:
-        #     self.sock.setsockopt_string(zmq.SUBSCRIBE, item)    
-
     def sendMessageToArduino(self, message, host, port):
         messageStr = messageSender_cffi.new("char *")
         host = messageSender_cffi.new("char *")
         messageStr[0] = message
         host[0] = host
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
-
-    '''
-       Function insert data to table StatusCard
-    '''
-    def insertToStatusCard(self, cstatus):
-        info = dbTmpStatus_cffi.new("CardInfo* ");
-
-        info.card.idCard = cstatus.idCard
-        info.ip_port.ip = cstatus.ip
-        info.ip_port.port = cstatus.port
-        info.dateTime.monthSD = cstatus.monthSD
-        info.dateTime.daySD = cstatus.daySD
-        info.dateTime.yearSD = cstatus.yearSD
-        info.dateTime.hourSD = cstatus.hourSD
-        info.dateTime.minSD = cstatus.minuteSD
-        info.dateTime.secSD = cstatus.secondSD
-
-        dbTmpStatus_c.insert_to_db_TmpStatus_ForC(info);
 
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))
@@ -83,6 +56,8 @@ class Processor(object):
             message = self.sock.recv(2, zmq.NOBLOCK)
             print("message", topic)
             print("message", message)
+            msg_handler = message_handler.MessageHandler(topic, message)
+            msg_handler.run()
             # message_processor = message_handler.MessageHandler(topic, message)
             # message_processor.run()
             # time.sleep(1)
@@ -96,7 +71,7 @@ if __name__ == '__main__':
         sys.exit(2)
 
     host, port, topic = optionParser.parseCmdLineArg(sys.argv)    
-
+    print("init topic: ", topic)
     processor = Processor(host, port, topic)
     processor.connect()
 

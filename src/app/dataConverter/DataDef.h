@@ -1,3 +1,4 @@
+
 #ifndef __DATA_STRUCT_DEF_H__
 #define __DATA_STRUCT_DEF_H__
 
@@ -17,18 +18,18 @@
 #define ATTR_JSON_DATA "data"
 #define ATTR_JSON_MESSAGE_TYPE "MESSAGE_TYPE"
 #define ATTR_JSON_CARD_OPEN "CARD_VALUE"
-#define CARD_TOPIC "CARD_TOPIC"
+#define CARD_TOPIC "CARD_VALUE_TOPIC"
 #define ATTR_JSON_CARD_ID "ID"
-#define ATTR_JSON_CARD_IP "IP"
-#define ATTR_JSON_CARD_PORT "Port"
+#define ATTR_JSON_CARD_IP "ip"
+#define ATTR_JSON_CARD_PORT "port"
 #define ATTR_JSON_SENDER "Sender"
-#define ATTR_JSON_DAY "Day"
-#define ATTR_JSON_MONTH "Month"
-#define ATTR_JSON_YEAR "Year"
-#define ATTR_JSON_HOUR "Hour"
-#define ATTR_JSON_MIN "Min"
-#define ATTR_JSON_SEC "Sec"
-#define ATTR_JSON_DATETIME "DateTime"
+#define ATTR_JSON_DAY "day"
+#define ATTR_JSON_MONTH "month"
+#define ATTR_JSON_YEAR "year"
+#define ATTR_JSON_HOUR "hour"
+#define ATTR_JSON_MIN "min"
+#define ATTR_JSON_SEC "sec"
+#define ATTR_JSON_DATETIME "dateTime"
 
 
 #define ATTR_JSON_IDCard "IDCard"

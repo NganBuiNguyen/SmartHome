@@ -16,6 +16,6 @@ class LibDBManager(object):
         data_ptr = dbTmpStatus_cffi.new("CardInfo* ",\
                                           smart_door_info)
         result = dbTmpStatus_c.insert_to_db_TmpStatus_ForC(data_ptr)
-        if !result:
+        if not result:
             raise exceptions.InsertingTableDBCardForCFailure(\
                                  error_messages.ERROR_INSERT_INTO_TIME_TABLE) 
