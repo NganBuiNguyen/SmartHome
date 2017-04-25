@@ -20,9 +20,11 @@ class MessageHandler(threading.Thread):
             self.lib_db_manager.insert_status_card(smart_door_info)
         except exceptions.InsertingTableDBCardForCFailure as ex:
             import traceback
-            traceback.print_exec()
+            traceback.print_exc()
             print("Error message: ", ex)
         except Exception as ex:
+            import traceback
+            traceback.print_exc()
             print("Error message: ", ex)
 
     def process_message(self):

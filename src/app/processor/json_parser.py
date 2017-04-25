@@ -6,7 +6,9 @@ import error_messages
 class JsonParser(object):
     def __init__(self):
         pass
-
+    # def char_convert_int(self, value):
+    #     [ord(i) for i in value]
+            
     def parse_smart_door_status(self, message):
         json_card = json.loads(message)
         print('json message: ', message)
@@ -15,32 +17,32 @@ class JsonParser(object):
     
         try:
             date_time_info = {
-                constants.ATTR_SEC : json_card[\
+                constants.ATTR_SEC : int(json_card[\
                                                 constants.ATTR_TIMER][\
-                                                constants.ATTR_SEC],
-                constants.ATTR_MIN : json_card[\
+                                                constants.ATTR_SEC]),
+                constants.ATTR_MIN : int(json_card[\
                                                 constants.ATTR_TIMER][\
-                                                constants.ATTR_MIN],
-                constants.ATTR_HOUR : json_card[\
+                                                constants.ATTR_MIN]),
+                constants.ATTR_HOUR : int(json_card[\
                                                 constants.ATTR_TIMER][\
-                                                constants.ATTR_HOUR],
-                constants.ATTR_DAY : json_card[\
+                                                constants.ATTR_HOUR]),
+                constants.ATTR_DAY : int(json_card[\
                                                 constants.ATTR_TIMER][\
-                                                constants.ATTR_DAY],
-                constants.ATTR_MONTH : json_card[\
+                                                constants.ATTR_DAY]),
+                constants.ATTR_MONTH : int(json_card[\
                                                 constants.ATTR_TIMER][\
-                                                constants.ATTR_MONTH],
-                constants.ATTR_YEAR : json_card[\
+                                                constants.ATTR_MONTH]),
+                constants.ATTR_YEAR : int(json_card[\
                                                 constants.ATTR_TIMER][\
-                                                constants.ATTR_YEAR],
+                                                constants.ATTR_YEAR]),
             }
 
             card_info = { 
-                constants.ATTR_ID_CARD_INFO : json_card[\
+                constants.ATTR_ID_CARD_INFO : bytes(json_card[\
                                                 constants.ATTR_DATA][\
-                                                constants.ATTR_ID_CARD],
+                                                constants.ATTR_ID_CARD], 'utf-8'),
 
-                constants.ATTR_TYPE_CARD : "",
+                constants.ATTR_TYPE_CARD : b'',
 
                 constants.ATTR_ID_PERSON : -1
 
@@ -50,7 +52,7 @@ class JsonParser(object):
 
                 constants.ATTR_ID_PERSON : -1,
 
-                constants.ATTR_NAME_PERSON : "",
+                constants.ATTR_NAME_PERSON : b'',
 
                 constants.ATTR_AGE_PERSON : -1,
 
@@ -63,13 +65,13 @@ class JsonParser(object):
             door_info = {
                 constants.ATTR_ID_DOOR : -1,
 
-                constants.ATTR_NAME_DOOR : "",
+                constants.ATTR_NAME_DOOR : b'',
             }
 
             room_info = {
                 constants.ATTR_ID_ROOM : -1,
 
-                constants.ATTR_NAME_ROOM : "",
+                constants.ATTR_NAME_ROOM : b'',
 
                 constants.ATTR_ID_DOOR : -1,
             }
@@ -77,19 +79,19 @@ class JsonParser(object):
             ip_info = {
                 constants.ATTR_ID_IP : -1,
 
-                constants.ATTR_NAME_IP : json_card[\
+                constants.ATTR_NAME_IP : bytes(json_card[\
                                                 constants.ATTR_SENDER][\
-                                                constants.ATTR_NAME_IP],
+                                                constants.ATTR_NAME_IP], 'utf-8'),
 
-                constants.ATTR_PORT : json_card[\
+                constants.ATTR_PORT : int(json_card[\
                                                 constants.ATTR_SENDER][\
-                                                constants.ATTR_PORT],
+                                                constants.ATTR_PORT]),
 
                 constants.ATTR_ID_DOOR : -1,
             }
 
             smart_door_status_info = {
-                constants.ATTR_TIMER : date_time_info,
+                constants.ATTR_DATE_TIME : date_time_info,
                 constants.ATTR_CARD : card_info,
                 constants.ATTR_PERSON : person_info,
                 constants.ATTR_DOOR : door_info,
@@ -101,5 +103,7 @@ class JsonParser(object):
 
         except ValueError as ex:
             print("ex: ", ex)
+            import traceback
+            traceback.print_exc()
             raise exceptions.CardInfoJsonDictionayKeyWordNotFound(\
                 error_messages.ERROR_Card_Info_Dictionary_Key_Word_Not_Found)

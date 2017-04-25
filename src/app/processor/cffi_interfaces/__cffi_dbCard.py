@@ -31,7 +31,7 @@ dbCard_cffi.cdef("""
     typedef struct
     {
         int year ;
-        int mon ;
+        int month ;
         int day ;
         int sec ;   
         int min ;   
@@ -88,7 +88,7 @@ dbCard_cffi.cdef("""
     bool insert_to_db_Card_ForC(CardInfo* info); 
     bool update_to_db_Card_ForC(CardInfo* info);
     bool delete_to_db_Card_ForC(CardInfo* info);
-    bool insert_to_db_TmpStatus_ForC (CardInfo* info);
+    bool insert_to_db_TmpStatus_ForC (const CardInfo* info);
     bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
 """)
 

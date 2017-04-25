@@ -31,6 +31,7 @@ ATTR_NAME_DOOR = "nameDoor"
 ATTR_SENDER = "Sender"
 ATTR_TIMER = "DateTime"
 ATTR_DATA = "data"
+ATTR_DATE_TIME = "dateTime"
 
 ATTR_ROOM = "room"
 ATTR_ID_ROOM = "idRoom"

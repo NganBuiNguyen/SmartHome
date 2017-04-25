@@ -25,7 +25,7 @@ jsonParser_cffi.cdef("""
     typedef struct
     {
         int year ;
-        int mon ;
+        int month ;
         int day ;
         int sec ;   
         int min ;   

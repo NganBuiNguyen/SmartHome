@@ -57,7 +57,7 @@ bool DbTmpStatus::insert_to_db_TmpStatus(const CardInfo &info)
         (this->prep_stmt)->setString(2, info.ip_port.ip);
         (this->prep_stmt)->setInt(3, info.ip_port.port);
         (this->prep_stmt)->setInt(4, info.dateTime.day);
-        (this->prep_stmt)->setInt(5, info.dateTime.mon);
+        (this->prep_stmt)->setInt(5, info.dateTime.month);
         (this->prep_stmt)->setInt(6, info.dateTime.year);
         (this->prep_stmt)->setInt(7, info.dateTime.hour);
         (this->prep_stmt)->setInt(8, info.dateTime.min);
@@ -71,6 +71,7 @@ bool DbTmpStatus::insert_to_db_TmpStatus(const CardInfo &info)
     }
     catch(sql::SQLException& e)
     {
+        printf("%s\n Err from dbCard:", e.what());
         MYSQL_DB_CONNECTION->rollback();
         return false;
     }
@@ -80,7 +81,7 @@ bool DbTmpStatus::insert_to_db_TmpStatus(const CardInfo &info)
     return true;
 }
 
-bool DbTmpStatus::select_to_db_TmpStatus(int ID_TmpStatus)
+sstd::vector<std::string> DbTmpStatus::select_to_db_TmpStatus(int ID_TmpStatus)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
