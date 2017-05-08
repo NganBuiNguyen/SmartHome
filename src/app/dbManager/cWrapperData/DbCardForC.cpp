@@ -1,7 +1,7 @@
 #include "DbCardForC.h"
 #include "DbCard.h"
-#include "DbTmpStatusForC.h"
-#include "DbTmpStatus.h"
+#include "DbHistoryForC.h"
+#include "DbHistory.h"
 
 #include <iostream>
 #include <sstream>
@@ -16,7 +16,7 @@
 #include <cppconn/connection.h>
 
 static DbCard DB_CARD_MANAGER;
-static DbTmpStatus DB_TMPSTATUS_MANAGER;
+static DbHistory DB_HISTORY_MANAGER;
 
 /*!
  * @internal
@@ -27,10 +27,10 @@ bool insert_to_db_Card_ForC(const CardInfo* info)
 
 }
 
-bool select_to_db_Card_ForC(const CardInfo** info, int *numberOfElement)
+bool selectToDbCardForC(const CardInfo** info, int *numberOfElement)
 {
     // std::vector<CardInfo> vectorCardInfos;
-    // bool result = DB_CARD_MANAGER.select_to_db_Card(vectorCardInfos);
+    // bool result = DB_CARD_MANAGER.selectToDbCard(vectorCardInfos);
     // if (!result)
     // {
     //     return false;
@@ -39,7 +39,7 @@ bool select_to_db_Card_ForC(const CardInfo** info, int *numberOfElement)
     // memcpy(*info, &vectorCardInfos, vectorCardInfos.size() * sizeof(CardInfo));
     // *numberOfElement = vectorCardInfos.size();
 
-    return true;
+    // return true;
 }
 
 bool update_to_db_Card_ForC(const CardInfo* info)
@@ -54,15 +54,15 @@ bool delete_to_db_Card_ForC(const CardInfo* info)
 }
 
 
-bool insert_to_db_TmpStatus_ForC (const CardInfo* info)
+bool insertToDbHistoryForC (const CardInfo* info)
 {
-    return DB_TMPSTATUS_MANAGER.insert_to_db_TmpStatus(*info);
+    return DB_HISTORY_MANAGER.insertToDbHistory(*info);
 
 }
 
-bool select_to_db_TmpStatus_ForC(int ID_TmpStatus)
-{
-    return DB_TMPSTATUS_MANAGER.select_to_db_TmpStatus(ID_TmpStatus);
+// bool selectToDbHistoryForC(int IdHistory)
+// {
+//     return DB_HISTORY_MANAGER.selectToDbHistory(IdHistory);
 
-}
+// }
 

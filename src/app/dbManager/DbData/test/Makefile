@@ -1,5 +1,5 @@
 APP = unittest
-TEST_OBJECT = /data/SmartHome/src/app/dbManager/test
+TEST_OBJECT = /data/project/SmartHome/src/app/dbManager/
 
 #-----------------------------------------------------------------------------
 #

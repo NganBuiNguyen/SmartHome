@@ -38,7 +38,7 @@ public:
     DbCard();
     void closeConn();
     bool insert_to_db_Card(const CardInfo &info);
-    bool select_to_db_Card(std::vector<CardInfo>& vectorCardInfos);
+    bool selectToDbCard(std::vector<CardInfo*>& vectorCardInfos);
     bool update_to_db_Card(const CardInfo &info);
     bool delete_to_db_Card(const CardInfo &info);
    

@@ -56,7 +56,7 @@
         {
           return;
          }
-        this->prep_stmt = conn->prepareStatement("INSERT INTO Room(roomID,roomName) values(?,?)");
+        this->prep_stmt = conn->prepareStatement("INSERT INTO tbl_Room(IDRoom,NameRoom) values(?,?)");
         if(this->prep_stmt==NULL)
          {
           return;

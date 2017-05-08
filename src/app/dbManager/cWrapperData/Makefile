@@ -6,11 +6,11 @@ endif
 
 #-----------------------------------------------------------------------------
 #source
-SRCS = DbCardForC.cpp DbTmpStatusForC.cpp
+SRCS = DbCardForC.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #-----------------------------------------------------------------------------
-SUBOBJS = DbCard.o DbTmpStatus.o
+SUBOBJS = DbCard.o DbHistory.o
 
 #-----------------------------------------------------------------------------
 LIBDIRS_dbData  += $(LIDT_ROOT)/src/app/dbManager/DbData/

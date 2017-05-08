@@ -13,6 +13,7 @@
 #define IP_PORT_TOKEN_SIZE 2
 #define NAME_CARD_PERSON_LENGTH 20
 #define NAME_DOOR_ROOM 10
+#define PORT 10
 
 #define CARD_MESSAGE 'R'
 #define ATTR_JSON_DATA "data"

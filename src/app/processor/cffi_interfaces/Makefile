@@ -4,8 +4,7 @@ CFFI_SRCS = __cffi_jsonCommon.py \
 			__cffi_jsonBuilder.py \
 			__cffi_jsonParser.py \
 			__cffi_messageSender.py \
-            __cffi_dbCard.py \
-            __cffi_dbTmpStatus.py
+            __cffi_dbCard.py 
 
             
 CFFI_OBJS = $(CFFI_SRCS:.py=.pyc)

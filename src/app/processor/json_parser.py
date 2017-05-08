@@ -6,10 +6,8 @@ import error_messages
 class JsonParser(object):
     def __init__(self):
         pass
-    # def char_convert_int(self, value):
-    #     [ord(i) for i in value]
             
-    def parse_smart_door_status(self, message):
+    def parse_smart_door_history(self, message):
         json_card = json.loads(message)
         print('json message: ', message)
         print('json_card: ', json_card)

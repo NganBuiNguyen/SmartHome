@@ -87,9 +87,9 @@ dbCard_cffi.cdef("""
 
     bool insert_to_db_Card_ForC(CardInfo* info); 
     bool update_to_db_Card_ForC(CardInfo* info);
+    bool selectToDbCardForC(const CardInfo** info, int *numberOfElement);
     bool delete_to_db_Card_ForC(CardInfo* info);
-    bool insert_to_db_TmpStatus_ForC (const CardInfo* info);
-    bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
+    bool insertToDbHistoryForC (const CardInfo* info);
 """)
 
 dbCard_c = dbCard_cffi.verify("""

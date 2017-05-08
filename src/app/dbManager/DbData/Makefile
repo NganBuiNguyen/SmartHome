@@ -6,7 +6,7 @@ endif
 
 #------------------------------------------------------------------------------
 #source
-SRCS = DbCard.cpp DbTmpStatus.cpp
+SRCS = DbCard.cpp DbHistory.cpp
 OBJS=$(SRCS:.cpp=.o)
 
 

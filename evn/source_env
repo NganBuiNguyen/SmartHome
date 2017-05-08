@@ -1,6 +1,6 @@
 export LIDT_MAKEDIR=${LIDT_ROOT}/src/make
 export LD_LIBRARY_PATH=/development/poco-1.7.5-all/lib:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/development/gtest-1.7/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/development/gtest-1.7.0/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/development/boost_1_62_0/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/development/mysql-connector-c++/lib:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/development/zeromq-4.1.6/lib:$LD_LIBRARY_PATH

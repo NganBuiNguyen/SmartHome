@@ -13,11 +13,11 @@ class MessageHandler(threading.Thread):
         self.topic = topic.decode('utf-8')
         self.json_parser = json_parser.JsonParser()
  
-    def process_smart_door_status(self):
+    def process_smart_door_history(self):
         try:
-            smart_door_info = self.json_parser.parse_smart_door_status(self.message)
+            smart_door_info = self.json_parser.parse_smart_door_history(self.message)
             print("smart_door_info:", smart_door_info)
-            self.lib_db_manager.insert_status_card(smart_door_info)
+            self.lib_db_manager.insert_history_card(smart_door_info)
         except exceptions.InsertingTableDBCardForCFailure as ex:
             import traceback
             traceback.print_exc()
@@ -33,7 +33,7 @@ class MessageHandler(threading.Thread):
         print("ATTR_SMART_DOOR_STATUS_VALUE: ", constants.ATTR_SMART_DOOR_STATUS_VALUE)
         if self.topic == constants.ATTR_SMART_DOOR_STATUS_VALUE:
             print("smart_door_info: 02")
-            self.process_smart_door_status()
+            self.process_smart_door_history()
  
     def run(self):
         self.lib_db_manager = lib_db_manager.LibDBManager()
