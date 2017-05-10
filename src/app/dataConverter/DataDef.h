@@ -59,39 +59,33 @@ typedef struct
 
 typedef struct
 {
-    int idPerson;
+    char idPerson[PORT];
     char namePerson[NAME_CARD_PERSON_LENGTH];
     int age;
     bool grantPerson;
-    int idRoom;
+    char userName[NAME_CARD_PERSON_LENGTH];
+    char password[PORT];
 }Person;
 
 typedef struct
 {
     char idCard[NAME_CARD_PERSON_LENGTH];
-    char typeCard[NAME_CARD_PERSON_LENGTH];
-    int idPerson;
+    char idPerson[PORT];
 }Card;
 
 typedef struct
 {
-    int idDoor;
-    char nameDoor[NAME_DOOR_ROOM]; 
+    char idDoor[PORT];
+    char nameDoor[NAME_DOOR_ROOM];
+    char ip[20];
+    long port;
+    char idRoom[PORT];
 }Door;
 
 typedef struct
 {
-    int idIP;
-    char ip[20];
-    long port;
-    int idDoor;
-}IP;
-
-typedef struct
-{
-    int idRoom;
+    char idRoom[PORT];
     char nameRoom[NAME_DOOR_ROOM];
-    int idDoor;
 }Room;
 
 typedef struct
@@ -101,7 +95,6 @@ typedef struct
     Person person;
     Door door;
     Room room;
-    IP ip_port;
   }CardInfo;
 
 typedef struct  

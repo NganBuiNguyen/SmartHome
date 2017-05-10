@@ -1,5 +1,5 @@
-#ifndef __DB_TMPSTATUS_FOR_C__
-#define __DB_TMPSTATUS_FOR_C__
+#ifndef __DB_HISTORY_FOR_C__
+#define __DB_HISTORY_FOR_C__
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,8 +16,8 @@ extern "C"{
  * param[in] message
  * return
  */
-bool insert_to_db_TmpStatus_ForC(const CardInfo* info);
-bool select_to_db_TmpStatus_ForC(int ID_TmpStatus);
+bool insertToDbHistoryForC(const CardInfo* info);
+bool selectToDbHistoryForC(int IdHistory);
 // bool update_to_db_TmpStatus_ForC(const CardInfo* info);
 // bool delete_to_db_TmpStatus_ForC(const CardInfo* info);
 

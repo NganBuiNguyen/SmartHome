@@ -24,8 +24,8 @@ MYSQL_CONN_INCLUDES = os.path.sep.join((MYSQL_ROOT, 'include'))
 MYSQL_CONN_LIB_DIR = os.path.sep.join((MYSQL_ROOT, 'lib'))
 MYSQL_CONN_LIBS = ["mysqlcppconn", 'stdc++']
 
-dbTmpStatus_cffi = cffi.FFI()
-dbTmpStatus_cffi.cdef("""
+dbHistory_cffi = cffi.FFI()
+dbHistory_cffi.cdef("""
     #define NAME_CARD_PERSON_LENGTH 20
     #define NAME_DOOR_ROOM 10
 
@@ -90,8 +90,8 @@ dbTmpStatus_cffi.cdef("""
     
 """)
 
-dbTmpStatus_c = dbTmpStatus_cffi.verify("""
-                #include "DbTmpStatusForC.h"
+dbHistory_c = dbHistory_cffi.verify("""
+                #include "DbHistory.h"
                 #include "DataDef.h"
                 #include "DbCardForC.h"
                 """,
@@ -99,4 +99,4 @@ dbTmpStatus_c = dbTmpStatus_cffi.verify("""
                                MYSQL_CONN_INCLUDES, DATA_TYPE_DEF_INCLUDES],
                 libraries = DBTMPSTATUS_FOR_C_LIBS + MYSQL_CONN_LIBS + POCO_LIBS,
                 library_dirs = [LIDT_LIBS, MYSQL_CONN_LIB_DIR, POCO_LIB_DIR],
-                modulename = "__cffi_dbTmpStatus")
+                modulename = "__cffi_dbHistory")

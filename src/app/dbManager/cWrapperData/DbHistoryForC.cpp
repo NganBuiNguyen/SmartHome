@@ -1,5 +1,5 @@
-#include "DbTmpStatusForC.h"
-#include "DbTmpStatus.h"
+#include "DbHistoryForC.h"
+#include "DbHistory.h"
 
 #include <iostream>
 #include <sstream>
@@ -15,15 +15,15 @@ static DbTmpStatus DB_TMPSTATUS_MANAGER;
 /*!
  * @internal
  */
-bool insert_to_db_TmpStatus_ForC (const CardInfo* info)
+bool insertToDbHistoryForC (const CardInfo* info)
 {
-    return DB_TMPSTATUS_MANAGER.insert_to_db_TmpStatus(*info);
+    return DB_TMPSTATUS_MANAGER.insertToDbHistory(*info);
 
 }
 
-bool select_to_db_TmpStatus_ForC(int ID_TmpStatus)
+bool selectToDbHistoryForC (int IdHistory)
 {
-    return DB_TMPSTATUS_MANAGER.select_to_db_TmpStatus(ID_TmpStatus);
+    return DB_TMPSTATUS_MANAGER.selectToDbHistory(IdHistory);
 
 }
 

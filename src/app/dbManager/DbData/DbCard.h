@@ -37,10 +37,10 @@ class DbCard
 public:
     DbCard();
     void closeConn();
-    bool insert_to_db_Card(const CardInfo &info);
+    bool insertToDbCard(const CardInfo &info);
     bool selectToDbCard(std::vector<CardInfo*>& vectorCardInfos);
-    bool update_to_db_Card(const CardInfo &info);
-    bool delete_to_db_Card(const CardInfo &info);
+    bool updateToDbCard(const CardInfo &info);
+    bool deleteToDbCard(const CardInfo &info);
    
 private:
     sql::PreparedStatement* prep_stmt;

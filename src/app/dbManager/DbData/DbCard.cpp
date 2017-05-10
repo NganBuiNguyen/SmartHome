@@ -38,7 +38,7 @@ void DbCard::closeConn()
     }
 }
 
-bool DbCard::insert_to_db_Card(const CardInfo &info)
+bool DbCard::insertToDbCard(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
@@ -54,8 +54,7 @@ bool DbCard::insert_to_db_Card(const CardInfo &info)
     try
     {
         (this->prep_stmt)->setString(1, info.card.idCard);
-        (this->prep_stmt)->setString(2, info.card.typeCard);
-        (this->prep_stmt)->setInt(3, info.card.idPerson);
+        (this->prep_stmt)->setString(2, info.card.idPerson);
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
@@ -85,8 +84,7 @@ bool DbCard::selectToDbCard(std::vector<CardInfo*>& vectorCardInfos)
         {
             CardInfo* item = new CardInfo;
             strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
-            strcpy(item->card.typeCard,(char*)res->getString("TypeCard").c_str());
-            item->card.idPerson = res->getInt("IDPerson");
+            strcpy(item->card.idPerson,(char*)res->getString("IDUser").c_str());
             vectorCardInfos.push_back(item);
         }
     }
@@ -102,12 +100,12 @@ bool DbCard::selectToDbCard(std::vector<CardInfo*>& vectorCardInfos)
     return true;
 }
 
-bool DbCard::update_to_db_Card(const CardInfo &info)
+bool DbCard::updateToDbCard(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     //this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Card SET kindCard = ? WHERE IDCard = ?");
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Card SET IDPerson = ? WHERE IDCard = ?");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Card SET IDUser = ? WHERE IDCard = ?");
     if (this->prep_stmt == NULL)
     {
         return false;
@@ -116,8 +114,7 @@ bool DbCard::update_to_db_Card(const CardInfo &info)
     try
     {
         (this->prep_stmt)->setString(2, info.card.idCard);
-        //(this->prep_stmt)->setString(2, info.card.nameKindCard);
-        (this->prep_stmt)->setInt(1, info.card.idPerson);
+        (this->prep_stmt)->setString(1, info.card.idPerson);
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
@@ -136,7 +133,7 @@ bool DbCard::update_to_db_Card(const CardInfo &info)
     return true;
 }
 
-bool DbCard::delete_to_db_Card(const CardInfo &info)
+bool DbCard::deleteToDbCard(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);

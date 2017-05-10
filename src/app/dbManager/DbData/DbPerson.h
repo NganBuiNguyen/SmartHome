@@ -6,6 +6,7 @@
 #include <sstream>
 #include <memory>
 #include <string>
+#include <string.h>
 #include <stdexcept> 
 
 
@@ -29,6 +30,7 @@
 #define PASSWORD "hongha17"
 #define DATABASE "SmartHome"
 
+#define NO_ROW_EFFECTED 0
 #define NUMOFFSET 100
 #define COLNAME 200
 
@@ -36,31 +38,17 @@ class DbPerson
 {
 public:
     DbPerson();
-    static std::string database;
-    static DbPerson* instance;
-    sql::Connection* getConn(std::string userName,std::string password,std::string url);
     void closeConn();
-    void insert_to_db(sql::Connection* conn, CardInfo &info);
-    void select_to_db(sql::Connection* conn);
-    void update_to_db(sql::Connection* conn, CardInfo &info);
-    void delete_to_db(sql::Connection* conn, CardInfo &info);
-    static DbPerson* getInstance();
+    bool insertToDbInfoUser(const CardInfo &info);
+    bool selectToDbInfoUser(std::vector<CardInfo*>& vectorCardInfos);
+    bool updateToDbInfoUser(const CardInfo &info);
+    bool deleteToDbInfoUser(const CardInfo &info);
    
 private:
-   
-
     sql::PreparedStatement* prep_stmt;
-    sql::Connection* conn;
     sql::ResultSet* res;
     sql::Statement* stmt;
-    sql::Driver* driver;
     sql::Savepoint* savept;
-
-    std::string url;
-    std::string user;
-    std::string password;
-    
-
 };
 
 #endif

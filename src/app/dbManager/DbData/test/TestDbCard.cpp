@@ -24,15 +24,12 @@ TEST_F(TestDbCard, TestSelectCard_RESULT_OK)
 {
     CardInfo item;
     strcpy(item.card.idCard,"5D2A821C");
-    strcpy(item.card.typeCard,"admin");
-    item.card.idPerson = 1;
+    strcpy(item.card.idPerson,"U0001");
     
     CardInfo item1;
     strcpy(item1.card.idCard,"6628E6EC");
-    strcpy(item1.card.typeCard,"admin");
-    item1.card.idPerson = 2;
-
-
+    strcpy(item1.card.idPerson,"U0002");
+    
     std::vector<CardInfo> vectorCardInfos;
 
     vectorCardInfos.push_back(item);
@@ -52,7 +49,6 @@ TEST_F(TestDbCard, TestSelectCard_RESULT_OK)
     
     for( int i = 0 ; i < vectorCardInfos.size() ; i++){
         EXPECT_EQ(strcmp(vectorCardInfos[i].card.idCard, vectorCardInfosResult[i]->card.idCard), 0);
-        EXPECT_EQ(strcmp(vectorCardInfos[i].card.typeCard, vectorCardInfosResult[i]->card.typeCard),0);
-        EXPECT_EQ(vectorCardInfos[i].card.idPerson, vectorCardInfosResult[i]->card.idPerson); 
+        EXPECT_EQ(strcmp(vectorCardInfos[i].card.idPerson, vectorCardInfosResult[i]->card.idPerson),0);
     }
 }

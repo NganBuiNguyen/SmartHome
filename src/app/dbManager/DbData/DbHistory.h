@@ -1,10 +1,11 @@
-#ifndef __DB_TMPSTATUS_H__
-#define __DB_TMPSTATUS_H__
+#ifndef __DB_HISTORY_H__
+#define __DB_HISTORY_H__
 
 #include <iostream>
 #include <sstream>
 #include <memory>
 #include <string>
+#include <string.h>
 #include <stdexcept>
 
 #include <mysql_driver.h>
@@ -30,13 +31,14 @@
 #define COLNAME 200
 #define INSERT_DB_TMP_STATUS "INSERT INTO tbl_TmpStatus(IDCard, IP, Port, Day, Mon, Year, Hour, Min, Sec) values (?,?,?,?,?,?,?,?,?)"
 #define SELECT_ID_TMP_STATUS "SELECT IP, Port FROM tbl_TmpStatus WHERE ID_Tmp_Status = ?"
-class DbTmpStatus
+
+class DbHistory
 {
 public:
-    DbTmpStatus();
+    DbHistory();
     void closeConn();
-    bool insert_to_db_TmpStatus(const CardInfo &info);
-    bool select_to_db_TmpStatus(int ID_TmpStatus);
+    bool insertToDbHistory(const CardInfo &info);
+    bool selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos);
     // bool update_to_db_TmpStatus(const CardInfo &info);
     // bool delete_to_db_TmpStatus(const CardInfo &info);
    

@@ -1,144 +1,153 @@
-    #include "DbPerson.h"
+#include "DbPerson.h"
+
+static sql::Driver* MYSQL_DRIVER_INSTANCE = get_driver_instance();
+static sql::Connection* MYSQL_DB_CONNECTION =
+                MYSQL_DRIVER_INSTANCE->connect(DBHOST, USER, PASSWORD);
+
+
+DbPerson::DbPerson()
+{
+    this->prep_stmt = NULL;
+    this->res = NULL;
+    this->stmt = NULL;
+    this->savept = NULL;
+}
+
+void DbPerson::closeConn()
+{
+    if(this->res != NULL)
+    {
+        delete this->res;
+        this->res = NULL;
+    }
+
+    if (this->stmt != NULL)
+    {
+        delete this->stmt;
+        this->stmt = NULL;
+    }
+
+    if (this->prep_stmt != NULL)
+    {
+        delete this->prep_stmt;
+        this->prep_stmt = NULL;
+    }
+}
+
+bool DbPerson::insertToDbInfoUser(const CardInfo &info)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
     
-    
-    DbPerson* DbPerson::instance = NULL;
-    std::string DbPerson::database = DATABASE;
-   
-
-    DbPerson* DbPerson::getInstance()
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_InfoUser (IDUser, NameUser, Age) values(?,?,?)");
+    if (this->prep_stmt == NULL)
     {
-      if(instance == NULL)
-      {
-         instance= new DbPerson();
-      }
-      return instance;
+        return false;
     }
 
-    sql::Connection* DbPerson::getConn(std::string userName,std::string password,std::string url)
-    {
-        this->driver=get_driver_instance();
-        this->conn=driver->connect(url,userName,password);
-        this->conn->setSchema(database);
-        this->conn->setAutoCommit(0);
-        return this->conn;
-    }
-    DbPerson::DbPerson()
-    {
-        this->url=DBHOST;
-        this->user=USER;
-        this->password=PASSWORD;
-    }
+    int result = NO_ROW_EFFECTED;
 
-    void DbPerson::closeConn()
+    try
     {
-        if(this->res!=NULL)
-        {
-            delete this->res;
-        }
-        if(this->stmt !=NULL)
-        {
-            delete this->stmt;
-        }
-        if(this->prep_stmt !=NULL)
-        {
-            delete this->prep_stmt;
-        }
-        if(this->conn !=NULL)
-        {
-            this->conn->close();
-            delete this->conn;
-        }
-    }
-
-    void DbPerson::insert_to_db(sql::Connection* conn, CardInfo &info)
-    {
-        DbPerson* dbPerson = DbPerson::getInstance();
-
-        conn = dbPerson->getConn(this->user,this->password,this->url);
-        if(conn==NULL)
-        {
-            return;
-        }
-        int idPerson;
-    char namePerson[NAME_CARD_PERSON_LENGTH];
-    int age;
-    bool grantPerson;
-    int idRoom;
-        this->prep_stmt = conn->prepareStatement("INSERT INTO tbl_Person(IDPerson, NamePerson, Age , GrantPerson, IDRoom) values(?,?,?,?)");
-        if(this->prep_stmt==NULL)
-        {
-             return;
-        }
-        try{
-        Card card;
         (this->prep_stmt)->setString(1, info.person.idPerson);
         (this->prep_stmt)->setString(2, info.person.namePerson);
         (this->prep_stmt)->setInt(3, info.person.age);
-        (this->prep_stmt)->setBoolean(4, info.person.grantPerson);
-        (this->prep_stmt)->setInt(5, info.person.idRoom);
+        // (this->prep_stmt)->setBoolean(4, info.person.grantPerson);
+        // (this->prep_stmt)->setInt(5, info.person.idRoom);
+        result = (this->prep_stmt)->executeUpdate();
 
-        int i=(this->prep_stmt)->executeUpdate();
-        if(i>0)
+        if(result < NO_ROW_EFFECTED)
         {
-            std::cout<<"Them thanh cong";
-        }else{
-            std::cout<<"Them that bai";
-          }
-        }catch(sql::SQLException& e)
-        {
-            conn->rollback();
+            return false;
         }
-        conn->commit();
-         dbPerson->closeConn();
     }
-    void DbPerson::select_to_db(sql::Connection* conn)
+    catch(sql::SQLException& e)
     {
-        DbPerson* dbPerson = DbPerson::getInstance();
+        MYSQL_DB_CONNECTION->rollback();
+        return false;
+    }
 
-        stmt = conn->createStatement();
+    MYSQL_DB_CONNECTION->commit();
+    this->closeConn();
+    return true;
+}
 
-        conn= dbPerson->getConn(this->user,this->password,this->url);
-
-        this->res = stmt->executeQuery("SELECT * FROM tbl_Person");
-
-         while (res->next())
+bool DbPerson::selectToDbInfoUser(std::vector<CardInfo*>& vectorCardInfos)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+    try{
+        stmt = MYSQL_DB_CONNECTION->createStatement();
+        this->res = stmt->executeQuery("SELECT * FROM tbl_InfoUser");
+        while (res->next())
         {
-            std::cout << res->getString("IDPerson") << std::endl;
+            CardInfo* item = new CardInfo;
+            strcpy(item->person.idPerson,(char*)res->getString("IDUser").c_str());
+            strcpy(item->person.namePerson,(char*)res->getString("NameUser").c_str());
+            item->person.age = res->getInt("Age");
+            vectorCardInfos.push_back(item);
         }
-        int updateCount = prep_stmt->executeUpdate();
-        conn->commit();
+    }
+        catch(sql::SQLException& e)
+        {
+            MYSQL_DB_CONNECTION->rollback();
+            return false;
+        }
         
-        dbPerson->closeConn();
-    }
-    void DbPerson::update_to_db(sql::Connection* conn, CardInfo &info)
+        MYSQL_DB_CONNECTION->commit();
+    
+    this->closeConn();
+    return true;
+}
+
+bool DbPerson::updateToDbInfoUser(const CardInfo &info)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_InfoUser SET NameUser = ? Age = ? WHERE IDUser = ?");
+    if (this->prep_stmt == NULL)
     {
-        
-        DbPerson* dbPerson = DbPerson::getInstance();
-
-        conn=dbPerson->getConn(this->user,this->password,this->url);
-
-        this->prep_stmt = conn->prepareStatement("UPDATE tbl_Person SET NamePerson = ? Age = ? GrantPerson = ? WHERE IDPerson = ?");
-
-        (this->prep_stmt)->setString(1, info.person.getPersonName());
-        (this->prep_stmt)->setInt(2, person.getAge());
-        (this->prep_stmt)->setString(3, person.getPersonID());
-        int updateCount = prep_stmt->executeUpdate();
-        conn->commit();
-        dbPerson->closeConn();
+        return false;
     }
-    void DbPerson::delete_to_db(sql::Connection* conn, CardInfo &info)
+    int result = NO_ROW_EFFECTED;
+    try
     {
-        DbPerson* dbPerson = DbPerson::getInstance();
+        (this->prep_stmt)->setString(3, info.person.idPerson);
+        (this->prep_stmt)->setString(1, info.person.namePerson);
+        (this->prep_stmt)->setInt(2, info.person.age);
+        result = (this->prep_stmt)->executeUpdate();
 
-        conn=dbPerson->getConn(this->user,this->password,this->url);
-        this->prep_stmt = conn->prepareStatement("DELETE FROM tbl_Person WHERE personID = ?");
-
-        (this->prep_stmt)->setString(1, person.getPersonID());
-
-        int updateCount = prep_stmt->executeUpdate();
-        conn->commit();
-
-        dbPerson->closeConn();
+        if(result < NO_ROW_EFFECTED)
+        {
+            return false;
+        }
     }
+    catch(sql::SQLException& e)
+    {
+        MYSQL_DB_CONNECTION->rollback();
+        return false;
+    }
+    //(this->prep_stmt)->executeUpdate();
+    MYSQL_DB_CONNECTION->commit();
+    this->closeConn();
+    return true;
+}
+
+bool DbPerson::deleteToDbInfoUser(const CardInfo &info)
+{
+    MYSQL_DB_CONNECTION->setSchema(DATABASE);
+    MYSQL_DB_CONNECTION->setAutoCommit(0);
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("DELETE FROM tbl_InfoUser WHERE IDUser = ?");
+
+    (this->prep_stmt)->setString(1,info.card.idCard);
+
+    int updateCount = prep_stmt->executeUpdate();
+
+    MYSQL_DB_CONNECTION->commit();
+
+    this->closeConn();
+    return true;
+}
 
 

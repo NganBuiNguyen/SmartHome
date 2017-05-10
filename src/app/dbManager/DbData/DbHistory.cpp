@@ -1,4 +1,4 @@
- #include "DbTmpStatus.h"
+ #include "DbHistory.h"
 
 static sql::Driver* MYSQL_DRIVER_INSTANCE = get_driver_instance();
 static sql::Connection* MYSQL_DB_CONNECTION =
@@ -7,7 +7,7 @@ static sql::Connection* MYSQL_DB_CONNECTION =
 /*!
  * @internal Default Constructor
  */
-DbTmpStatus::DbTmpStatus()
+DbHistory::DbHistory()
 {
     this->prep_stmt = NULL;
     this->res = NULL;
@@ -15,7 +15,7 @@ DbTmpStatus::DbTmpStatus()
     this->savept = NULL;
 }
 
-void DbTmpStatus::closeConn()
+void DbHistory::closeConn()
 {
     if(this->res != NULL)
     {
@@ -36,68 +36,41 @@ void DbTmpStatus::closeConn()
     }
 }
 
-bool DbTmpStatus::insert_to_db_TmpStatus(const CardInfo &info)
-{
+bool DbHistory::selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos)
+{       
+
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
-    
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement(INSERT_DB_TMP_STATUS);
-
-    if (this->prep_stmt == NULL)
-    {
-        return false;
-    }
-
-    int result = NO_ROW_EFFECTED;
-
-    try
-    {
-        // (this->prep_stmt)->setInt(1, 1);
-        (this->prep_stmt)->setString(1, info.card.idCard);
-        (this->prep_stmt)->setString(2, info.ip_port.ip);
-        (this->prep_stmt)->setInt(3, info.ip_port.port);
-        (this->prep_stmt)->setInt(4, info.dateTime.day);
-        (this->prep_stmt)->setInt(5, info.dateTime.month);
-        (this->prep_stmt)->setInt(6, info.dateTime.year);
-        (this->prep_stmt)->setInt(7, info.dateTime.hour);
-        (this->prep_stmt)->setInt(8, info.dateTime.min);
-        (this->prep_stmt)->setInt(9, info.dateTime.sec);
-        result = (this->prep_stmt)->executeUpdate();
-
-        if(result < NO_ROW_EFFECTED)
+    try{
+        stmt = MYSQL_DB_CONNECTION->createStatement();
+        this->res = stmt->executeQuery("SELECT * FROM tbl_History");
+        while (res->next())
         {
-            return false;
+            CardInfo* item = new CardInfo;
+            strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
+            strcpy(item->ip_port.ip,(char*)res->getString("IP").c_str());
+            char* port = new char[PORT];
+            strcpy(port,(char*)res->getString("Port").c_str());
+            item->ip_port.port = atol(port);
+            item->dateTime.day = res->getInt("Day");
+            item->dateTime.month = res->getInt("Mon");
+            item->dateTime.year = res->getInt("Year");
+            item->dateTime.hour = res->getInt("Hour");
+            item->dateTime.min = res->getInt("Min");
+            item->dateTime.sec = res->getInt("Sec");
+            vectorCardInfos.push_back(item);
         }
     }
-    catch(sql::SQLException& e)
-    {
-        printf("%s\n Err from dbCard:", e.what());
-        MYSQL_DB_CONNECTION->rollback();
-        return false;
-    }
-
-    MYSQL_DB_CONNECTION->commit();
-    this->closeConn();
-    return true;
-}
-
-sstd::vector<std::string> DbTmpStatus::select_to_db_TmpStatus(int ID_TmpStatus)
-{
-    MYSQL_DB_CONNECTION->setSchema(DATABASE);
-    MYSQL_DB_CONNECTION->setAutoCommit(0);
-    
-    stmt = MYSQL_DB_CONNECTION->createStatement();
-    this->res = stmt->executeQuery(SELECT_ID_TMP_STATUS);
-    // this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement(SELECT_ID_TMP_STATUS);
-    // (this->prep_stmt)->setInt(1,ID_TmpStatus);
-     while (res->next())
-    {
-        std::cout << res->getInt("Sec") << std::endl;
-    }
-    
-    MYSQL_DB_CONNECTION->commit();
+     catch(sql::SQLException& e)
+        {
+            MYSQL_DB_CONNECTION->rollback();
+            return false;
+        }
+        
+        MYSQL_DB_CONNECTION->commit();
     
     this->closeConn();
-    return true;
+    return true;   
 }
+
 
