@@ -1,10 +1,10 @@
- #include "DbRoom.h"
+ #include "DbDoorCard.h"
 
 static sql::Driver* MYSQL_DRIVER_INSTANCE = get_driver_instance();
 static sql::Connection* MYSQL_DB_CONNECTION =
                     MYSQL_DRIVER_INSTANCE->connect(DBHOST, USER, PASSWORD);
     
-DbRoom::DbRoom()
+DbDoorCard::DbDoorCard()
 {
     this->prep_stmt = NULL;
     this->res = NULL;
@@ -12,7 +12,7 @@ DbRoom::DbRoom()
     this->savept = NULL;
 }
 
-void DbRoom::closeConn()
+void DbDoorCard::closeConn()
 {
     if(this->res!=NULL)
     {
@@ -28,12 +28,12 @@ void DbRoom::closeConn()
     }
 }
 
-bool DbRoom::insertToDbRoom(const CardInfo &info)
+bool DbDoorCard::insertToDbDoorCard(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_Room (IDRoom,NameRoom) values(?,?)");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_Door_Card (IDCard,IDDoor) values(?,?)");
     if (this->prep_stmt == NULL)
     {
         return false;
@@ -43,9 +43,8 @@ bool DbRoom::insertToDbRoom(const CardInfo &info)
 
     try
     {
-        (this->prep_stmt)->setString(1, info.room.idRoom);
-        (this->prep_stmt)->setString(2, info.room.nameRoom);
-
+        (this->prep_stmt)->setString(1, info.card.idCard);
+        (this->prep_stmt)->setString(2, info.door.idDoor);
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
@@ -65,18 +64,18 @@ bool DbRoom::insertToDbRoom(const CardInfo &info)
 
 }
 
-bool DbRoom::selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos)
+bool DbDoorCard::selectToDbDoorCard(std::vector<CardInfo*>& vectorCardInfos)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
         stmt = MYSQL_DB_CONNECTION->createStatement();
-        this->res = stmt->executeQuery("SELECT * FROM tbl_Room");
+        this->res = stmt->executeQuery("SELECT IDCard , IDDoor FROM tbl_Door_Card");
         while (res->next())
         {
             CardInfo* item = new CardInfo;
-            strcpy(item->room.idRoom,(char*)res->getString("IDRoom").c_str());
-            strcpy(item->room.nameRoom,(char*)res->getString("NameRoom").c_str());
+            strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
+            strcpy(item->door.idDoor,(char*)res->getString("IDDoor").c_str());
             vectorCardInfos.push_back(item);
         }
     }
@@ -92,13 +91,13 @@ bool DbRoom::selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos)
     return true;
 }
 
-bool DbRoom::updateToDbRoom(const CardInfo &info)
+bool DbDoorCard::updateToDbDoorCard(const CardInfo &info,int id)
 {
     
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Room SET NameRoom = ? WHERE IDRoom = ?");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("UPDATE tbl_Door_Card SET IDCard = ? IDDoor = ? WHERE ID = ?");
     if (this->prep_stmt == NULL)
     {
         return false;
@@ -106,9 +105,9 @@ bool DbRoom::updateToDbRoom(const CardInfo &info)
     int result = NO_ROW_EFFECTED;
     try
     {
-        (this->prep_stmt)->setString(1, info.room.nameRoom);
-        (this->prep_stmt)->setString(2, info.room.idRoom);
-
+        (this->prep_stmt)->setString(1, info.card.idCard);
+        (this->prep_stmt)->setString(2, info.door.ip);
+        (this->prep_stmt)->setInt(3, id);
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
@@ -127,13 +126,13 @@ bool DbRoom::updateToDbRoom(const CardInfo &info)
     return true;
 }
 
-bool DbRoom::deleteToDbRoom(const CardInfo &info)
+bool DbDoorCard::deleteToDbDoorCard(const CardInfo &info,int id)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("DELETE FROM tbl_Room WHERE IDRoom = ?");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("DELETE FROM tbl_Door_Card WHERE ID = ?");
 
-    (this->prep_stmt)->setString(1, info.room.idRoom);
+    (this->prep_stmt)->setInt(1, id);
 
     int updateCount = prep_stmt->executeUpdate();
 

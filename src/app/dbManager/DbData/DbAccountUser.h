@@ -1,13 +1,14 @@
-#ifndef __DB_ROOM_H__
-#define __DB_ROOM_H__
-
+#ifndef __DB_ACCOUNTUSER_H__
+#define __DB_ACCOUNTUSER_H__
 
 #include <iostream>
 #include <sstream>
 #include <memory>
 #include <string>
+#include <stdexcept>
+#include <vector>
+#include <string>
 #include <string.h>
-#include <stdexcept> 
 
 
 #include <mysql_driver.h>
@@ -20,7 +21,6 @@
 #include <cppconn/exception.h>
 #include <cppconn/warning.h>
 
-
 #include "DataDef.h"
 
 #define DBHOST "tcp://127.0.0.1:3306"
@@ -32,15 +32,15 @@
 #define NUMOFFSET 100
 #define COLNAME 200
 
-class DbRoom
+class DbAccountUser
 {
 public:
-    DbRoom();
+    DbAccountUser();
     void closeConn();
-    bool insertToDbRoom(const CardInfo &info);
-    bool selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos);
-    bool updateToDbRoom(const CardInfo &info);
-    bool deleteToDbRoom(const CardInfo &info);
+    bool insertToDbAccountUser(const CardInfo &info);
+    bool selectToDbAccountUser(std::vector<CardInfo*>& vectorCardInfos);
+    bool updateToDbAccountUser(const CardInfo &info);
+    bool deleteToDbAccountUser(const CardInfo &info);
    
 private:
     sql::PreparedStatement* prep_stmt;
@@ -49,6 +49,5 @@ private:
     sql::Savepoint* savept;
 };
 
+
 #endif
-
-

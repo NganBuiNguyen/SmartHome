@@ -1,5 +1,5 @@
-#ifndef __DB_ROOM_H__
-#define __DB_ROOM_H__
+#ifndef __DB_DOORCARD_H__
+#define __DB_DOORCARD_H__
 
 
 #include <iostream>
@@ -23,6 +23,8 @@
 
 #include "DataDef.h"
 
+
+
 #define DBHOST "tcp://127.0.0.1:3306"
 #define USER "root"
 #define PASSWORD "hongha17"
@@ -32,15 +34,15 @@
 #define NUMOFFSET 100
 #define COLNAME 200
 
-class DbRoom
+class DbDoorCard
 {
 public:
-    DbRoom();
+    DbDoorCard();
     void closeConn();
-    bool insertToDbRoom(const CardInfo &info);
-    bool selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos);
-    bool updateToDbRoom(const CardInfo &info);
-    bool deleteToDbRoom(const CardInfo &info);
+    bool insertToDbDoorCard(const CardInfo &info);
+    bool selectToDbDoorCard(std::vector<CardInfo*>& vectorCardInfos);
+    bool updateToDbDoorCard(const CardInfo &info,int id);
+    bool deleteToDbDoorCard(const CardInfo &info,int id);
    
 private:
     sql::PreparedStatement* prep_stmt;
@@ -50,5 +52,4 @@ private:
 };
 
 #endif
-
 

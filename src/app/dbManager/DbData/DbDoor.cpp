@@ -33,7 +33,7 @@ bool DbDoor::insertToDbDoor(const CardInfo &info)
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_Door (IDDoor,NameDoor,IP,Port,IDRoom) values(?,?,?)");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_Door (IDDoor,NameDoor,IP,Port,IDRoom) values(?,?,?,?,?)");
     if (this->prep_stmt == NULL)
     {
         return false;
@@ -47,7 +47,7 @@ bool DbDoor::insertToDbDoor(const CardInfo &info)
         (this->prep_stmt)->setString(2, info.door.nameDoor);
         (this->prep_stmt)->setString(3, info.door.ip);
         (this->prep_stmt)->setString(4, std::to_string(info.door.port));
-        (this->prep_stmt)->setString(1, info.door.idRoom);
+        (this->prep_stmt)->setString(5, info.door.idRoom);
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)
