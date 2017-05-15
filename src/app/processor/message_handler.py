@@ -17,7 +17,7 @@ class MessageHandler(threading.Thread):
         try:
             smart_door_info = self.json_parser.parse_smart_door_history(self.message)
             print("smart_door_info:", smart_door_info)
-            self.lib_db_manager.insert_history_card(smart_door_info)
+            self.lib_db_manager.insertToDbHistory(smart_door_info)
         except exceptions.InsertingTableDBCardForCFailure as ex:
             import traceback
             traceback.print_exc()
@@ -26,6 +26,9 @@ class MessageHandler(threading.Thread):
             import traceback
             traceback.print_exc()
             print("Error message: ", ex)
+
+    # def process_info_card(self):
+        
 
     def process_message(self):
         print("smart_door_info: 01")

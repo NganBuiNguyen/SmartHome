@@ -194,12 +194,12 @@ bool buildJsonListCarInfo(std::string &jsonString, std::vector<CardInfo> vectorC
 {
     boost::property_tree::ptree root;
     boost::property_tree::ptree child_tree;
-        boost::property_tree::ptree children;
+    boost::property_tree::ptree children;
+
     for(int i = 0; i<vectorCardInfos.size(); i++)
     {
         
         child_tree.put(ATTR_JSON_IDCard, vectorCardInfos[i].card.idCard);
-        child_tree.put(ATTR_JSON_TYPE_CARD, vectorCardInfos[i].card.typeCard);
         child_tree.put(ATTR_JSON_IDPerson, vectorCardInfos[i].card.idPerson);
         children.push_back(std::make_pair("", child_tree));
     }

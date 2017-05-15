@@ -67,11 +67,13 @@ bool DbDoor::insertToDbDoor(const CardInfo &info)
 
 }
 
-bool DbDoor::selectToDbDoor(std::vector<CardInfo*>& vectorCardInfos)
+bool DbDoor::selectToDbDoor(std::vector<CardInfo>& vectorCardInfos)
 {
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
-    try{
+    try
+    {
         stmt = MYSQL_DB_CONNECTION->createStatement();
         this->res = stmt->executeQuery("SELECT * FROM tbl_Door");
         while (res->next())
@@ -84,7 +86,7 @@ bool DbDoor::selectToDbDoor(std::vector<CardInfo*>& vectorCardInfos)
             strcpy(port,(char*)res->getString("Port").c_str());
             item->door.port = atol(port);
             strcpy(item->door.idRoom,(char*)res->getString("IDRoom").c_str());
-            vectorCardInfos.push_back(item);
+            vectorCardInfos.push_back(*item);
         }
     }
         catch(sql::SQLException& e)

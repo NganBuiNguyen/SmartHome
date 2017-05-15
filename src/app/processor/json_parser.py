@@ -40,15 +40,13 @@ class JsonParser(object):
                                                 constants.ATTR_DATA][\
                                                 constants.ATTR_ID_CARD], 'utf-8'),
 
-                constants.ATTR_TYPE_CARD : b'',
-
-                constants.ATTR_ID_PERSON : -1
+                constants.ATTR_ID_PERSON : b''
 
             }
 
             person_info = {
 
-                constants.ATTR_ID_PERSON : -1,
+                constants.ATTR_ID_PERSON : b'',
 
                 constants.ATTR_NAME_PERSON : b'',
 
@@ -56,26 +54,17 @@ class JsonParser(object):
 
                 constants.ATTR_GRANT_PERSON : 0,
 
-                constants.ATTR_ID_ROOM : -1,
+                constants.ATTR_USER_NAME : b'',
+
+                constants.ATTR_PASS : b''
+
             }
 
            
             door_info = {
-                constants.ATTR_ID_DOOR : -1,
+                constants.ATTR_ID_DOOR : b'',
 
                 constants.ATTR_NAME_DOOR : b'',
-            }
-
-            room_info = {
-                constants.ATTR_ID_ROOM : -1,
-
-                constants.ATTR_NAME_ROOM : b'',
-
-                constants.ATTR_ID_DOOR : -1,
-            }
-
-            ip_info = {
-                constants.ATTR_ID_IP : -1,
 
                 constants.ATTR_NAME_IP : bytes(json_card[\
                                                 constants.ATTR_SENDER][\
@@ -84,8 +73,35 @@ class JsonParser(object):
                 constants.ATTR_PORT : int(json_card[\
                                                 constants.ATTR_SENDER][\
                                                 constants.ATTR_PORT]),
+                constants.ATTR_ID_ROOM : b''
+            }
 
-                constants.ATTR_ID_DOOR : -1,
+            room_info = {
+                constants.ATTR_ID_ROOM : b'',
+
+                constants.ATTR_NAME_ROOM : b'',
+
+            }
+
+            # ip_info = {
+            #     constants.ATTR_ID_IP : -1,
+
+            #     constants.ATTR_NAME_IP : bytes(json_card[\
+            #                                     constants.ATTR_SENDER][\
+            #                                     constants.ATTR_NAME_IP], 'utf-8'),
+
+            #     constants.ATTR_PORT : int(json_card[\
+            #                                     constants.ATTR_SENDER][\
+            #                                     constants.ATTR_PORT]),
+
+            #     constants.ATTR_ID_DOOR : -1,
+            # }
+
+            history_info = {
+                constants.ATTR_STATUS_DOOR : 0,
+
+                constants.ATTR_CHECK_CARD : 0,
+
             }
 
             smart_door_status_info = {
@@ -94,7 +110,8 @@ class JsonParser(object):
                 constants.ATTR_PERSON : person_info,
                 constants.ATTR_DOOR : door_info,
                 constants.ATTR_ROOM : room_info,
-                constants.ATTR_IP : ip_info
+                constants.ATTR_HISTORY : history_info,
+                # constants.ATTR_IP : ip_info
             }
 
             return smart_door_status_info

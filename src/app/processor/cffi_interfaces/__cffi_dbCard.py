@@ -28,6 +28,8 @@ dbCard_cffi = cffi.FFI()
 dbCard_cffi.cdef("""
     #define NAME_CARD_PERSON_LENGTH 20
     #define NAME_DOOR_ROOM 10
+    #define PORT 10
+
     typedef struct
     {
         int year ;
@@ -40,40 +42,40 @@ dbCard_cffi.cdef("""
 
     typedef struct
     {
-        int idPerson;
+        char idPerson[PORT];
         char namePerson[NAME_CARD_PERSON_LENGTH];
         int age;
         bool grantPerson;
-        int idRoom;
+        char userName[NAME_CARD_PERSON_LENGTH];
+        char password[PORT];
     }Person;
 
     typedef struct
     {
         char idCard[NAME_CARD_PERSON_LENGTH];
-        char typeCard[NAME_CARD_PERSON_LENGTH];
-        int idPerson;
+        char idPerson[PORT];
     }Card;
 
     typedef struct
     {
-        int idDoor;
-        char nameDoor[NAME_DOOR_ROOM]; 
+        char idDoor[PORT];
+        char nameDoor[NAME_DOOR_ROOM];
+        char ip[20];
+        long port;
+        char idRoom[PORT];
     }Door;
 
     typedef struct
     {
-        int idIP;
-        char ip[20];
-        long port;
-        int idDoor;
-    }IP;
-
-    typedef struct
-    {
-        int idRoom;
+        char idRoom[PORT];
         char nameRoom[NAME_DOOR_ROOM];
-        int idDoor;
     }Room;
+
+    typedef struct  
+    {
+        bool statusDoor;
+        bool checkCard; 
+    }History;
 
     typedef struct
     {
@@ -82,14 +84,49 @@ dbCard_cffi.cdef("""
         Person person;
         Door door;
         Room room;
-        IP ip_port;
+        History history;
     }CardInfo;
 
-    bool insert_to_db_Card_ForC(CardInfo* info); 
-    bool update_to_db_Card_ForC(CardInfo* info);
-    bool selectToDbCardForC(const CardInfo** info, int *numberOfElement);
-    bool delete_to_db_Card_ForC(CardInfo* info);
-    bool insertToDbHistoryForC (const CardInfo* info);
+    typedef struct  
+    {
+        void* result; 
+        int numberOfElement; 
+    }DBAResult;
+
+    bool insertToDbCardForC(const CardInfo* info);
+    bool selectToDbCardForC(CardInfo** info, int *numberOfElement);
+    bool updateToDbCardForC(const CardInfo* info);
+    bool deleteToDbCardForC(const CardInfo* info);
+
+
+    bool insertToDbDoorForC(const CardInfo* info);
+    bool selectToDbDoorForC(const CardInfo** info, int *numberOfElement);
+    bool updateToDbDoorForC(const CardInfo* info);
+    bool deleteToDbDoorForC(const CardInfo* info);
+
+
+    bool insertToDbRoomForC(const CardInfo* info);
+    bool selectToDbRoomForC(const CardInfo** info, int *numberOfElement);
+    bool updateToDbRoomForC(const CardInfo* info);
+    bool deleteToDbRoomForC(const CardInfo* info);
+
+    bool insertToDbPersonForC(const CardInfo* info);
+    bool selectToDbPersonForC(const CardInfo** info, int *numberOfElement);
+    bool updateToDbPersonForC(const CardInfo* info);
+    bool deleteToDbPersonForC(const CardInfo* info);
+
+    bool insertToDbDoorCardForC(const CardInfo* info);
+    bool selectToDbDoorCardForC(const CardInfo** info, int *numberOfElement);
+    bool updateToDbDoorCardForC(const CardInfo* info,int id);
+    bool deleteToDbDoorCardForC(const CardInfo* info,int id);
+
+    bool insertToDbAccountUserForC(const CardInfo* info);
+    bool selectToDbAccountUserForC(const CardInfo** info, int *numberOfElement);
+    bool updateToDbAccountUserForC(const CardInfo* info);
+    bool deleteToDbAccountUserForC(const CardInfo* info);
+
+    bool insertToDbHistoryForC(const CardInfo* info);
+    bool selectToDbHistoryForC(const CardInfo** info, int *numberOfElement);
 """)
 
 dbCard_c = dbCard_cffi.verify("""

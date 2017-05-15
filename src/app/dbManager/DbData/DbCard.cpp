@@ -73,8 +73,9 @@ bool DbCard::insertToDbCard(const CardInfo &info)
     return true;
 }
 
-bool DbCard::selectToDbCard(std::vector<CardInfo*>& vectorCardInfos)
+bool DbCard::selectToDbCard(std::vector<CardInfo>& vectorCardInfos)
 {
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
@@ -83,9 +84,9 @@ bool DbCard::selectToDbCard(std::vector<CardInfo*>& vectorCardInfos)
         while (res->next())
         {
             CardInfo* item = new CardInfo;
-            strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
-            strcpy(item->card.idPerson,(char*)res->getString("IDUser").c_str());
-            vectorCardInfos.push_back(item);
+            strcpy(item->card.idCard, (char*)res->getString("IDCard").c_str());
+            strcpy(item->card.idPerson, (char*)res->getString("IDUser").c_str());
+            vectorCardInfos.push_back(*item);
         }
     }
         catch(sql::SQLException& e)

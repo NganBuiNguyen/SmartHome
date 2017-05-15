@@ -38,7 +38,7 @@
 #define ATTR_JSON_IDPerson "IDPerson"
 #define ATTR_JSON_ARR_CARD "ARR_CARD"
 
-#include <stdbool.h>
+// #include <stdbool.h>
 
 typedef enum 
 {
@@ -88,14 +88,21 @@ typedef struct
     char nameRoom[NAME_DOOR_ROOM];
 }Room;
 
+typedef struct  
+{
+    bool statusDoor;
+    bool checkCard; 
+}History;
+
 typedef struct
-  {
+{
     Date_Time dateTime;
     Card card;
     Person person;
     Door door;
     Room room;
-  }CardInfo;
+    History history;
+}CardInfo; 
 
 typedef struct  
 {

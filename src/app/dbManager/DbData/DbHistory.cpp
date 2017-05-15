@@ -36,7 +36,7 @@ void DbHistory::closeConn()
     }
 }
 
-bool DbCard::insertToDbCard(const CardInfo &info, bool statusDoor, bool checkCard)
+bool DbHistory::insertToDbHistory(const CardInfo &info)
 {
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
@@ -57,15 +57,16 @@ bool DbCard::insertToDbCard(const CardInfo &info, bool statusDoor, bool checkCar
         (this->prep_stmt)->setInt(4, info.dateTime.hour);
         (this->prep_stmt)->setInt(5, info.dateTime.min);
         (this->prep_stmt)->setInt(6, info.dateTime.sec);
+        
 
-        if(statusDoor == true){
+        if(info.history.statusDoor == true){
             (this->prep_stmt)->setInt(7, 1);
         }
         else{
             (this->prep_stmt)->setInt(7, 0);
         }
 
-        if(checkCard == true){
+        if(info.history.checkCard == true){
             (this->prep_stmt)->setInt(8, 1);
         }
         else{
@@ -97,7 +98,7 @@ bool DbHistory::selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos)
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
         stmt = MYSQL_DB_CONNECTION->createStatement();
-        this->res = stmt->executeQuery("SELECT Day,Mon,Year,Hour,Min,Sec FROM tbl_History");
+        this->res = stmt->executeQuery("SELECT Day,Mon,Year,Hour,Min,Sec,StatusDoor,CheckCard FROM tbl_History");
         while (res->next())
         {
             CardInfo* item = new CardInfo;
@@ -112,6 +113,19 @@ bool DbHistory::selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos)
             item->dateTime.hour = res->getInt("Hour");
             item->dateTime.min = res->getInt("Min");
             item->dateTime.sec = res->getInt("Sec");
+
+            if(res->getInt("StatusDoor") == 1){
+                item->history.statusDoor = true;
+            }else{
+                item->history.statusDoor = false;
+            }
+
+            if(res->getInt("CheckCard") == 1){
+                item->history.checkCard = true;
+            }else{
+                item->history.checkCard = false;
+            }
+            
             vectorCardInfos.push_back(item);
         }
     }

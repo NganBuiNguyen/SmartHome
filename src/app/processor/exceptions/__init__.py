@@ -5,3 +5,6 @@ class InsertingTableDBCardForCFailure(Exception):
 
 class CardInfoJsonDictionayKeyWordNotFound(Exception):
 	pass
+
+class DbCardInfoSelectOperationFailure(Exception):
+	pass

@@ -29,7 +29,7 @@
 #define NO_ROW_EFFECTED 0
 #define NUMOFFSET 100
 #define COLNAME 200
-#define INSERT_DB_TMP_STATUS "INSERT INTO tbl_TmpStatus(IDCard, IP, Port, Day, Mon, Year, Hour, Min, Sec) values (?,?,?,?,?,?,?,?,?)"
+// #define INSERT_DB_TMP_STATUS "INSERT INTO tbl_TmpStatus(IDCard, IP, Port, Day, Mon, Year, Hour, Min, Sec) values (?,?,?,?,?,?,?,?,?)"
 #define SELECT_ID_TMP_STATUS "SELECT IP, Port FROM tbl_TmpStatus WHERE ID_Tmp_Status = ?"
 
 class DbHistory

@@ -21,6 +21,7 @@ jsonParser_cffi = cffi.FFI()
 jsonParser_cffi.cdef("""
     #define NAME_CARD_PERSON_LENGTH 20
     #define NAME_DOOR_ROOM 10
+    #define PORT 10
 
     typedef struct
     {
@@ -34,40 +35,40 @@ jsonParser_cffi.cdef("""
 
     typedef struct
     {
-        int idPerson;
+        char idPerson[PORT];
         char namePerson[NAME_CARD_PERSON_LENGTH];
         int age;
         bool grantPerson;
-        int idRoom;
+        char userName[NAME_CARD_PERSON_LENGTH];
+        char password[PORT];
     }Person;
 
     typedef struct
     {
         char idCard[NAME_CARD_PERSON_LENGTH];
-        char typeCard[NAME_CARD_PERSON_LENGTH];
-        int idPerson;
+        char idPerson[PORT];
     }Card;
 
     typedef struct
     {
-        int idDoor;
-        char nameDoor[NAME_DOOR_ROOM]; 
+        char idDoor[PORT];
+        char nameDoor[NAME_DOOR_ROOM];
+        char ip[20];
+        long port;
+        char idRoom[PORT];
     }Door;
 
     typedef struct
     {
-        int idIP;
-        char ip[20];
-        long port;
-        int idDoor;
-    }IP;
-
-    typedef struct
-    {
-        int idRoom;
+        char idRoom[PORT];
         char nameRoom[NAME_DOOR_ROOM];
-        int idDoor;
     }Room;
+
+    typedef struct  
+    {
+        bool statusDoor;
+        bool checkCard; 
+    }History;
 
     typedef struct
       {
@@ -76,14 +77,18 @@ jsonParser_cffi.cdef("""
         Person person;
         Door door;
         Room room;
-        IP ip_port;
+        History history;
       }CardInfo;
 
+    typedef struct  
+    {
+        void* result; 
+        int numberOfElement; 
+    }DBAResult;
     bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 
 jsonParser_c = jsonParser_cffi.verify("""
-                #include <stdbool.h>
                 #include "JsonParserForC.h"
                 """,
                 include_dirs = [JSON_PARSER_FOR_C_INCLUDES,

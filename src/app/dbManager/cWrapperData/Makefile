@@ -10,7 +10,8 @@ SRCS = DbCardForC.cpp
 OBJS = $(SRCS:.cpp=.o)
 
 #-----------------------------------------------------------------------------
-SUBOBJS = DbCard.o DbHistory.o
+SUBOBJS = DbCard.o DbHistory.o DbDoor.o DbRoom.o DbPerson.o DbDoorCard.o \
+          DbAccountUser.o
 
 #-----------------------------------------------------------------------------
 LIBDIRS_dbData  += $(LIDT_ROOT)/src/app/dbManager/DbData/
