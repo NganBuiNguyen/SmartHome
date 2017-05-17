@@ -65,8 +65,9 @@ bool DbRoom::insertToDbRoom(const CardInfo &info)
 
 }
 
-bool DbRoom::selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos)
+bool DbRoom::selectToDbRoom(std::vector<CardInfo>& vectorCardInfos)
 {
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
@@ -77,7 +78,7 @@ bool DbRoom::selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos)
             CardInfo* item = new CardInfo;
             strcpy(item->room.idRoom,(char*)res->getString("IDRoom").c_str());
             strcpy(item->room.nameRoom,(char*)res->getString("NameRoom").c_str());
-            vectorCardInfos.push_back(item);
+            vectorCardInfos.push_back(*item);
         }
     }
         catch(sql::SQLException& e)

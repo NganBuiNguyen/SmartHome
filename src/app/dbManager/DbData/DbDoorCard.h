@@ -40,7 +40,7 @@ public:
     DbDoorCard();
     void closeConn();
     bool insertToDbDoorCard(const CardInfo &info);
-    bool selectToDbDoorCard(std::vector<CardInfo*>& vectorCardInfos);
+    bool selectToDbDoorCard(std::vector<CardInfo>& vectorCardInfos);
     bool updateToDbDoorCard(const CardInfo &info,int id);
     bool deleteToDbDoorCard(const CardInfo &info,int id);
    

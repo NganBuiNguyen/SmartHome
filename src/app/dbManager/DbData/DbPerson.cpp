@@ -72,8 +72,9 @@ bool DbPerson::insertToDbInfoUser(const CardInfo &info)
     return true;
 }
 
-bool DbPerson::selectToDbInfoUser(std::vector<CardInfo*>& vectorCardInfos)
+bool DbPerson::selectToDbInfoUser(std::vector<CardInfo>& vectorCardInfos)
 {
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
@@ -85,7 +86,7 @@ bool DbPerson::selectToDbInfoUser(std::vector<CardInfo*>& vectorCardInfos)
             strcpy(item->person.idPerson,(char*)res->getString("IDUser").c_str());
             strcpy(item->person.namePerson,(char*)res->getString("NameUser").c_str());
             item->person.age = res->getInt("Age");
-            vectorCardInfos.push_back(item);
+            vectorCardInfos.push_back(*item);
         }
     }
         catch(sql::SQLException& e)

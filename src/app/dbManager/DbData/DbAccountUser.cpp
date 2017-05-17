@@ -82,8 +82,9 @@ bool DbAccountUser::insertToDbAccountUser(const CardInfo &info)
     return true;
 }
 
-bool DbAccountUser::selectToDbAccountUser(std::vector<CardInfo*>& vectorCardInfos)
+bool DbAccountUser::selectToDbAccountUser(std::vector<CardInfo>& vectorCardInfos)
 {
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
@@ -100,7 +101,7 @@ bool DbAccountUser::selectToDbAccountUser(std::vector<CardInfo*>& vectorCardInfo
             }
             strcpy(item->person.userName,(char*)res->getString("UserName").c_str());
             strcpy(item->person.password,(char*)res->getString("Password").c_str());
-            vectorCardInfos.push_back(item);
+            vectorCardInfos.push_back(*item);
         }
     }
         catch(sql::SQLException& e)

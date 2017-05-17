@@ -64,8 +64,9 @@ bool DbDoorCard::insertToDbDoorCard(const CardInfo &info)
 
 }
 
-bool DbDoorCard::selectToDbDoorCard(std::vector<CardInfo*>& vectorCardInfos)
+bool DbDoorCard::selectToDbDoorCard(std::vector<CardInfo>& vectorCardInfos)
 {
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
@@ -76,16 +77,16 @@ bool DbDoorCard::selectToDbDoorCard(std::vector<CardInfo*>& vectorCardInfos)
             CardInfo* item = new CardInfo;
             strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
             strcpy(item->door.idDoor,(char*)res->getString("IDDoor").c_str());
-            vectorCardInfos.push_back(item);
+            vectorCardInfos.push_back(*item);
         }
     }
-        catch(sql::SQLException& e)
-        {
-            MYSQL_DB_CONNECTION->rollback();
-            return false;
-        }
+    catch(sql::SQLException& e)
+    {
+        MYSQL_DB_CONNECTION->rollback();
+        return false;
+    }
         
-        MYSQL_DB_CONNECTION->commit();
+    MYSQL_DB_CONNECTION->commit();
     
     this->closeConn();
     return true;

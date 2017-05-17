@@ -91,9 +91,9 @@ bool DbHistory::insertToDbHistory(const CardInfo &info)
     return true;
 }
 
-bool DbHistory::selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos)
+bool DbHistory::selectToDbHistory(std::vector<CardInfo>& vectorCardInfos)
 {       
-
+    vectorCardInfos.clear();
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
@@ -102,11 +102,6 @@ bool DbHistory::selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos)
         while (res->next())
         {
             CardInfo* item = new CardInfo;
-            // strcpy(item->card.idCard,(char*)res->getString("ID").c_str());
-            // strcpy(item->door.ip,(char*)res->getString("IP").c_str());
-            // char* port = new char[PORT];
-            // strcpy(port,(char*)res->getString("Port").c_str());
-            // item->door.port = atol(port);
             item->dateTime.day = res->getInt("Day");
             item->dateTime.month = res->getInt("Mon");
             item->dateTime.year = res->getInt("Year");
@@ -126,7 +121,7 @@ bool DbHistory::selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos)
                 item->history.checkCard = false;
             }
             
-            vectorCardInfos.push_back(item);
+            vectorCardInfos.push_back(*item);
         }
     }
      catch(sql::SQLException& e)

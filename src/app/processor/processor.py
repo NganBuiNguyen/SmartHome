@@ -58,9 +58,7 @@ class Processor(object):
             print("message", message)
             msg_handler = message_handler.MessageHandler(topic, message)
             msg_handler.run()
-            # message_processor = message_handler.MessageHandler(topic, message)
-            # message_processor.run()
-            # time.sleep(1)
+           
 
         self.sock.close()
 

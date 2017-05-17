@@ -104,11 +104,6 @@ typedef struct
     History history;
 }CardInfo; 
 
-typedef struct  
-{
-    void* result; 
-    int numberOfElement; 
-}DBAResult;
 
 
 #endif

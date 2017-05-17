@@ -40,7 +40,7 @@ public:
     DbPerson();
     void closeConn();
     bool insertToDbInfoUser(const CardInfo &info);
-    bool selectToDbInfoUser(std::vector<CardInfo*>& vectorCardInfos);
+    bool selectToDbInfoUser(std::vector<CardInfo>& vectorCardInfos);
     bool updateToDbInfoUser(const CardInfo &info);
     bool deleteToDbInfoUser(const CardInfo &info);
    

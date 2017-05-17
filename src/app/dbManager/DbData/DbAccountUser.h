@@ -38,7 +38,7 @@ public:
     DbAccountUser();
     void closeConn();
     bool insertToDbAccountUser(const CardInfo &info);
-    bool selectToDbAccountUser(std::vector<CardInfo*>& vectorCardInfos);
+    bool selectToDbAccountUser(std::vector<CardInfo>& vectorCardInfos);
     bool updateToDbAccountUser(const CardInfo &info);
     bool deleteToDbAccountUser(const CardInfo &info);
    

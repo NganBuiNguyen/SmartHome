@@ -38,7 +38,7 @@ public:
     DbHistory();
     void closeConn();
     bool insertToDbHistory(const CardInfo &info);
-    bool selectToDbHistory(std::vector<CardInfo*>& vectorCardInfos);
+    bool selectToDbHistory(std::vector<CardInfo>& vectorCardInfos);
    
 private:
     sql::PreparedStatement* prep_stmt;

@@ -38,7 +38,7 @@ public:
     DbRoom();
     void closeConn();
     bool insertToDbRoom(const CardInfo &info);
-    bool selectToDbRoom(std::vector<CardInfo*>& vectorCardInfos);
+    bool selectToDbRoom(std::vector<CardInfo>& vectorCardInfos);
     bool updateToDbRoom(const CardInfo &info);
     bool deleteToDbRoom(const CardInfo &info);
    

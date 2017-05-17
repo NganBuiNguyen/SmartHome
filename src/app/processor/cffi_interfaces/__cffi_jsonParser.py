@@ -80,12 +80,7 @@ jsonParser_cffi.cdef("""
         History history;
       }CardInfo;
 
-    typedef struct  
-    {
-        void* result; 
-        int numberOfElement; 
-    }DBAResult;
-    bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
+        bool parseOpenDoorJsonForC(const char* jsonString, CardInfo* info);
 """)
 
 jsonParser_c = jsonParser_cffi.verify("""
