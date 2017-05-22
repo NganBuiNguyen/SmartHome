@@ -18,8 +18,8 @@ class TestSelectRoomMethods(unittest.TestCase):
                 'nameRoom': "Phong1"
             },
             {
-                'idRoom': "P0001",
-                'nameRoom': "Phong1"
+                'idRoom': "P0002",
+                'nameRoom': "Phong2"
             }
         ]
 
@@ -28,7 +28,7 @@ class TestSelectRoomMethods(unittest.TestCase):
             self.assertTrue(True)
         except:
             self.assertTrue(False)
-
+        print(result)
         self.assertEqual(expected_result, result)
 
 

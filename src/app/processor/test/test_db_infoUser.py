@@ -20,10 +20,10 @@ class TestSelectInfoUserMethods(unittest.TestCase):
                 'password' : 'nganit123'
             },
             {
-                'idPerson' : 'U0001',
-                'grantPerson' : True,
-                'userName' : 'kimnganbui',
-                'password' : 'nganit123'
+                'idPerson' : 'U0002',
+                'grantPerson' : False,
+                'userName' : 'hongha17',
+                'password' : 'hongha123'
             }
         ]
 

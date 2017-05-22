@@ -27,9 +27,9 @@ class TestSelectHistoryMethods(unittest.TestCase):
                 'day' : 7,
                 'month' : 5,
                 'year' : 2017,
-                'hour' : 9,
-                'min' : 42,
-                'sec' : 15,
+                'hour' : 13,
+                'min' : 12,
+                'sec' : 35,
                 'statusDoor' : True,
                 'checkCard' : True
             }

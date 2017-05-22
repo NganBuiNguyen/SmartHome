@@ -9,29 +9,29 @@ class JsonParser(object):
             
     def parse_smart_door_history(self, message):
         json_card = json.loads(message)
-        print('json message: ', message)
-        print('json_card: ', json_card)
+        print('\n\njson message: ', message)
+        print('\n\njson_card: ', json_card)
 
-    
+        
         try:
             date_time_info = {
                 constants.ATTR_SEC : int(json_card[\
-                                                constants.ATTR_TIMER][\
+                                                constants.ATTR_DATE_TIME][\
                                                 constants.ATTR_SEC]),
                 constants.ATTR_MIN : int(json_card[\
-                                                constants.ATTR_TIMER][\
+                                                constants.ATTR_DATE_TIME][\
                                                 constants.ATTR_MIN]),
                 constants.ATTR_HOUR : int(json_card[\
-                                                constants.ATTR_TIMER][\
+                                                constants.ATTR_DATE_TIME][\
                                                 constants.ATTR_HOUR]),
                 constants.ATTR_DAY : int(json_card[\
-                                                constants.ATTR_TIMER][\
+                                                constants.ATTR_DATE_TIME][\
                                                 constants.ATTR_DAY]),
                 constants.ATTR_MONTH : int(json_card[\
-                                                constants.ATTR_TIMER][\
+                                                constants.ATTR_DATE_TIME][\
                                                 constants.ATTR_MONTH]),
                 constants.ATTR_YEAR : int(json_card[\
-                                                constants.ATTR_TIMER][\
+                                                constants.ATTR_DATE_TIME][\
                                                 constants.ATTR_YEAR]),
             }
 
@@ -83,19 +83,7 @@ class JsonParser(object):
 
             }
 
-            # ip_info = {
-            #     constants.ATTR_ID_IP : -1,
-
-            #     constants.ATTR_NAME_IP : bytes(json_card[\
-            #                                     constants.ATTR_SENDER][\
-            #                                     constants.ATTR_NAME_IP], 'utf-8'),
-
-            #     constants.ATTR_PORT : int(json_card[\
-            #                                     constants.ATTR_SENDER][\
-            #                                     constants.ATTR_PORT]),
-
-            #     constants.ATTR_ID_DOOR : -1,
-            # }
+            
 
             history_info = {
                 constants.ATTR_STATUS_DOOR : 0,
@@ -110,8 +98,7 @@ class JsonParser(object):
                 constants.ATTR_PERSON : person_info,
                 constants.ATTR_DOOR : door_info,
                 constants.ATTR_ROOM : room_info,
-                constants.ATTR_HISTORY : history_info,
-                # constants.ATTR_IP : ip_info
+                constants.ATTR_HISTORY : history_info
             }
 
             return smart_door_status_info

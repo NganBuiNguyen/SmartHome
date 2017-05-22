@@ -18,8 +18,8 @@ class TestSelectDoorCardMethods(unittest.TestCase):
                 'idDoor': 'C0001'
             },
             {
-                'idCard': '5D2A821C',
-                'idDoor': 'C0001'
+                'idCard': '6628E6EC',
+                'idDoor': 'C0002'
             }
         ]
 
@@ -28,9 +28,8 @@ class TestSelectDoorCardMethods(unittest.TestCase):
             self.assertTrue(True)
         except:
             self.assertTrue(False)
-
+        
         self.assertEqual(expected_result, result)
-
 
 if __name__ == '__main__':
     unittest.main()

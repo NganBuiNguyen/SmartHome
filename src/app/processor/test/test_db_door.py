@@ -21,11 +21,11 @@ class TestSelectDoorMethods(unittest.TestCase):
                 'idRoom': 'P0001'
             },
             {
-                'idDoor': 'C0001',
-                'nameDoor': 'Cua1',
+                'idDoor': 'C0002',
+                'nameDoor': 'Cua2',
                 'ip': '192.168.3.100',
                 'port' : 5563,
-                'idRoom': 'P0001'
+                'idRoom': 'P0002'
             }
         ]
 

@@ -58,7 +58,6 @@ bool DbHistory::insertToDbHistory(const CardInfo &info)
         (this->prep_stmt)->setInt(5, info.dateTime.min);
         (this->prep_stmt)->setInt(6, info.dateTime.sec);
         
-
         if(info.history.statusDoor == true){
             (this->prep_stmt)->setInt(7, 1);
         }

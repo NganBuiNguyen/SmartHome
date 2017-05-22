@@ -18,8 +18,8 @@ class TestSelectCardMethods(unittest.TestCase):
                 'idCard': '5D2A821C'
             },
             {
-                'idPerson': 'U0001', 
-                'idCard': '5D2A821C'
+                'idPerson': 'U0002',
+                'idCard': '6628E6EC'
             }
         ]
 
@@ -28,7 +28,7 @@ class TestSelectCardMethods(unittest.TestCase):
             self.assertTrue(True)
         except:
             self.assertTrue(False)
-
+            
         self.assertEqual(expected_result, result)
 
 

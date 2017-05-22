@@ -19,9 +19,9 @@ class TestSelectUserMethods(unittest.TestCase):
                 'age' : 21
             },
             {
-                'idPerson' : 'U0001',
-                'namePerson' : 'Ngan',
-                'age' : 21
+                'idPerson' : 'U0002',
+                'namePerson' : 'Ha',
+                'age' : 22
             }
         ]
 
