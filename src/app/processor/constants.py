@@ -41,8 +41,7 @@ ATTR_DATE_TIME = "dateTime"
 ATTR_HISTORY = "history"
 ATTR_STATUS_DOOR = "statusDoor"
 ATTR_CHECK_CARD = "checkCard" 
-# ATTR_IP = "ip_port"
-# ATTR_ID_IP = "idIP"
+ATTR_ID = 'id';
 
 
 

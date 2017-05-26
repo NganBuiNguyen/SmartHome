@@ -72,6 +72,8 @@ bool DbHistory::insertToDbHistory(const CardInfo &info)
             (this->prep_stmt)->setInt(8, 0);
         }
 
+        // (this->prep_stmt)->setInt(9, info.history.id);
+
         result = (this->prep_stmt)->executeUpdate();
 
         if(result < NO_ROW_EFFECTED)

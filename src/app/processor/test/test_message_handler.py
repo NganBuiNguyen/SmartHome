@@ -76,11 +76,13 @@ class TestMessageHandlerMethods(unittest.TestCase):
                 constants.ATTR_YEAR : 2017,
            }
         }
+
         json_message = json.dumps(json_dict)
         print("\n\n\n json message test:", json_message)
         message_topic = constants.ATTR_SMART_DOOR_STATUS_VALUE
         message_handler_obj = message_handler.MessageHandler(topic=message_topic.encode(), 
                                                             message=json_message.encode())
+       
         try:
             result = message_handler_obj.is_goin_goout(json_message)
             print("\n\nresult go in or go out:", result )

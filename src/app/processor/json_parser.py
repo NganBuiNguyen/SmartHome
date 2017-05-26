@@ -6,7 +6,7 @@ import error_messages
 class JsonParser(object):
     def __init__(self):
         pass
-            
+                
     def parse_smart_door_history(self, message):
         json_card = json.loads(message)
         print('\n\njson message: ', message)
@@ -86,9 +86,11 @@ class JsonParser(object):
             
 
             history_info = {
-                constants.ATTR_STATUS_DOOR : 0,
+                constants.ATTR_STATUS_DOOR : True,
 
-                constants.ATTR_CHECK_CARD : 0,
+                constants.ATTR_CHECK_CARD : True,
+
+                constants.ATTR_ID : 0,
 
             }
 

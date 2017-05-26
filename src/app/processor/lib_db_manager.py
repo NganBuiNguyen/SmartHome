@@ -11,18 +11,11 @@ import exceptions
 import constants
 
 DBA_RESULT_OK = 1
-
+list_card_insert = []
 class LibDBManager(object):
     def __init__(self):
         pass
 
-    def insert_history_card(self, smart_door_info):
-        data_ptr = dbCard_cffi.new("CardInfo* ",\
-                                          smart_door_info)
-        result = dbCard_c.insertToDbHistoryForC(data_ptr)
-        if not result:
-            raise exceptions.InsertingTableDBCardForCFailure(\
-                                 error_messages.ERROR_INSERT_INTO_STATUS_TABLE) 
     def select_card_info(self):
         list_cards = []
 
@@ -163,7 +156,16 @@ class LibDBManager(object):
             
             list_infoUsers.append(infoUser_item)
         return list_infoUsers
+        
+    
 
+    def insert_history_card(self, smart_door_info):
+        data_ptr = dbCard_cffi.new("CardInfo* ",\
+                                          smart_door_info)
+        result = dbCard_c.insertToDbHistoryForC(data_ptr)
+        if not result:
+            raise exceptions.InsertingTableDBCardForCFailure(\
+                                error_messages.ERROR_INSERT_INTO_STATUS_TABLE)
     def select_history_info(self):
         list_historys = []
 

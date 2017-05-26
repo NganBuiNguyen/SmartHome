@@ -91,7 +91,8 @@ typedef struct
 typedef struct  
 {
     bool statusDoor;
-    bool checkCard; 
+    bool checkCard;
+    int id;
 }History;
 
 typedef struct
