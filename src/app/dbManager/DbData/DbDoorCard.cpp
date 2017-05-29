@@ -71,10 +71,11 @@ bool DbDoorCard::selectToDbDoorCard(std::vector<CardInfo>& vectorCardInfos)
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     try{
         stmt = MYSQL_DB_CONNECTION->createStatement();
-        this->res = stmt->executeQuery("SELECT IDCard , IDDoor FROM tbl_Door_Card");
+        this->res = stmt->executeQuery("SELECT  * FROM tbl_Door_Card");
         while (res->next())
         {
             CardInfo* item = new CardInfo;
+            item->history.id = res->getInt("ID");
             strcpy(item->card.idCard,(char*)res->getString("IDCard").c_str());
             strcpy(item->door.idDoor,(char*)res->getString("IDDoor").c_str());
             vectorCardInfos.push_back(*item);

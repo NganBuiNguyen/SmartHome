@@ -272,6 +272,8 @@ bool selectToDbDoorCardForC(CardInfo** info, int *numberOfElement)
 
     for (index = 0; index < *numberOfElement; index++)
     {
+        (listDoorCardInfoTmp[index]).history.id = 
+                                        vectorDoorCardInfos[index].history.id;    
         strcpy((listDoorCardInfoTmp[index]).card.idCard,
                                         vectorDoorCardInfos[index].card.idCard);
         strcpy((listDoorCardInfoTmp[index]).door.idDoor,

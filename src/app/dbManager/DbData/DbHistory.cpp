@@ -41,7 +41,7 @@ bool DbHistory::insertToDbHistory(const CardInfo &info)
     MYSQL_DB_CONNECTION->setSchema(DATABASE);
     MYSQL_DB_CONNECTION->setAutoCommit(0);
     
-    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_History (Day,Mon,Year,Hour,Min,Sec,StatusDoor,CheckCard) values(?,?,?,?,?,?,?,?)");
+    this->prep_stmt = MYSQL_DB_CONNECTION->prepareStatement("INSERT INTO tbl_History (Day,Mon,Year,Hour,Min,Sec,StatusDoor,CheckCard,ID) values(?,?,?,?,?,?,?,?,?)");
     if (this->prep_stmt == NULL)
     {
         return false;
@@ -72,7 +72,7 @@ bool DbHistory::insertToDbHistory(const CardInfo &info)
             (this->prep_stmt)->setInt(8, 0);
         }
 
-        // (this->prep_stmt)->setInt(9, info.history.id);
+        (this->prep_stmt)->setInt(9, info.history.id);
 
         result = (this->prep_stmt)->executeUpdate();
 

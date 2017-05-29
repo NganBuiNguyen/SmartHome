@@ -5,6 +5,7 @@ import exceptions
 import lib_db_manager
 import constants
 import json_parser
+import processor
 
 from cffi_interfaces.__cffi_dbCard import dbCard_cffi
 from cffi_interfaces.__cffi_dbCard import dbCard_c
@@ -12,65 +13,80 @@ from cffi_interfaces.__cffi_dbCard import dbCard_c
 list_card_insert = []
 
 class MessageHandler(threading.Thread):
-    def __init__(self, topic, message):
+    def __init__(self, topic, message, list_doors , list_card_doors):
         threading.Thread.__init__(self)
         self.message = message.decode('utf-8')
         self.topic = topic.decode('utf-8')
         self.json_parser = json_parser.JsonParser()
+        self.list_doors = list_doors
+        self.list_card_doors = list_card_doors
 
     def is_card_id_valid(self,message):
         card_info = self.json_parser.parse_smart_door_history(message)
-        print("\n\ncard info:",card_info)
-        lib_db_manager_obj = lib_db_manager.LibDBManager()
-
-        # check_card = card_info['history']['checkCard']
-        
         ip = card_info['door']['ip'].decode("utf-8")
         port = card_info['door']['port'] 
-        db_door = lib_db_manager_obj.select_door_info()
+        db_door = self.list_doors
         id_door = card_info['door']['idDoor'].decode("utf-8")
         for door_index in db_door:
             if ip == door_index['ip']  and port == door_index['port']:
                 id_door = door_index['idDoor']
-        
         id_card = card_info['card']['idCard'].decode("utf-8")
-        db_card_door = lib_db_manager_obj.select_doorcard_info()
+        db_card_door = self.list_card_doors
         for info_index in db_card_door:
-            # print("info_index:" , info_index)
             if(id_card == info_index['idCard'] and id_door == info_index['idDoor']):
                 return True
-                print("check card True:",check_card)
             else:
                 return False
-                # print("check card False:",check_card)
+                
 
     
     def is_goin_goout(self,message):
         card_info = self.json_parser.parse_smart_door_history(message)
         list_door_infos_ptr = dbCard_cffi.new("CardInfo**")
-        # number_elements = dbCard_cffi.new("int*")
-        # status_door = card_info['history']['statusDoor']
+        
         id_card = card_info['card']['idCard'].decode("utf-8")
         if id_card in list_card_insert:
             list_card_insert.remove(id_card)
-            print("\n\nList card insert:", list_card_insert)
             return False
         else: 
             list_card_insert.append(id_card)
-            print("\n\nList card insert2:", list_card_insert)
             return True
-             
- 
+    
+    def id_doorcard(self,message):
+        card_info = self.json_parser.parse_smart_door_history(message)
+        db_card_door = self.list_card_doors
+        ip = card_info['door']['ip'].decode("utf-8")
+        port = card_info['door']['port'] 
+        db_door = self.list_doors
+        id_door = card_info['door']['idDoor'].decode("utf-8")
+        for door_index in db_door:
+            if ip == door_index['ip']  and port == door_index['port']:
+                id_door = door_index['idDoor']
+        id_card = card_info['card']['idCard'].decode("utf-8")
+        print("\n\n select doorcard:",db_card_door)
+        for info_index in db_card_door:
+            print("\n\nindex info door1:",info_index['idCard'])
+            if(id_card == info_index['idCard'] and id_door == info_index['idDoor']):
+                return info_index['id']        
+        return None
+
     def process_smart_door_history(self):
         try:
-            smart_door_info = self.json_parser.parse_smart_door_history(self.message)
-            print("smart_door_info:", smart_door_info)
-            check_card = smart_door_info['history']['checkCard']
-            status_door = smart_door_info['history']['statusDoor']
+            # import pdb
+            # pdb.set_trace()
             check_card = self.is_card_id_valid(self.message)
             status_door = self.is_goin_goout(self.message)
-            print("\n\n check card:", check_card)
-            self.lib_db_manager.insert_history_card(smart_door_info)
+            id = self.id_doorcard(self.message)
+            print("\n\n id:", id)
+            if(id != None):
+                smart_door_info = self.json_parser.parse_smart_door_history(self.message)
+                print("smart_door_info:", smart_door_info)
+                smart_door_info['history']['checkCard'] = check_card 
+                smart_door_info['history']['statusDoor'] = status_door
+                smart_door_info['history']['id'] = id
+                print("\n\n check card:", check_card)
+                self.lib_db_manager.insert_history_card(smart_door_info)
+                print("\n\n smart door info test:", smart_door_info)
         except exceptions.InsertingTableDBCardForCFailure as ex:
             import traceback
             traceback.print_exc()
@@ -80,7 +96,27 @@ class MessageHandler(threading.Thread):
             traceback.print_exc()
             print("Error message: ", ex)
 
-    
+    def process_send_message_to_arduino(self):
+        try:
+            json_message = json.loads(self.message)
+            print("\n\n json_message_sender:", json_message)
+            id_card = json_message[constants.ATTR_DATA][constants.ATTR_ID_CARD]
+            print('id_card:', id_card)
+            is_open_valid = self.is_card_id_valid(self.message)
+            if is_open_valid == True:
+                print('is_open_valid:',  is_open_valid)
+                self.lib_db_manager.message_sender(id_card, "YES")
+            else: 
+                print('is_open_valid:',  is_open_valid)
+                self.lib_db_manager.message_sender(id_card, "NO")
+        except exceptions.SendMessageToArduinoFailure as ex:
+            import traceback
+            traceback.print_exc()
+            print("Error message 01: ", ex)
+        except Exception as ex:
+            import traceback
+            traceback.print_exc()
+            print("Error message 02: ", ex)
 
     def process_message(self):
         print("smart_door_info: 01")
@@ -93,6 +129,10 @@ class MessageHandler(threading.Thread):
             self.is_goin_goout(self.message)
             print("\nis goin goout:",self.is_goin_goout(self.message))
             self.process_smart_door_history()
+        # elif self.topic == constants.ATTR_SMART_IS_OPEN_VALID:
+            print('Send message Message Sender')
+            self.process_send_message_to_arduino()
+
  
     def run(self):
         self.lib_db_manager = lib_db_manager.LibDBManager()

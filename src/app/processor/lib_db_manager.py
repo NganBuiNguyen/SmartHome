@@ -4,11 +4,16 @@
 
 from cffi_interfaces.__cffi_dbCard import dbCard_cffi
 from cffi_interfaces.__cffi_dbCard import dbCard_c
+
+from cffi_interfaces.__cffi_messageSender import messageSender_cffi
+from cffi_interfaces.__cffi_messageSender import messageSender_c
+
 from ctypes import *
 
 import error_messages
 import exceptions
 import constants
+
 
 DBA_RESULT_OK = 1
 list_card_insert = []
@@ -96,10 +101,11 @@ class LibDBManager(object):
 
         if result != DBA_RESULT_OK:
             raise DbCardInfoSelectOperationFailure(ERROR_SELECT_CARD_INFO)
-        print(dbCard_cffi.string(\
-                        list_doorcard_infos_ptr[0][0].card.idCard))
+        print("\n\nid select1:",list_doorcard_infos_ptr[0][0].history.id)
         for index in range(0, number_elements[0]):
             doorcard_item = {}
+            doorcard_item[constants.ATTR_ID] = int(dbCard_cffi.cast(\
+                                "int",list_doorcard_infos_ptr[0][index].history.id))
             doorcard_item['idCard'] = dbCard_cffi.string(\
                         list_doorcard_infos_ptr[0][index].card.idCard).decode('utf-8')
             doorcard_item['idDoor'] =  dbCard_cffi.string(\
@@ -196,10 +202,28 @@ class LibDBManager(object):
                                 "bool",list_history_infos_ptr[0][index].history.statusDoor))
             history_item['checkCard'] = bool(dbCard_cffi.cast(\
                                 "bool",list_history_infos_ptr[0][index].history.checkCard))
+            history_item[constants.ATTR_ID] = int(dbCard_cffi.cast(\
+                                "int",list_history_infos_ptr[0][index].history.id))
         
             list_historys.append(history_item)
         return list_historys
 
-    def function():
-        pass
+    def message_sender(self, id_card, is_open_valid):
+        print("Bao Khanh is here")
+        if id_card == "5D2A821C":
+            print("id_card " + id_card)
+            str1 = '192.168.3.177'
+            host = messageSender_cffi.new("char[]", bytes(str1, "utf-8"))
+            print(host[0])
+        # elif id_device == "SD002":
+        #     print("id_device " + id_device)
+        #     host = messageSender_cffi.new("char[]", bytes('192.168.0.103',"utf-8"))
+            
+        messageStr = messageSender_cffi.new("char[]", bytes(is_open_valid, "utf-8"))
+        print("is_open_valid: " + is_open_valid)
+        
+        port = 6203
+
+        messageSender_c.sendMessageUDPForC(messageStr, host, port)
+        print("sendMessageUDPForC")
 
