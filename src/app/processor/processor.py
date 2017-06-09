@@ -5,6 +5,7 @@ import zmq
 import lib_db_manager
 import optionParser
 import message_handler
+import time
 
 from cffi_interfaces import dbCard_c
 from cffi_interfaces import dbCard_cffi
@@ -31,6 +32,7 @@ class Processor(object):
         self.host = host 
         self.port = port
         self.topic = topic
+        self.db_manager = lib_db_manager.LibDBManager()
         self.context = zmq.Context()
         self.sock = self.context.socket(zmq.PAIR)
         self.list_doors = self.get_all_doors()
@@ -38,34 +40,23 @@ class Processor(object):
         self.list_card_doors = self.get_card_doors()
 
     def get_all_doors(self):
-        lib_db_manager_obj = lib_db_manager.LibDBManager()
-        db_door = lib_db_manager_obj.select_door_info()
+        db_door = self.db_manager.select_door_info()
         for door_index in db_door:
-            print("\n\n door_index:", door_index)
             list_doors.append(door_index)
-            print("\n\n list door:", list_doors)
         return list_doors
         
-
     def get_card_ids(self):
-        lib_db_manager_obj = lib_db_manager.LibDBManager()
-        db_card = lib_db_manager_obj.select_card_info()
+        db_card = self.db_manager.select_card_info()
         for card_index in db_card:
-            print("\n\n door_index:", card_index)
             list_card_ids.append(card_index)
-            print("\n\n list door:", list_card_ids)
         return list_card_ids
 
     def get_card_doors(self):
-        lib_db_manager_obj = lib_db_manager.LibDBManager()
-        db_card_door = lib_db_manager_obj.select_doorcard_info()
+        db_card_door = self.db_manager.select_doorcard_info()
         for carddoor_index in db_card_door:
-            print("\n\n door_index:", carddoor_index)
             list_card_doors.append(carddoor_index)
-            print("\n\n list door:", list_card_doors)
         return list_card_doors
     
-
     def connect(self):
         cmd = "tcp://" + self.host
         cmd = cmd + ":"
@@ -73,12 +64,10 @@ class Processor(object):
         self.sock.connect(cmd)
 
     def subscribeTopic(self, topic):
-
         if self.topic == None:
             self.topic = topic
         else:    
             self.topic + topic
-
 
     def sendMessageToArduino(self, message, host, port):
         messageStr = messageSender_cffi.new("char *")
@@ -87,7 +76,6 @@ class Processor(object):
         host[0] = host
         messageSender_c.sendMessageUDPForC(messageStr, host, port)
 
-
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))
         while True:
@@ -95,9 +83,13 @@ class Processor(object):
             message = self.sock.recv(2, zmq.NOBLOCK)
             print("message", topic)
             print("message", message)
-            msg_handler = message_handler.MessageHandler(topic, message, list_doors, list_card_doors)
+            
+            # message = self.sock.recv()
+            print("message ",message)
+            msg_handler = message_handler.MessageHandler(topic, message,\
+                                                list_doors, list_card_doors)
             msg_handler.run()
-           
+            time.sleep(1)
 
         self.sock.close()
 

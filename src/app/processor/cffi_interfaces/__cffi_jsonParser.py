@@ -68,7 +68,8 @@ jsonParser_cffi.cdef("""
     {
         bool statusDoor;
         bool checkCard;
-        int id; 
+        int id;
+        char countTime[NAME_CARD_PERSON_LENGTH]; 
     }History;
 
     typedef struct

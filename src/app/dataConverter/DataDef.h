@@ -1,4 +1,3 @@
-
 #ifndef __DATA_STRUCT_DEF_H__
 #define __DATA_STRUCT_DEF_H__
 
@@ -95,6 +94,7 @@ typedef struct
     bool statusDoor;
     bool checkCard;
     int id;
+    char countTime[NAME_CARD_PERSON_LENGTH];
 }History;
 
 typedef struct

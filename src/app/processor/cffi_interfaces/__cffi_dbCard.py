@@ -76,6 +76,7 @@ dbCard_cffi.cdef("""
         bool statusDoor;
         bool checkCard;
         int id;
+        char countTime[NAME_CARD_PERSON_LENGTH];
     }History;
 
     typedef struct

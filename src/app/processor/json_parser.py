@@ -8,11 +8,7 @@ class JsonParser(object):
         pass
                 
     def parse_smart_door_history(self, message):
-        json_card = json.loads(message)
-        print('\n\njson message: ', message)
-        print('\n\njson_card: ', json_card)
-
-        
+        json_card = json.loads(message)    
         try:
             date_time_info = {
                 constants.ATTR_SEC : int(json_card[\
@@ -91,6 +87,8 @@ class JsonParser(object):
                 constants.ATTR_CHECK_CARD : True,
 
                 constants.ATTR_ID : 0,
+                
+                constants.ATTR_COUNT_TIME : b'',
 
             }
 
