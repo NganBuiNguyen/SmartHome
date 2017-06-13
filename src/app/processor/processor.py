@@ -6,6 +6,8 @@ import lib_db_manager
 import optionParser
 import message_handler
 import time
+import json_parser
+import constants
 
 from cffi_interfaces import dbCard_c
 from cffi_interfaces import dbCard_cffi
@@ -23,8 +25,8 @@ from cffi_interfaces import messageSender_c
 from cffi_interfaces import messageSender_cffi
 
 list_doors = []
-list_card_doors = []
 list_card_ids = []
+list_card_doors = []
 
 class Processor(object):
     def __init__(self, host, port, topic=None):
@@ -35,6 +37,7 @@ class Processor(object):
         self.db_manager = lib_db_manager.LibDBManager()
         self.context = zmq.Context()
         self.sock = self.context.socket(zmq.PAIR)
+        self.json_parser = json_parser.JsonParser()
         self.list_doors = self.get_all_doors()
         self.list_card_ids = self.get_card_ids()
         self.list_card_doors = self.get_card_doors()
@@ -47,6 +50,7 @@ class Processor(object):
         
     def get_card_ids(self):
         db_card = self.db_manager.select_card_info()
+        list_card_ids = []
         for card_index in db_card:
             list_card_ids.append(card_index)
         return list_card_ids
@@ -56,7 +60,7 @@ class Processor(object):
         for carddoor_index in db_card_door:
             list_card_doors.append(carddoor_index)
         return list_card_doors
-    
+
     def connect(self):
         cmd = "tcp://" + self.host
         cmd = cmd + ":"
@@ -79,17 +83,25 @@ class Processor(object):
     def run(self):
         print("Processor run on %s:%s" %(self.host, self.port))
         while True:
-            topic = self.sock.recv(2, zmq.NOBLOCK)
-            message = self.sock.recv(2, zmq.NOBLOCK)
-            print("message", topic)
-            print("message", message)
-            
-            # message = self.sock.recv()
+            message = self.sock.recv()
             print("message ",message)
-            msg_handler = message_handler.MessageHandler(topic, message,\
-                                                list_doors, list_card_doors)
-            msg_handler.run()
-            time.sleep(1)
+            message = message.decode('utf-8')
+            topic = self.json_parser.parse_json_message_topic(message)
+
+            if topic == constants.ATTR_UDATE_PROCESS:
+                self.list_doors = self.get_all_doors()
+                self.list_card_ids = self.get_card_ids()
+                self.list_card_doors = self.get_card_doors()
+                print("\n\nself.list_card_ids",self.list_card_ids )
+                print("\n\nself.list_doors")
+                print(self.list_doors)
+                print('\n\nself.list_card_doors')
+                print(self.list_card_doors)
+            else:
+                msg_handler = message_handler.MessageHandler(topic, message,\
+                                         self.list_doors, self.list_card_doors)
+                msg_handler.run()
+                time.sleep(1)
 
         self.sock.close()
 
@@ -101,6 +113,8 @@ if __name__ == '__main__':
 
     host, port, topic = optionParser.parseCmdLineArg(sys.argv)    
     print("init topic: ", topic)
+    # import pdb
+    # pdb.set_trace()
     processor = Processor(host, port, topic)
     processor.connect()
 

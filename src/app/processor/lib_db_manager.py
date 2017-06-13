@@ -1,6 +1,7 @@
 """
 [description]
 """
+import threading
 
 from cffi_interfaces.__cffi_dbCard import dbCard_cffi
 from cffi_interfaces.__cffi_dbCard import dbCard_c
@@ -17,9 +18,13 @@ import constants
 
 DBA_RESULT_OK = 1
 list_card_insert = []
+list_doors = []
+list_card_doors = []
+
 class LibDBManager(object):
     def __init__(self):
         pass
+        
 
     def select_card_info(self):
         list_cards = []

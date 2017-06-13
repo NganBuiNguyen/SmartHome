@@ -42,7 +42,7 @@ std::string convertMessageTypeToStr(const MESSAGE_TYPE& messageType)
     switch(messageType)
     {
     case MESSAGE_TYPE_CARD:
-        return std::string(CARD_TOPIC);
+        return std::string(ATTR_JSON_CARD_OPEN);
     default:
         return std::string("MESSAGE_TYPE_DEFAULT");
     }

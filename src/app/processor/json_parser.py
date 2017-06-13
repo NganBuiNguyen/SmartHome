@@ -6,7 +6,18 @@ import error_messages
 class JsonParser(object):
     def __init__(self):
         pass
-                
+            
+    def parse_json_message_topic(self, message):
+        message_topic = None
+        try:
+            json_message = json.loads(message)
+            message_topic = json_message[constants.ATTR_MESSAGE_TYPE]
+            print ("message topic: ", message_topic)
+        except json.decoder.JSONDecodeError:
+            print("Error message: ",\
+                            error_messages.ERROR_UPDATE_PROCESS)
+        return message_topic
+            
     def parse_smart_door_history(self, message):
         json_card = json.loads(message)    
         try:
