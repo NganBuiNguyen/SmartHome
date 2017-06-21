@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">TestConectDjango</string>
+
+    <string-array name="thuoctinh_history">
+        <item>List History</item>
+        <item>IdHistory</item>
+        <item>Day</item>
+        <item>Mon</item>
+        <item>Year</item>
+        <item>Hour</item>
+        <item>Min</item>
+        <item>Sec</item>
+        <item>Statusdoor</item>
+        <item>Checkcard</item>
+    </string-array>
+</resources>
