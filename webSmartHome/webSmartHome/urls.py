@@ -14,7 +14,22 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from cardInfo import views
+
+from rest_framework import routers
+from Rest.viewsets import HistoryViewSet,DoorViewSet
+from Rest.viewsets import CardViewSet, DoorCardViewSet
+
+router = routers.DefaultRouter()
+router.register(r'cards', CardViewSet)
+router.register(r'doors', DoorViewSet)
+router.register(r'doorcards', DoorCardViewSet)
+router.register(r'historys', HistoryViewSet)
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^save/$', "cardInfo.views.save", name='save'),
+    url(r'^notifyUpdateProcessor/$', views.notifyUpdateProcessor, name='notify'),
+    url(r'^actionsave/$', views.actionsave , name='actionsave'),
+    url(r'^rest/', include(router.urls))
 ]
