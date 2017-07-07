@@ -7,5 +7,5 @@ export LD_LIBRARY_PATH=/development/zeromq-4.1.6/lib:$LD_LIBRARY_PATH
 PATH=/development/python-3.5.2/bin:$PATH
 export BOOST_ROOT=/development/boost_1_62_0
 export POCO_ROOT=/development/poco-1.7.5-all
-export MYSQL_ROOT=//development/mysql-connector-c++
+export MYSQL_ROOT=/development/mysql-connector-c++
 
