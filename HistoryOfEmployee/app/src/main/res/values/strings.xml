@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">HistoryOfEmployee</string>
+
+    <string-array name="thuoctinh_history">
+        <item>Tìm kiếm theo:</item>
+        <item>IdHistory</item>
+        <item>Day</item>
+        <item>Mon</item>
+        <item>Year</item>
+        <item>Hour</item>
+        <item>NameUser</item>
+        <item>IdCard</item>
+    </string-array>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+
+    <string name="action_settings">Settings</string>
+</resources>

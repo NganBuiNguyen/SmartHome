@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_listHistory"
+            android:icon="@mipmap/ic_list_black_24dp"
+            android:title="Danh Sách" />
+        <item
+            android:id="@+id/nav_search"
+            android:icon="@mipmap/ic_search_black_24dp"
+            android:title="Tìm Kiếm" />
+        <item
+            android:id="@+id/nav_lockout"
+            android:icon="@mipmap/ic_lock_outline_black_24dp"
+            android:title="Đăng Xuất" />
+        <item
+            android:id="@+id/nav_selectuser"
+            android:icon="@mipmap/ic_lock_outline_black_24dp"
+            android:title="Vị Trí" />
+
+    </group>
+
+</menu>

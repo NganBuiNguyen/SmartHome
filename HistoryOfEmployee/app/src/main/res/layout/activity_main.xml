@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/images1"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="com.kimnganbui.historyofemployee.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_weight="0.19">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="0.35">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:text="UserName:"
+                android:textColor="@android:color/background_light"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/txtUserName"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="0.31"
+                android:background="@android:color/background_light"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:paddingLeft="30dp"
+                android:scrollHorizontally="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingLeft="30dp"
+                android:paddingTop="10dp"
+                android:text="PassWord:"
+                android:textColor="@android:color/background_light"
+                android:textSize="25dp" />
+
+            <EditText
+                android:id="@+id/txtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@android:color/background_light"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:paddingLeft="30dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_weight="0.03"
+            android:background="@drawable/gradient_bg_select"
+            android:text="Login" />
+    </LinearLayout>
+
+</LinearLayout>
