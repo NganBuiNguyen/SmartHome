@@ -176,6 +176,15 @@ class LibDBManager(object):
         if not result:
             raise exceptions.InsertingTableDBCardForCFailure(\
                                 error_messages.ERROR_INSERT_INTO_STATUS_TABLE)
+
+    def insert_history(self, smart_door_info):
+        data_ptr = dbCard_cffi.new("CardInfo* ",\
+                                          smart_door_info)
+        result = dbCard_c.insertToDbHistoryUserForC(data_ptr)
+        if not result:
+            raise exceptions.InsertingTableDBCardForCFailure(\
+                                error_messages.ERROR_INSERT_INTO_STATUS_TABLE)
+
     def select_history_info(self):
         list_historys = []
 

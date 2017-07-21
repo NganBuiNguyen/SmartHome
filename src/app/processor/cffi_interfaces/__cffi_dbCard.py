@@ -29,15 +29,11 @@ dbCard_cffi.cdef("""
     #define NAME_CARD_PERSON_LENGTH 20
     #define NAME_DOOR_ROOM 10
     #define PORT 10
+    #define SIZE_DATE_TIME 30
 
     typedef struct
     {
-        int year ;
-        int month ;
-        int day ;
-        int sec ;   
-        int min ;   
-        int hour ;
+        char dataDateTime[SIZE_DATE_TIME];
     }Date_Time;
 
     typedef struct
@@ -121,8 +117,7 @@ dbCard_cffi.cdef("""
     bool updateToDbAccountUserForC(const CardInfo* info);
     bool deleteToDbAccountUserForC(const CardInfo* info);
 
-    bool insertToDbHistoryForC(const CardInfo* info);
-    bool selectToDbHistoryForC(CardInfo** info, int *numberOfElement);
+    bool insertToDbHistoryUserForC(const CardInfo* info);
 """)
 
 dbCard_c = dbCard_cffi.verify("""

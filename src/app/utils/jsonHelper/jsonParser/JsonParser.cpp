@@ -52,32 +52,33 @@ bool parseOpenDoorJson(const std::string& jsonString, CardInfo& info)
                         pTree.get<std::string>(jsonCardIntPath);
 
 
-    std::string jsonDayPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_DAY);
-    std::string jsonMonthPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_MONTH);
-    std::string jsonYearPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_YEAR);
-    std::string jsonHourPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_HOUR);
-    std::string jsonMinPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_MIN);
-    std::string jsonSecPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_SEC);
+    // std::string jsonDayPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_DAY);
+    // std::string jsonMonthPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_MONTH);
+    // std::string jsonYearPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_YEAR);
+    // std::string jsonHourPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_HOUR);
+    // std::string jsonMinPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_MIN);
+    // std::string jsonSecPath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_SEC);
+    std::string jsondataDateTimePath = getJsonPath(ATTR_JSON_DATETIME, ATTR_JSON_DATA_DATETIME);
 
-
-    std::string dayStr = pTree.get<std::string>(jsonDayPath);
-    std::string monthStr = pTree.get<std::string>(jsonMonthPath);
-    std::string yearStr = pTree.get<std::string>(jsonYearPath);
-    std::string hourStr = pTree.get<std::string>(jsonHourPath);
-    std::string minStr = pTree.get<std::string>(jsonMinPath);
-    std::string secStr = pTree.get<std::string>(jsonSecPath);
+    std::string dataDateTimeStr = pTree.get<std::string>(jsondataDateTimePath);
+    // std::string monthStr = pTree.get<std::string>(jsonMonthPath);
+    // std::string yearStr = pTree.get<std::string>(jsonYearPath);
+    // std::string hourStr = pTree.get<std::string>(jsonHourPath);
+    // std::string minStr = pTree.get<std::string>(jsonMinPath);
+    // std::string secStr = pTree.get<std::string>(jsonSecPath);
 
     
     strcpy(info.card.idCard, cardValueStr.c_str());
     info.door.port = std::stol(portStr);
     strcpy(info.door.ip, ipStr.c_str());
 
-    info.dateTime.day = std::stoi(dayStr);
-    info.dateTime.month = std::stoi(monthStr);
-    info.dateTime.year = std::stoi(yearStr);
-    info.dateTime.hour = std::stoi(hourStr);
-    info.dateTime.min = std::stoi(minStr);
-    info.dateTime.sec = std::stoi(secStr);
+    strcpy(info.dateTime.dataDateTime, dataDateTimeStr.c_str());
+    // info.dateTime.day = std::stoi(dayStr);
+    // info.dateTime.month = std::stoi(monthStr);
+    // info.dateTime.year = std::stoi(yearStr);
+    // info.dateTime.hour = std::stoi(hourStr);
+    // info.dateTime.min = std::stoi(minStr);
+    // info.dateTime.sec = std::stoi(secStr);
 
     return true;
 }

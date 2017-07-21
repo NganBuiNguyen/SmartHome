@@ -48,8 +48,9 @@ bool selectToDbAccountUserForC(CardInfo** info, int *numberOfElement);
 bool updateToDbAccountUserForC(const CardInfo* info);
 bool deleteToDbAccountUserForC(const CardInfo* info);
 
-bool insertToDbHistoryForC(const CardInfo* info);
-bool selectToDbHistoryForC(CardInfo** info, int *numberOfElement);
+// bool insertToDbHistoryForC(const CardInfo* info);
+// bool selectToDbHistoryForC(CardInfo** info, int *numberOfElement);
+bool insertToDbHistoryUserForC(const CardInfo* info);
 
 #ifdef __cplusplus
 }

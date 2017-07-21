@@ -24,9 +24,9 @@ char* getTime()
     std::string hourStr = std::to_string(hour);
 
     strcat(pTime,dayStr.c_str());
-    strcat(pTime,"/");
+    strcat(pTime,"-");
     strcat(pTime,monStr.c_str());
-    strcat(pTime,"/");
+    strcat(pTime,"-");
     strcat(pTime,yearStr.c_str());
     
     

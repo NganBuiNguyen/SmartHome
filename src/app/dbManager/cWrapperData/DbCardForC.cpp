@@ -1,11 +1,12 @@
 #include "DbCardForC.h"
 #include "DbCard.h"
-#include "DbHistory.h"
+// #include "DbHistory.h"
 #include "DbDoor.h"
 #include "DbRoom.h"
 #include "DbPerson.h"
 #include "DbDoorCard.h"
 #include "DbAccountUser.h"
+#include "DbHistoryUser.h"
 
 #include <iostream>
 #include <sstream>
@@ -20,7 +21,8 @@
 #include <cppconn/connection.h>
 
 static DbCard DB_CARD_MANAGER;
-static DbHistory DB_HISTORY_MANAGER;
+// static DbHistory DB_HISTORY_MANAGER;
+static DbHistoryUser DB_HISTORY_USER_MANAGER;
 static DbDoor DB_DOOR_MANAGER;
 static DbRoom DB_ROOM_MANAGER;
 static DbPerson DB_PERSON_MANAGER;
@@ -352,55 +354,64 @@ bool deleteToDbAccountUserForC(const CardInfo* info)
 /*!
  * @funtion of DbHistory
  */
-bool insertToDbHistoryForC (const CardInfo* info)
-{
-    return DB_HISTORY_MANAGER.insertToDbHistory(*info);
+// bool insertToDbHistoryForC (const CardInfo* info)
+// {
+//     return DB_HISTORY_MANAGER.insertToDbHistory(*info);
 
-}
+// }
 
-bool selectToDbHistoryForC(CardInfo** info, int *numberOfElement)
-{
-    if (*info != NULL)
-    {
-        delete *info;
-        *info = NULL;
-    }
+// bool selectToDbHistoryForC(CardInfo** info, int *numberOfElement)
+// {
+//     if (*info != NULL)
+//     {
+//         delete *info;
+//         *info = NULL;
+//     }
 
-    int index = 0;
-    std::vector<CardInfo> vectorHistoryInfos;
-    bool result = DB_HISTORY_MANAGER.selectToDbHistory(vectorHistoryInfos);
+//     int index = 0;
+//     std::vector<CardInfo> vectorHistoryInfos;
+//     bool result = DB_HISTORY_MANAGER.selectToDbHistory(vectorHistoryInfos);
 
-    if (!result)
-    {
-        return false;
-    }
+//     if (!result)
+//     {
+//         return false;
+//     }
 
-    CardInfo* listHistoryInfoTmp = new CardInfo[vectorHistoryInfos.size()];
-    *numberOfElement = vectorHistoryInfos.size();
+//     CardInfo* listHistoryInfoTmp = new CardInfo[vectorHistoryInfos.size()];
+//     *numberOfElement = vectorHistoryInfos.size();
 
-    for (index = 0; index < *numberOfElement; index++)
-    {
+//     for (index = 0; index < *numberOfElement; index++)
+//     {
         
-        (listHistoryInfoTmp[index]).dateTime.day = 
-                                        vectorHistoryInfos[index].dateTime.day;
-        (listHistoryInfoTmp[index]).dateTime.month = 
-                                        vectorHistoryInfos[index].dateTime.month;
-        (listHistoryInfoTmp[index]).dateTime.year = 
-                                        vectorHistoryInfos[index].dateTime.year;
-        (listHistoryInfoTmp[index]).dateTime.hour = 
-                                        vectorHistoryInfos[index].dateTime.hour;
-        (listHistoryInfoTmp[index]).dateTime.min = 
-                                        vectorHistoryInfos[index].dateTime.min;
-        (listHistoryInfoTmp[index]).dateTime.sec = 
-                                        vectorHistoryInfos[index].dateTime.sec;                                                                                                
-        (listHistoryInfoTmp[index]).history.statusDoor = 
-                                        vectorHistoryInfos[index].history.statusDoor;
-        (listHistoryInfoTmp[index]).history.checkCard = 
-                                        vectorHistoryInfos[index].history.checkCard;
-    }
+//         (listHistoryInfoTmp[index]).dateTime.day = 
+//                                         vectorHistoryInfos[index].dateTime.day;
+//         (listHistoryInfoTmp[index]).dateTime.month = 
+//                                         vectorHistoryInfos[index].dateTime.month;
+//         (listHistoryInfoTmp[index]).dateTime.year = 
+//                                         vectorHistoryInfos[index].dateTime.year;
+//         (listHistoryInfoTmp[index]).dateTime.hour = 
+//                                         vectorHistoryInfos[index].dateTime.hour;
+//         (listHistoryInfoTmp[index]).dateTime.min = 
+//                                         vectorHistoryInfos[index].dateTime.min;
+//         (listHistoryInfoTmp[index]).dateTime.sec = 
+//                                         vectorHistoryInfos[index].dateTime.sec;                                                                                                
+//         (listHistoryInfoTmp[index]).history.statusDoor = 
+//                                         vectorHistoryInfos[index].history.statusDoor;
+//         (listHistoryInfoTmp[index]).history.checkCard = 
+//                                         vectorHistoryInfos[index].history.checkCard;
+//     }
    
-    *info = listHistoryInfoTmp;
+//     *info = listHistoryInfoTmp;
 
-    return true;
+//     return true;
+// }
+
+/*!
+ * @funtion of DbHistoryUser
+ */
+bool insertToDbHistoryUserForC (const CardInfo* info)
+{
+    return DB_HISTORY_USER_MANAGER.insertToDbHistoryUser(*info);
+
 }
 

@@ -74,24 +74,25 @@ STATIC bool buildOpenDoorsityJson(const std::string& message,
 STATIC bool buildTimeJson(const std::string& pTime,
                                     boost::property_tree::ptree& timeTree)
 {
-    std::vector<std::string> token = splitWordRegex(pTime,
+    // std::vector<std::string> token = splitWordRegex(pTime,
 
-                                    std::string(DATETIME_SPLITTER));
-    std::cout<<token[0];
-    std::cout<<token[1];
+    //                                 std::string(DATETIME_SPLITTER));
+    // std::cout<<token[0];
+    // std::cout<<token[1];
 
-    std::vector<std::string> date = splitWordRegex(token[0],
-                                    std::string(DATE_SPLITTER));
+    // std::vector<std::string> date = splitWordRegex(token[0],
+    //                                 std::string(DATE_SPLITTER));
 
-    timeTree.put(ATTR_JSON_DAY, date[0]);
-    timeTree.put(ATTR_JSON_MONTH, date[1]);
-    timeTree.put(ATTR_JSON_YEAR, date[2]);
+    // timeTree.put(ATTR_JSON_DAY, date[0]);
+    // timeTree.put(ATTR_JSON_MONTH, date[1]);
+    // timeTree.put(ATTR_JSON_YEAR, date[2]);
 
-    std::vector<std::string> time = splitWordRegex(token[1],
-                                    std::string(IP_MESSAGE_SPLITTER));
-    timeTree.put(ATTR_JSON_HOUR, time[0]);
-    timeTree.put(ATTR_JSON_MIN, time[1]);
-    timeTree.put(ATTR_JSON_SEC, time[2]);
+    // std::vector<std::string> time = splitWordRegex(token[1],
+    //                                 std::string(IP_MESSAGE_SPLITTER));
+    // timeTree.put(ATTR_JSON_HOUR, time[0]);
+    // timeTree.put(ATTR_JSON_MIN, time[1]);
+    // timeTree.put(ATTR_JSON_SEC, time[2]);
+    timeTree.put(ATTR_JSON_DATA_DATETIME, pTime);
     
     return true;
 }

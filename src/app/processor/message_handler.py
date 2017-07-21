@@ -38,7 +38,12 @@ class MessageHandler(threading.Thread):
                 id_door = door_index[constants.ATTR_ID_DOOR]
         id_card = card_info[constants.ATTR_CARD][\
                             constants.ATTR_ID_CARD_INFO].decode("utf-8")
+        print('id_card', id_card)
         for info_index in self.list_card_doors:
+            # print('info_index card', info_index[constants.ATTR_ID_CARD_INFO] )
+            # print('info_index door', info_index['idDoor'] )
+            # print('id_card', id_card)
+            # print('id_door', id_door)
             if(id_card == info_index[constants.ATTR_ID_CARD_INFO] \
                 and id_door == info_index['idDoor']):
                 return True
@@ -59,14 +64,15 @@ class MessageHandler(threading.Thread):
         card_info = self.json_parser.parse_smart_door_history(message)
         id_card = card_info[constants.ATTR_CARD][\
                                 constants.ATTR_ID_CARD_INFO].decode("utf-8")
+        # date_time = datetime(card_info[constants.ATTR_DATE_TIME][\
+        #                                             constants.ATTR_YEAR], \
+        #             card_info[constants.ATTR_DATE_TIME][constants.ATTR_MONTH],\
+        #             card_info[constants.ATTR_DATE_TIME][constants.ATTR_DAY],\
+        #             card_info[constants.ATTR_DATE_TIME][constants.ATTR_HOUR],\
+        #             card_info[constants.ATTR_DATE_TIME][constants.ATTR_MIN],\
+        #             card_info[constants.ATTR_DATE_TIME][constants.ATTR_SEC])
         date_time = datetime(card_info[constants.ATTR_DATE_TIME][\
-                                                    constants.ATTR_YEAR], \
-                    card_info[constants.ATTR_DATE_TIME][constants.ATTR_MONTH],\
-                    card_info[constants.ATTR_DATE_TIME][constants.ATTR_DAY],\
-                    card_info[constants.ATTR_DATE_TIME][constants.ATTR_HOUR],\
-                    card_info[constants.ATTR_DATE_TIME][constants.ATTR_MIN],\
-                    card_info[constants.ATTR_DATE_TIME][constants.ATTR_SEC])
-        
+                                                    constants.ATTR_DATA_DATETIME])
         data_item = {}
         data_item[constants.ATTR_ID_CARD_INFO] = id_card
         data_item[constants.ATTR_DATE_TIME] = date_time
@@ -119,8 +125,8 @@ class MessageHandler(threading.Thread):
             print("\n\n list_card_insert true:",list_card_insert)
             print("\n\n status door1:",status_door)
             id = self.id_doorcard(self.message)
-            count_time = self.sum_time_info(self.message)
-            print("\n\n count_time process:", count_time)
+            # count_time = self.sum_time_info(self.message)
+            # print("\n\n count_time process:", count_time)
 
             if(id != None):
                 smart_door_info = \
@@ -131,11 +137,16 @@ class MessageHandler(threading.Thread):
                 smart_door_info[constants.ATTR_HISTORY][\
                                     constants.ATTR_STATUS_DOOR] = status_door
                 print("\n\n status door:",status_door)
-                smart_door_info[constants.ATTR_HISTORY][\
-                    constants.ATTR_COUNT_TIME] = bytes(count_time , "ascii")
+                # smart_door_info[constants.ATTR_HISTORY][\
+                #     constants.ATTR_COUNT_TIME] = bytes(count_time , "ascii")
                 smart_door_info[constants.ATTR_HISTORY][\
                                                     constants.ATTR_ID] = id
-                self.lib_db_manager.insert_history_card(smart_door_info)
+                # self.lib_db_manager.insert_history_card(smart_door_info)
+                print("\n\n id:",id)
+                print("\n\n HERE1:")
+                self.lib_db_manager.insert_history(smart_door_info)
+                print("\n\n HERE2:")
+
         except exceptions.InsertingTableDBCardForCFailure as ex:
             import traceback
             traceback.print_exc()

@@ -22,15 +22,11 @@ jsonParser_cffi.cdef("""
     #define NAME_CARD_PERSON_LENGTH 20
     #define NAME_DOOR_ROOM 10
     #define PORT 10
+    #define SIZE_DATE_TIME 30
 
     typedef struct
     {
-        int year ;
-        int month ;
-        int day ;
-        int sec ;   
-        int min ;   
-        int hour ;
+        char dataDateTime[SIZE_DATE_TIME];
     }Date_Time;
 
     typedef struct

@@ -13,13 +13,14 @@
 #define NAME_CARD_PERSON_LENGTH 20
 #define NAME_DOOR_ROOM 10
 #define PORT 10
+#define SIZE_DATE_TIME 30
 
 #define CARD_MESSAGE 'R'
 #define ATTR_JSON_DATA "data"
 #define ATTR_JSON_MESSAGE_TYPE "MESSAGE_TYPE"
 #define ATTR_JSON_CARD_OPEN "CARD_VALUE"
 #define CARD_TOPIC "CARD_VALUE_TOPIC"
-#define ATTR_SMART_IS_OPEN_VALID = "CARD_OPEN_VALID_TOPIC"
+#define ATTR_SMART_IS_OPEN_VALID  "CARD_OPEN_VALID_TOPIC"
 
 #define MESSAGE_TYPE_CARD_VALUE "SMART_DOOR_VALUE"
 #define MESSAGE_TYPE_DJANGO_VALUE "DJANGO_STATUS_VALUE"
@@ -36,6 +37,7 @@
 #define ATTR_JSON_MIN "min"
 #define ATTR_JSON_SEC "sec"
 #define ATTR_JSON_DATETIME "dateTime"
+#define ATTR_JSON_DATA_DATETIME "dataDateTime"
 
 
 #define ATTR_JSON_IDCard "IDCard"
@@ -55,12 +57,13 @@ typedef enum
 
 typedef struct
 {
-    int year ;
-    int month ;
-    int day ;
-    int sec ;   
-    int min ;   
-    int hour ;
+    // int year ;
+    // int month ;
+    // int day ;
+    // int sec ;   
+    // int min ;   
+    // int hour ;
+    char dataDateTime[SIZE_DATE_TIME];
 }Date_Time;
 
 typedef struct
@@ -111,7 +114,5 @@ typedef struct
     Room room;
     History history;
 }CardInfo; 
-
-
 
 #endif

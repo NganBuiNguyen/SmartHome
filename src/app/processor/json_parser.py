@@ -22,24 +22,28 @@ class JsonParser(object):
         json_card = json.loads(message)    
         try:
             date_time_info = {
-                constants.ATTR_SEC : int(json_card[\
+                # constants.ATTR_SEC : int(json_card[\
+                #                                 constants.ATTR_DATE_TIME][\
+                #                                 constants.ATTR_SEC]),
+                # constants.ATTR_MIN : int(json_card[\
+                #                                 constants.ATTR_DATE_TIME][\
+                #                                 constants.ATTR_MIN]),
+                # constants.ATTR_HOUR : int(json_card[\
+                #                                 constants.ATTR_DATE_TIME][\
+                #                                 constants.ATTR_HOUR]),
+                # constants.ATTR_DAY : int(json_card[\
+                #                                 constants.ATTR_DATE_TIME][\
+                #                                 constants.ATTR_DAY]),
+                # constants.ATTR_MONTH : int(json_card[\
+                #                                 constants.ATTR_DATE_TIME][\
+                #                                 constants.ATTR_MONTH]),
+                # constants.ATTR_YEAR : int(json_card[\
+                #                                 constants.ATTR_DATE_TIME][\
+                #                                 constants.ATTR_YEAR]),
+
+                constants.ATTR_DATA_DATETIME : bytes(json_card[\
                                                 constants.ATTR_DATE_TIME][\
-                                                constants.ATTR_SEC]),
-                constants.ATTR_MIN : int(json_card[\
-                                                constants.ATTR_DATE_TIME][\
-                                                constants.ATTR_MIN]),
-                constants.ATTR_HOUR : int(json_card[\
-                                                constants.ATTR_DATE_TIME][\
-                                                constants.ATTR_HOUR]),
-                constants.ATTR_DAY : int(json_card[\
-                                                constants.ATTR_DATE_TIME][\
-                                                constants.ATTR_DAY]),
-                constants.ATTR_MONTH : int(json_card[\
-                                                constants.ATTR_DATE_TIME][\
-                                                constants.ATTR_MONTH]),
-                constants.ATTR_YEAR : int(json_card[\
-                                                constants.ATTR_DATE_TIME][\
-                                                constants.ATTR_YEAR]),
+                                                constants.ATTR_DATA_DATETIME], 'utf-8')
             }
 
             card_info = { 
